@@ -1,0 +1,17 @@
+ngb-carousel,
+img {
+  width: 100%;
+}
+
+img {
+  object-fit: cover;
+  max-height: 400px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  font-size: 24px;
+  height: 40px;
+  width: 37px;
+  cursor: pointer;
+}
