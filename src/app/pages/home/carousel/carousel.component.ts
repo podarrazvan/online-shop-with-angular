@@ -1,13 +1,27 @@
 import { Component } from '@angular/core';
+import { DBService } from 'src/app/shared/db.service';
 
 @Component({
   selector: 'app-carousel',
   templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss']
+  styleUrls: ['./carousel.component.scss'],
 })
 export class CarouselComponent {
-  public model3 = `https://tesla-cdn.thron.com/delivery/public/image/tesla/088d64b2-afcc-43c6-9fa1-8f37e567a3d0/bvlatuR/std/2880x2400/desktop_model_3_v2`;
-  public models = 'https://www.tesla.com/sites/default/files/modelsx-new/ms-rhd-eu-en/hero/RHD_model-s_hero%402x.jpg';
-  private modelx ='https://www.tesla.com/sites/default/files/images/blogs/model-x-blog.jpg';
-  public images = [this.model3,this.models,this.modelx];
+  constructor(private db: DBService) {}
+
+  index = 0;
+
+  public product1 = this.db.product1;
+  public product2 = this.db.product2;
+  public product3 = this.db.product3;
+
+  public products = [this.product1, this.product2, this.product3];
+
+  next() {
+    this.index === this.products.length - 1 ? (this.index = 0) : this.index++;
+  }
+
+  previous() {
+    this.index === 0 ? this.products.length - 1 : this.index--;
+  }
 }
