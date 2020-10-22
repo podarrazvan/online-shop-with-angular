@@ -5,4 +5,5 @@ export interface Product {
   category: string;
   homepagePosition?: string;
   tags: string[];
+  url: string;
 }

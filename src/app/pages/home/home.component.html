@@ -1,1 +1,17 @@
 <app-carousel></app-carousel>
+<div class="container">
+  <div class="products">
+    <h2><b>Top</b></h2>
+    <div class="row">
+      <div class="col" *ngFor="let product of products">
+        <app-get-products
+          [img]="product.img"
+          [description]="product.description"
+          [price]="product.price"
+          [homepagePosition]="product.homepagePosition"
+          [url]="product.url"
+        ></app-get-products>
+      </div>
+    </div>
+  </div>
+</div>
