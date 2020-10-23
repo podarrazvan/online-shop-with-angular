@@ -1,0 +1,21 @@
+.price-input,
+.tags-input {
+    display: flex;
+}
+
+.tags,
+.tags-area {
+    margin-top: 20px;
+}
+
+.tags-area {
+    min-height: 150px;
+    border: 1px solid #ccc!important;
+    border-radius: 5px;
+    flex-direction: row !important;
+    column-count: 5; //TO FIX!
+}
+
+.tag-btn {
+    margin-top: 10px;
+}
