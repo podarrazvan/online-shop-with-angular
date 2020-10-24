@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AppRoutingModule } from './shared/app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +21,11 @@ import { OrdersComponent } from './pages/admin/orders/orders.component';
 import { MessagesComponent } from './pages/admin/messages/messages.component';
 import { StatisticsComponent } from './pages/admin/statistics/statistics.component';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { environment } from 'src/environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,8 +48,16 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    HttpClientModule,
+    // NgModule
   ],
   providers: [DBService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,AngularFirestore]
 })
 export class AppModule { }

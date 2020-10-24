@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "shop-436e8": {
+      "hosting": {
+        "shop": [
+          "shop-436e8"
+        ]
+      }
+    }
+  }
+}

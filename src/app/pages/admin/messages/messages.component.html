@@ -1,1 +1,37 @@
-<p>messages works!</p>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Status</th>
+        <th scope="col">Nume</th>
+        <th scope="col">Subiect</th>
+        <th scope="col">Email</th>
+        <th scope="col">Mesaj</th>
+        <th scope="col">Dată</th>
+        <th scpe="col"></th>
+        <th scpe="col"></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let email of fbEmails; let i = index">
+      <tr>
+        <th scope="row">{{ i + 1 }}</th>
+        <th scope="row" *ngIf="!email.read"><mat-icon> email</mat-icon></th>
+        <th scope="row" *ngIf="email.read">
+          <mat-icon>mail_outline</mat-icon>
+        </th>
+        <td>{{ email.name }}</td>
+        <td>{{ email.subject | shorten: 10 }}</td>
+        <td>{{ email.email }}</td>
+        <td>{{ email.message | shorten: 30 }}</td>
+        <td>{{ email.date }}</td>
+        <td><a (click)="openEmail(i)" style="color: blue">Deschide</a></td>
+        <td>
+          <button style="border: 0px; background-color: transparent;" (click)="onDelete(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
