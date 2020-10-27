@@ -1,0 +1,121 @@
+<h1>Homepage areas</h1>
+<br />
+<button
+  class="btn btn-secondary dropdown-toggle"
+  type="button"
+  (click)="homepageAreasHide = !homepageAreasHide"
+>
+  Show
+</button>
+<br />
+<div *ngIf="!homepageAreasHide">
+  <form #newArea="ngForm">
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label for="tagInput"><b>Add a new area</b></label>
+        <input
+          type="text"
+          class="form-control"
+          id="tagInput"
+          placeholder="Area"
+          #area
+          required
+        />
+      </div>
+      <div class="col-auto">
+        <br />
+        <!--To do: fix newArea.valid-->
+        <button
+          [disabled]="!newArea.valid"
+          type="button"
+          (click)="addNewValue(area, 'area')"
+          class="btn btn-primary"
+        >
+          Add new area
+        </button>
+      </div>
+    </div>
+  </form>
+  <ul class="list-group">
+    <div *ngFor="let area of homepageAreas; let i = index">
+      <!--To do: implement active-->
+      <li class="list-group-item">
+        <h1>{{ area.name }}</h1>
+        <hr />
+        <div class="buttons">
+          <button
+            (click)="delete(i, area.key, 'area')"
+            style="background-color: transparent; border: none"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button style="background-color: transparent; border: none">
+            <mat-icon>create</mat-icon>
+          </button>
+        </div>
+      </li>
+    </div>
+  </ul>
+</div>
+<br />
+<h1>Products categories</h1>
+<br />
+<button
+  class="btn btn-secondary dropdown-toggle"
+  type="button"
+  (click)="categoriesHide = !categoriesHide"
+>
+  Show
+</button>
+<br />
+<div *ngIf="!categoriesHide">
+  <form #newCategory="ngForm">
+    <div class="form-row align-items-center">
+      <div class="col-auto">
+        <label for="tagInput"><b>Add a new category</b></label>
+        <input
+          type="text"
+          class="form-control"
+          id="tagInput"
+          placeholder="Category"
+          #category
+          required
+        />
+      </div>
+      <div class="col-auto">
+        <br />
+        <!--To do: fix newCategory.valid-->
+        <button
+          [disabled]="!newCategory.valid"
+          type="button"
+          (click)="addNewValue(category, 'category')"
+          class="btn btn-primary"
+        >
+          Add a new category
+        </button>
+      </div>
+    </div>
+  </form>
+  <ul class="list-group">
+    <div *ngFor="let category of categories; let i = index">
+      <!--To do: implement active-->
+      <li class="list-group-item">
+        <h1>{{ category.name }}</h1>
+        <hr />
+        <div class="buttons">
+          <button
+            (click)="delete(i, category.key, 'category')"
+            style="background-color: transparent; border: none"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+
+          <button style="background-color: transparent; border: none">
+            <mat-icon>create</mat-icon>
+          </button>
+        </div>
+      </li>
+    </div>
+  </ul>
+</div>

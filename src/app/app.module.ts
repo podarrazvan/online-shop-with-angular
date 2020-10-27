@@ -16,7 +16,6 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { AdminComponent } from './pages/admin/admin.component';
 import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
 import { AddProductComponent } from './pages/admin/add-product/add-product.component';
-import { HomepageEditComponent } from './pages/admin/homepage-edit/homepage-edit.component';
 import { OrdersComponent } from './pages/admin/orders/orders.component';
 import { MessagesComponent } from './pages/admin/messages/messages.component';
 import { StatisticsComponent } from './pages/admin/statistics/statistics.component';
@@ -26,6 +25,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductsComponent } from './pages/admin/products/products.component';
+import { WebsiteEditComponent } from './pages/admin/website-edit/website-edit.component';
+import { HomepageEditAlertComponent } from './pages/admin/products/homepage-edit-alert/homepage-edit-alert.component';
 
 @NgModule({
   declarations: [
@@ -39,10 +41,12 @@ import { HttpClientModule } from '@angular/common/http';
     AdminComponent,
     SidebarComponent,
     AddProductComponent,
-    HomepageEditComponent,
     OrdersComponent,
     MessagesComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ProductsComponent,
+    WebsiteEditComponent,
+    HomepageEditAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -54,8 +58,7 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
-    HttpClientModule,
-    // NgModule
+    HttpClientModule
   ],
   providers: [DBService],
   bootstrap: [AppComponent,AngularFirestore]

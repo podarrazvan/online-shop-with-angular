@@ -1,0 +1,14 @@
+<div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+  <button class="btn btn-danger" style="float: right;" (click)="onClose()">x</button>
+  <br>
+  <p>Home page possition</p>
+  <div class="alert-box-actions">
+    <select  #selectedArea class="form-control form-control-sm">
+        <option value="">Remove</option>
+        <option *ngFor="let area of homepageAreas" [value]="area.name">{{area.name}}</option>
+      </select>
+      <hr>
+      <button class="btn btn-primary" (click)="onAdd(selectedArea)">Add</button>
+  </div>
+</div>

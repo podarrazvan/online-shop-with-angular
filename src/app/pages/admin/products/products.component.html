@@ -1,0 +1,39 @@
+<div class="container">
+  <div *ngIf='showEditHomepage'>
+    <app-homepage-edit-alert
+    (close)="close('homepage')"
+    [product]="productToAddOnHomepage"
+    ></app-homepage-edit-alert>
+  </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">On home page</th>
+          <th scpe="col">Edit</th>
+          <th scpe="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let product of products; let i = index">
+        <tr>
+          <th scope="row">{{ i + 1 }}</th>
+          <td><img class="product-img" [src]="product.img" [alt]="product.name"></td>
+          <td><b>{{ product.title |shorten : 20 }}</b></td>
+          <td><b>{{product.price}}</b></td>
+          <td><b>{{product.quantity}}</b></td>
+          <td *ngIf="product.homepagePosition"><button (click)="openEdit('homepage', product)" class="btn btn-primary">{{product.homepagePosition}}</button></td>
+          <td *ngIf="!product.homepagePosition"><button (click)="openEdit('homepage', product)" class="mat-btn"><mat-icon>add</mat-icon></button></td>
+          <td><button class="mat-btn" (click)="openEdi(i)"><mat-icon>edit</mat-icon></button></td>
+          <td>
+            <button class="mat-btn" (click)="onDelete(product.category, product.key)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
