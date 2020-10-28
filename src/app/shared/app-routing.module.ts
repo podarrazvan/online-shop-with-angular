@@ -9,7 +9,7 @@ import { ProductsComponent } from '../pages/admin/products/products.component';
 import { StatisticsComponent } from '../pages/admin/statistics/statistics.component';
 import { HomeComponent } from '../pages/home/home.component';
 import { PageNotFoundComponent } from '../pages/page-not-found/page-not-found.component';
-import { HomepageEditAlertComponent } from '../pages/admin/products/homepage-edit-alert/homepage-edit-alert.component';
+import { ProductComponent } from '../pages/product/product.component';
 
 const routes: Routes = [
     {path:'', component: HomeComponent},
@@ -21,6 +21,7 @@ const routes: Routes = [
       {path:'products',component: ProductsComponent},
       {path:'website-edit',component: WebsiteEditComponent}
     ]},
+    {path:'product/:category/:key', component: ProductComponent},
     {path:'**', component: PageNotFoundComponent}
 ];
 

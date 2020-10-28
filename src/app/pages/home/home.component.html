@@ -1,16 +1,20 @@
-<app-carousel></app-carousel>
-<div class="container">
-  <div class="products" *ngFor="let area of homepageAreas">
-    <h2><b>{{area.name}}</b></h2>
-    <div class="row">
-      <div class="col" *ngFor="let product of products">
-        <app-get-products
+<div *ngIf="loading"><h1>Loading...</h1></div>
+<div *ngIf="!loading">
+  <app-carousel></app-carousel>
+  <div class="container">
+    <div class="products" *ngFor="let product of products">
+      <h2><b>{{product.area.name}}</b></h2>
+      <div class="row">
+        <div class="col" *ngFor="let product of product.product">
+          <app-get-products
           [img]="product.img"
           [description]="product.description"
           [price]="product.price"
           [homepagePosition]="product.homepagePosition"
-          [url]="product.url"
-        ></app-get-products>
+          [category]="product.category"
+          [key]="product.key"
+          ></app-get-products>
+        </div>
       </div>
     </div>
   </div>

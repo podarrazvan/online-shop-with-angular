@@ -1,0 +1,30 @@
+hr {
+    border-color: rgb(222, 222, 222) !important;
+}
+
+.top {
+    display: flex;
+    margin-top: 50px;
+    margin-left: -10%;
+    width: 78vw;
+}
+img {
+    height: 720px;
+    width: 1000px;
+}
+.buy-area {
+    flex-direction: column;
+    margin-top: 100px;
+    margin-left:10%;
+    text-align: center;
+    min-width: 300px;
+}
+.quantity {
+  padding-left:35%;
+  padding-right:35% ;
+}
+
+.description {
+    margin-top: 50px;
+    text-align: justify;
+}

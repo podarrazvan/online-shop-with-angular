@@ -13,27 +13,18 @@ import { Product } from 'src/app/shared/product.interface';
 export class HomeComponent implements OnInit {
 
   constructor(private db: DBService) {}
-
-  columns = 4;
-  columnsNr: number[];
   
+  loading = true;
+
   homepageAreas: HomepageArea[];
-  area;
   
-  // public product1 = this.db.product1;
-  // public product2 = this.db.product2;
-  // public product3 = this.db.product3;
-  
-  // public products = [this.product1, this.product2,this.product2, this.product2, this.product3];
-
-  products: Product[] = [];
+  products: [{area:HomepageArea, product: Product[]}];
   productsData;
   categories: Category[];
   category;
   
   ngOnInit(): void {
     this.getAreas();
-    this.getCategories();
   }
 
   getAreas() {
@@ -44,19 +35,31 @@ export class HomeComponent implements OnInit {
         for (let area of areas) {
           this.homepageAreas.push(area);
         }
+        this.getCategories();
         return this.homepageAreas;
       });
   }
   
   getProducts(cat: string) {
-    this.products = [];
+    this.products = [{area:{name:'', key:''},product:[]}];
     this.db
       .fetchProductsByCategory(cat)
       .subscribe((products) => {
-        this.productsData = products;
-        for (let productsData of products) {
-          this.products.push(productsData);
+        console.log(products);
+        for(let area of this.homepageAreas){
+          const homepageArea = area
+          const product =  products.filter(prod => prod.homepagePosition === area.name);
+          this.products.push({area: homepageArea,product: product});
+          // this.products.area = area;
+          // this.products.product = products.filter(prod => prod.homepagePosition === area.name);
         }
+
+        // !!!!! \\
+        this.products.splice(0,1);
+        // !!!!! \\
+        
+        this.loading = false;
+        console.log(this.products)
         return this.products;
       });
   }

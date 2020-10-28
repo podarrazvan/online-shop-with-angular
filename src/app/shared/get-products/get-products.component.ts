@@ -1,5 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { Product } from '../product.interface';
 
 @Component({
   selector: 'app-get-products',
@@ -13,7 +14,8 @@ export class GetProductsComponent implements OnInit {
   @Input() description: string;
   @Input() price: number;
   @Input() homepagePosition: string;
-  @Input() url: string;
+  @Input() category: string;
+  @Input() key: string;
 
   constructor(private router: Router) { }
   
@@ -23,8 +25,8 @@ export class GetProductsComponent implements OnInit {
     
   }
   
-  openProduct(url: string) {
-    this.router.navigate([url]);
+  openProduct(c: string, k: string) {
+    this.router.navigate(['/product',c, k]);
   }
 
 }

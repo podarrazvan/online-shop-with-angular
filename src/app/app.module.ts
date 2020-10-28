@@ -28,6 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductsComponent } from './pages/admin/products/products.component';
 import { WebsiteEditComponent } from './pages/admin/website-edit/website-edit.component';
 import { HomepageEditAlertComponent } from './pages/admin/products/homepage-edit-alert/homepage-edit-alert.component';
+import { ProductComponent } from './pages/product/product.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { HomepageEditAlertComponent } from './pages/admin/products/homepage-edit
     StatisticsComponent,
     ProductsComponent,
     WebsiteEditComponent,
-    HomepageEditAlertComponent
+    HomepageEditAlertComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
