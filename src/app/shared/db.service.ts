@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Category } from './category.interface';
 import { HomepageArea } from './homepage-area.interface';
+import { ProductComponent } from '../pages/product/product.component';
 
 @Injectable()
 
@@ -78,6 +79,24 @@ export class DBService {
     )
   }
 
+  addToCarousel(key:string, category: string) {
+    const product = {id: key, category: category}
+    this.http.post(`https://shop-436e8.firebaseio.com/homepage/carousel/.json`,
+    product,
+    {
+      observe: 'response'
+    }
+    ).subscribe(
+      responseData => {
+        console.log(responseData);
+      },
+      error => {
+        console.log('error:', error);
+        error.next(error.message);
+      }
+    );
+  }
+
   addHomepageArea(name: string) {
     const area = { name: name };
     this.http
@@ -144,7 +163,8 @@ export class DBService {
 
   fetchProductsByCategory(category) {
     const productsArray = [];
-    return this.http.get<{ key: string }>(`https://shop-436e8.firebaseio.com/products/${category}/.json`).pipe(
+    return this.http.get<{ key: string }>(`https://shop-436e8.firebaseio.com/products/${category}/.json`)
+    .pipe(
       map((responseData) => {
         for (const key in responseData) {
           if (responseData.hasOwnProperty(key)) {
@@ -157,7 +177,7 @@ export class DBService {
   }
 
   fetchProduct(category: string, key: string) {
-    return this.http.get(`https://shop-436e8.firebaseio.com/products/${category}/${key}.json`)
+    return this.http.get<Product>(`https://shop-436e8.firebaseio.com/products/${category}/${key}.json`);
   }
 
   fetchHomepageAreas() {
@@ -184,6 +204,22 @@ export class DBService {
           }
         }
         return categoriesArray;
+      })
+    );
+  }
+
+  fetchFromCarousel() {
+    const carouselArray = []
+    return this.http.get(`https://shop-436e8.firebaseio.com/homepage/carousel/.json`)
+    .pipe(
+      map((responseData) => {
+        for (const key in responseData) {
+          if (responseData.hasOwnProperty(key)) {
+            carouselArray.push({ ...responseData[key]});
+          }
+        }
+        // console.log("carouselArray",carouselArray)
+        return carouselArray;
       })
     );
   }

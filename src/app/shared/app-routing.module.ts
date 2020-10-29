@@ -10,6 +10,7 @@ import { StatisticsComponent } from '../pages/admin/statistics/statistics.compon
 import { HomeComponent } from '../pages/home/home.component';
 import { PageNotFoundComponent } from '../pages/page-not-found/page-not-found.component';
 import { ProductComponent } from '../pages/product/product.component';
+import { CartComponent } from '../pages/cart/cart.component';
 
 const routes: Routes = [
     {path:'', component: HomeComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
       {path:'website-edit',component: WebsiteEditComponent}
     ]},
     {path:'product/:category/:key', component: ProductComponent},
+    {path:'cart',component: CartComponent},
     {path:'**', component: PageNotFoundComponent}
 ];
 

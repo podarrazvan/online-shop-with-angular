@@ -18,7 +18,13 @@ a {
   text-decoration: none !important;
   color: black;
 }
+
 html,
 body {
   height: 100%;
+}
+
+.mat-btn {
+  border: 0px;
+  background-color: transparent;
 }

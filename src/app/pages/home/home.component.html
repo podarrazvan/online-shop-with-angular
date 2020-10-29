@@ -1,6 +1,9 @@
 <div *ngIf="loading"><h1>Loading...</h1></div>
 <div *ngIf="!loading">
-  <app-carousel></app-carousel>
+  <app-carousel
+    [products]="carousel"
+    [homepage]="true"
+  ></app-carousel>
   <div class="container">
     <div class="products" *ngFor="let product of products">
       <h2><b>{{product.area.name}}</b></h2>

@@ -29,21 +29,9 @@ export class HomepageEditAlertComponent implements OnInit{
 
   getAreas() {
     this.homepageAreas = [];
-    const homepageAreasArray: HomepageArea[] = [];
     this.db
       .fetchHomepageAreas()
-      .pipe(
-        map((responseData) => {
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              homepageAreasArray.push({ ...responseData[key], key });
-            }
-          }
-          return homepageAreasArray;
-        })
-      )
       .subscribe((areas) => {
-        // this.area = areas;
         for (let area of areas) {
           this.homepageAreas.push(area);
         }
@@ -51,14 +39,18 @@ export class HomepageEditAlertComponent implements OnInit{
       });
     }
     onAdd(selectedArea) {
-      this.db.addHomepageAreaOnProduct(this.product, selectedArea.value) .subscribe(
-        responseData => {
-          console.log(responseData);
-        },
-        error => {
-          console.log('error:',error);
-        }
-      );
+      if(selectedArea.value === 'carousel'){
+        this.db.addToCarousel(this.product.key, this.product.category);
+      } else {
+        this.db.addHomepageAreaOnProduct(this.product, selectedArea.value) .subscribe(
+          responseData => {
+            console.log(responseData);
+          },
+          error => {
+            console.log('error:',error);
+          }
+        );
+      }
       this.close.emit();
-    }
+      }
 }

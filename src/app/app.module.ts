@@ -8,7 +8,7 @@ import { AppRoutingModule } from './shared/app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
-import { CarouselComponent } from './pages/home/carousel/carousel.component';
+import { CarouselComponent } from './shared/carousel/carousel.component';
 import { DBService } from './shared/db.service';
 import { GetProductsComponent } from './shared/get-products/get-products.component';
 import { ShortenPipe } from './shared/shorten.pipe';
@@ -29,6 +29,7 @@ import { ProductsComponent } from './pages/admin/products/products.component';
 import { WebsiteEditComponent } from './pages/admin/website-edit/website-edit.component';
 import { HomepageEditAlertComponent } from './pages/admin/products/homepage-edit-alert/homepage-edit-alert.component';
 import { ProductComponent } from './pages/product/product.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ProductComponent } from './pages/product/product.component';
     ProductsComponent,
     WebsiteEditComponent,
     HomepageEditAlertComponent,
-    ProductComponent
+    ProductComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

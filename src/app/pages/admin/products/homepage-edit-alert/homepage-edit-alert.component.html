@@ -6,6 +6,7 @@
   <div class="alert-box-actions">
     <select  #selectedArea class="form-control form-control-sm">
         <option value="">Remove</option>
+        <option value="carousel">Carousel</option>
         <option *ngFor="let area of homepageAreas" [value]="area.name">{{area.name}}</option>
       </select>
       <hr>

@@ -14,6 +14,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private db: DBService) {}
   
+  carousel:[{img: string, category: string, id: string}];
+  
+
   loading = true;
 
   homepageAreas: HomepageArea[];
@@ -25,6 +28,7 @@ export class HomeComponent implements OnInit {
   
   ngOnInit(): void {
     this.getAreas();
+    this.createCarousel();
   }
 
   getAreas() {
@@ -45,13 +49,10 @@ export class HomeComponent implements OnInit {
     this.db
       .fetchProductsByCategory(cat)
       .subscribe((products) => {
-        console.log(products);
         for(let area of this.homepageAreas){
           const homepageArea = area
           const product =  products.filter(prod => prod.homepagePosition === area.name);
           this.products.push({area: homepageArea,product: product});
-          // this.products.area = area;
-          // this.products.product = products.filter(prod => prod.homepagePosition === area.name);
         }
 
         // !!!!! \\
@@ -59,7 +60,6 @@ export class HomeComponent implements OnInit {
         // !!!!! \\
         
         this.loading = false;
-        console.log(this.products)
         return this.products;
       });
   }
@@ -74,6 +74,22 @@ export class HomeComponent implements OnInit {
           this.getProducts(category.name);
         }
       });
+  }
+
+  createCarousel() {
+    this.carousel = [{img:'',category:'',id:''}]
+    this.db.fetchFromCarousel().subscribe((data) => {
+      for(let product of data){
+        const category = product.category;
+        const key = product.id;
+        this.db.fetchProduct(category, key).subscribe(data => {
+          // this.carouselImages.push(data.img)
+          this.carousel.push({img: data.img, category: category,id: key});
+        })
+      }
+      console.log(this.carousel);
+      this.carousel.splice(0,1);
+    });
   }
 
 }

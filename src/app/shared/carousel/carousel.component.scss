@@ -1,11 +1,11 @@
 ngb-carousel,
-img {
+.homepage {
   width: 100%;
 }
 
-img {
-  object-fit: cover;
-  max-height: 400px;
+.homepage img {
+    object-fit: cover;
+    max-height: 500px!important;
 }
 
 .carousel-control-prev-icon,
