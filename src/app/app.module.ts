@@ -30,6 +30,8 @@ import { WebsiteEditComponent } from './pages/admin/website-edit/website-edit.co
 import { HomepageEditAlertComponent } from './pages/admin/products/homepage-edit-alert/homepage-edit-alert.component';
 import { ProductComponent } from './pages/product/product.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { SharedDataService } from './shared/shared-data.service';
+import { DeleteAlertComponent } from './pages/admin/products/delete-alert/delete-alert.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { CartComponent } from './pages/cart/cart.component';
     WebsiteEditComponent,
     HomepageEditAlertComponent,
     ProductComponent,
-    CartComponent
+    CartComponent,
+    DeleteAlertComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,7 @@ import { CartComponent } from './pages/cart/cart.component';
     AngularFireStorageModule,
     HttpClientModule
   ],
-  providers: [DBService],
+  providers: [DBService,SharedDataService],
   bootstrap: [AppComponent,AngularFirestore]
 })
 export class AppModule { }

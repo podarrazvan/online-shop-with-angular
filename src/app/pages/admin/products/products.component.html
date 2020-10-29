@@ -2,8 +2,16 @@
   <div *ngIf='showEditHomepage'>
     <app-homepage-edit-alert
     (close)="close('homepage')"
+    (changed)='getCategories()'
     [product]="productToAddOnHomepage"
     ></app-homepage-edit-alert>
+  </div>
+  <div *ngIf='deleteAlert'>
+    <app-delete-alert
+    [productToDelete]="productToDelete"
+    (yes)="onProductDeleted()"
+    (no)="onCancelDelete()"
+    ></app-delete-alert>
   </div>
     <table class="table">
       <thead>
@@ -27,9 +35,9 @@
           <td><b>{{product.quantity}}</b></td>
           <td *ngIf="product.homepagePosition"><button (click)="openEdit('homepage', product)" class="btn btn-primary">{{product.homepagePosition}}</button></td>
           <td *ngIf="!product.homepagePosition"><button (click)="openEdit('homepage', product)" class="mat-btn"><mat-icon>add</mat-icon></button></td>
-          <td><button class="mat-btn" (click)="openEdi(i)"><mat-icon>edit</mat-icon></button></td>
+          <td><button class="mat-btn" (click)="openEditProduct(product)"><mat-icon>edit</mat-icon></button></td>
           <td>
-            <button class="mat-btn" (click)="onDelete(product.category, product.key)">
+            <button class="mat-btn" (click)="onDelete(product.category, product.key, i, product.img)">
               <mat-icon>delete</mat-icon>
             </button>
           </td>

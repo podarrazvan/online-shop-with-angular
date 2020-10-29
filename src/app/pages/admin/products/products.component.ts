@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Category } from 'src/app/shared/category.interface';
 import { DBService } from 'src/app/shared/db.service';
 import { Product } from 'src/app/shared/product.interface';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 import { HomepageEditAlertComponent } from './homepage-edit-alert/homepage-edit-alert.component';
 
 @Component({
@@ -17,7 +19,11 @@ export class ProductsComponent implements OnInit {
   productToAddOnHomepage: Product;
   idOfProductToAddOnHomepage: string;
 
-  constructor(private db: DBService) {}
+  constructor(
+    private db: DBService,
+    private sharedDataService: SharedDataService,
+    private router: Router
+  ) {}
 
   products: Product[];
   productsData;
@@ -27,6 +33,10 @@ export class ProductsComponent implements OnInit {
 
   showEditHomepage = false;
   showEditProduct = false;
+
+  deleteAlert: boolean;
+  productToDelete;
+  productToDeleteIndex;
 
   ngOnInit(): void {
     this.getCategories();
@@ -53,9 +63,10 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  onDelete(category, key) {
-    // To do: delete the photo too!
-    this.db.deleteProduct(category, key).subscribe();
+  onDelete(category, key, index, img) {
+    this.deleteAlert = true;
+    this.productToDeleteIndex = index;
+    this.productToDelete = { category: category, key: key, img: img };
   }
 
   openEdit(type: string, product: Product) {
@@ -69,5 +80,21 @@ export class ProductsComponent implements OnInit {
     type === 'homepage'
       ? (this.showEditHomepage = false)
       : (this.showEditProduct = false);
+  }
+
+  openEditProduct(product: Product) {
+    console.log(product);
+    this.sharedDataService.product = product;
+    this.sharedDataService.productEdit = true;
+    this.router.navigate(['admin', 'add-product']);
+  }
+
+  onProductDeleted() {
+    this.products.splice(this.productToDeleteIndex, 1);
+    this.deleteAlert = false;
+  }
+
+  onCancelDelete() {
+    this.deleteAlert = false;
   }
 }

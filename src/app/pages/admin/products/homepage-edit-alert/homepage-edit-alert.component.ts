@@ -7,14 +7,14 @@ import { Product } from 'src/app/shared/product.interface';
 @Component({
   selector: 'app-homepage-edit-alert',
   templateUrl: './homepage-edit-alert.component.html',
-  styleUrls: ['./homepage-edit-alert.component.scss']
+  styleUrls: ['./homepage-edit-alert.component.scss'],
 })
-export class HomepageEditAlertComponent implements OnInit{
-
-  constructor(private db: DBService){}
+export class HomepageEditAlertComponent implements OnInit {
+  constructor(private db: DBService) {}
 
   @Input() product: Product;
   @Output() close = new EventEmitter<void>();
+  @Output() changed = new EventEmitter<void>();
 
   homepageAreas: HomepageArea[];
   area;
@@ -29,28 +29,36 @@ export class HomepageEditAlertComponent implements OnInit{
 
   getAreas() {
     this.homepageAreas = [];
-    this.db
-      .fetchHomepageAreas()
-      .subscribe((areas) => {
-        for (let area of areas) {
-          this.homepageAreas.push(area);
+    this.db.fetchHomepageAreas().subscribe((areas) => {
+      for (let area of areas) {
+        this.homepageAreas.push(area);
+      }
+      return this.homepageAreas;
+    });
+  }
+  onAdd(selectedArea) {
+    if (selectedArea.value === 'Carousel') {
+      this.db.addToCarousel(this.product.key, this.product.category);
+    } else if (selectedArea.value === '') {
+      this.db.fetchFromCarousel().subscribe((data) => {
+        for (let product of data) {
+          if (product.id === product.key) {
+            this.db.deleteFromCarousel(product.key).subscribe();
+          }
         }
-        return this.homepageAreas;
       });
     }
-    onAdd(selectedArea) {
-      if(selectedArea.value === 'carousel'){
-        this.db.addToCarousel(this.product.key, this.product.category);
-      } else {
-        this.db.addHomepageAreaOnProduct(this.product, selectedArea.value) .subscribe(
-          responseData => {
-            console.log(responseData);
-          },
-          error => {
-            console.log('error:',error);
-          }
-        );
-      }
-      this.close.emit();
-      }
+    this.db
+      .addHomepageAreaOnProduct(this.product, selectedArea.value)
+      .subscribe(
+        (responseData) => {
+          console.log(responseData);
+        },
+        (error) => {
+          console.log('error:', error);
+        }
+      );
+
+    this.changed.emit();
+  }
 }

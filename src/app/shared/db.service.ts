@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Category } from './category.interface';
 import { HomepageArea } from './homepage-area.interface';
 import { ProductComponent } from '../pages/product/product.component';
+import * as firebase from 'firebase';
 
 @Injectable()
 
@@ -45,31 +46,18 @@ export class DBService {
       );
   }
 
-  // addLink(name: string, productUrl, product: Product) {
-  //   let newUrl = productUrl.split("");
-  //   newUrl.splice(productUrl.length - 6, 0, "/" + name)
-  //   newUrl = newUrl.join("");
-  //   const newProduct: Product = { title: product.title, category: product.category, price: product.price, img: product.img, description: product.description, tags: product.tags, quantity: product.quantity};
-  //   this.http
-  //     .put(
-  //       `https://shop-436e8.firebaseio.com/products/${product.category}/${name}/.json`,
-  //       newProduct,
-  //       {
-  //         observe: 'response'
-  //       }
-  //     )
-  //     .subscribe(
-  //       responseData => {
-  //         console.log(responseData);
-  //       },
-  //       error => {
-  //         this.error.next(error.message);
-  //       }
-  //     );
-  // }
+  updateProduct(product: Product, homepagePosition: string, key: string) {
+    console.log(product);
+    const productData: Product = { title: product.title, category: product.category, price: product.price, img: product.img, description: product.description, tags: product.tags, quantity: product.quantity, homepagePosition: homepagePosition }
+    return this.http.put(`https://shop-436e8.firebaseio.com/products/${product.category}/${key}/.json`,
+      productData,
+      {
+        observe: 'response'
+      }
+    );
+  }
 
   addHomepageAreaOnProduct(product: Product, homepagePosition: string) {
-    console.log(homepagePosition);
     const newProduct: Product = { title: product.title, category: product.category, price: product.price, img: product.img, description: product.description, tags: product.tags, quantity: product.quantity, homepagePosition: homepagePosition };
     return this.http.put(`https://shop-436e8.firebaseio.com/products/${product.category}/${product.key}/.json`,
       newProduct,
@@ -117,29 +105,6 @@ export class DBService {
         }
       );
   }
-
-  // To do: add 
-
-  // addProductToHomepageArea(key: string, product: string,category: string ) {
-  //   const area = {name: name, product: product, category: category};
-  //   this.http
-  //     .post<{ name: string }>(
-  //       `https://shop-436e8.firebaseio.com/homepage/areas/${key}.json`,
-  //       area,
-  //       {
-  //         observe: 'response'
-  //       }
-  //     )
-  //     .subscribe(
-  //       responseData => {
-  //         console.log(responseData);
-  //       },
-  //       error => {
-  //         console.log('error:',error);
-  //         error.next(error.message);
-  //       }
-  //     );
-  // }
 
   addCategory(name: string) {
     const category = { name: name };
@@ -210,15 +175,14 @@ export class DBService {
 
   fetchFromCarousel() {
     const carouselArray = []
-    return this.http.get(`https://shop-436e8.firebaseio.com/homepage/carousel/.json`)
+    return this.http.get<{category: string, id: string, key: string}>(`https://shop-436e8.firebaseio.com/homepage/carousel/.json`)
     .pipe(
       map((responseData) => {
         for (const key in responseData) {
           if (responseData.hasOwnProperty(key)) {
-            carouselArray.push({ ...responseData[key]});
+            carouselArray.push({ ...responseData[key], key});
           }
         }
-        // console.log("carouselArray",carouselArray)
         return carouselArray;
       })
     );
@@ -229,21 +193,27 @@ export class DBService {
       .delete(`https://shop-436e8.firebaseio.com/products/${category}/${key}/.json`);
   }
 
+  deleteFromCarousel(key: string) {
+    return this.http
+    .delete(`https://shop-436e8.firebaseio.com/homepage/carousel/${key}/.json`);
+  }
+
   deleteHomepageArea(key: string) {
-    console.log(key)
     return this.http
       .delete(`https://shop-436e8.firebaseio.com/homepage/areas/${key}/.json`);
   }
 
   deleteCategory(key: string) {
-    console.log(key)
     return this.http
       .delete(`https://shop-436e8.firebaseio.com/categories/${key}/.json`);
   }
 
-  // fetchSinglePost(category, uid, name) {
-  //   return this.http.get<{[key: string]:Post}>(`https://cure-with-photos-af2fa.firebaseio.com/posts/${category}/${uid}/${name}/.json`);
-  // }
-
-
+  deletePhoto(img: string) { 
+    var image = firebase.storage().refFromURL(img);
+    image.delete().then(function() {
+     console.log("Image deleted!")
+    }).catch(function(error) {
+      console.log(error);
+    });
+  }
 }
