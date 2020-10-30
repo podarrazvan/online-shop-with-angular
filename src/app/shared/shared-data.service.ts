@@ -5,4 +5,5 @@ import { Product } from './product.interface';
 export class SharedDataService {
     productEdit: boolean;
     product: Product;
+    unreadMessages: number;
 }

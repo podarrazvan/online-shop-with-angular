@@ -33,6 +33,8 @@ import { CartComponent } from './pages/cart/cart.component';
 import { SharedDataService } from './shared/shared-data.service';
 import { DeleteAlertComponent } from './pages/admin/products/delete-alert/delete-alert.component';
 import { FooterComponent } from './footer/footer.component';
+import { ContactComponent } from './pages/contact/contact.component';
+import { MessageComponent } from './pages/admin/messages/message/message.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { FooterComponent } from './footer/footer.component';
     ProductComponent,
     CartComponent,
     DeleteAlertComponent,
-    FooterComponent
+    FooterComponent,
+    ContactComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

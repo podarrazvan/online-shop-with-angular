@@ -1,0 +1,21 @@
+<div class="backdrop"></div>
+<div class="alert">
+  <div class="alert-box">
+    <button (click)="onClose()" class="btn btn-danger">X</button>
+    <div class="sender">
+      <p>
+        <b>Email: {{ message.email }}</b>
+      </p>
+      <p>
+        <b>First name: {{ message.firstName }}</b>
+      </p>
+      <p>
+        <b>Last name: {{ message.lastName }}</b>
+      </p>
+    </div>
+    <hr />
+    <div class="message">
+      <h3>{{ message.message }}</h3>
+    </div>
+  </div>
+</div>
