@@ -30,12 +30,12 @@ export class AddProductComponent implements OnInit, OnDestroy {
     if(this.sharedData.productEdit){
       this.productForm = this.fb.group({
         title: [this.sharedData.product.title, Validators.required],
-      category: [this.sharedData.product.category, Validators.required],
-      price: [this.sharedData.product.price, Validators.required],
-      img: '',
-      description: [this.sharedData.product.description, Validators.required],
-      tags: [this.sharedData.product.tags],
-      quantity: [this.sharedData.product.quantity, Validators.required],
+        category: [this.sharedData.product.category, Validators.required],
+        price: [this.sharedData.product.price, Validators.required],
+        img: '',
+        description: [this.sharedData.product.description, Validators.required],
+        tags: [this.sharedData.product.tags],
+        quantity: [this.sharedData.product.quantity, Validators.required],
       })
     }else{
 

@@ -1,0 +1,36 @@
+li {
+  width: fit-content !important;
+}
+
+a {
+  padding: 10px;
+  color: white;
+} 
+
+.footer {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0px;
+  padding: 20px;
+  height: 100px;
+  background-color: gray;
+}
+
+.footer-link:hover {
+  padding: 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: rgb(0, 110, 255);
+}
+
+@media screen and (max-width: 991px) {
+  .footer-link:hover {
+    padding: 5px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .footer-link:hover {
+    padding: 1px;
+  }
+}
