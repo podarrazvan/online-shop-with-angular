@@ -1,7 +1,13 @@
+.side-bar-area {
+  position: relative;
+  width: fit-content;
+}
 .side-bar {
-  height: calc(100vh - 56px);
+  position: fixed;
+  margin-top: -55px;
+  height: 110vh;
   width: 14vw;
-  padding:50px 60px 50px 0px;
+  padding:100px 60px 50px 0px;
   background-color: rgb(30, 30, 30);
 }
 

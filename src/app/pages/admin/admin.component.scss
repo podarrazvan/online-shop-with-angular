@@ -4,11 +4,13 @@
 }
 
 .content {
+  position: relative;
   flex-direction: column;
   display: flex;
+  left: 16vw;
   // place-content: center;
   align-items: center;
   float: right;
-  width: 78vw;
+  width: 70vw;
   padding: 50px;
 }

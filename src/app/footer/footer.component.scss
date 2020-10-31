@@ -8,12 +8,13 @@ a {
 } 
 
 .footer {
+  position: absolute;
   width: 100%;
   text-align: center;
   margin-bottom: 0px;
   padding: 20px;
   height: 100px;
-  background-color: gray;
+  background-color: rgb(46, 36, 36);
 }
 
 .footer-link:hover {
