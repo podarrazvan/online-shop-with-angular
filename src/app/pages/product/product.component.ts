@@ -33,7 +33,10 @@ export class ProductComponent implements OnInit {
     this.images = []
     this.db.fetchProduct(category, key).subscribe((response) => {
       this.product = response;
-      this.images.push(response.img);
+      for(let img of response.img) {
+        this.images.push(img);
+      }
+      console.log(this.images);
       this.isLoading = false
     });
   }

@@ -9,7 +9,7 @@ import { Product } from '../product.interface';
 })
 export class GetProductsComponent implements OnInit {
 
-  @Input() img: string;
+  @Input() img: string[];
   @Input() title: string;
   @Input() description: string;
   @Input() price: number;

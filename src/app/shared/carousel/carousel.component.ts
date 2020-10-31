@@ -16,27 +16,34 @@ export class CarouselComponent implements OnInit {
 
   index = 0;
 
+  length: number;
+
   ngOnInit(): void {
     console.log('carusel', this.images);
+    this.homepage
+      ? (this.length = this.products.length)
+      : (this.length = this.images.length);
   }
 
   onClick() {
-    if (this.homepage === true) {
+    if (this.homepage) {
       this.router.navigate([
         '/product',
         this.products[this.index].category,
         this.products[this.index].id,
       ]);
-    } else if (this.productPage === true) {
+    } else if (this.productPage) {
       // To do: img on full screen
     }
   }
 
   next() {
-    this.index === this.products.length - 1 ? (this.index = 0) : this.index++;
+    this.index === this.length - 1 ? (this.index = 0) : this.index++;
+    console.log(this.index);
   }
 
   previous() {
-    this.index === 0 ? (this.index = this.products.length - 1) : this.index--;
+    console.log(this.index);
+    this.index === 0 ? (this.index = this.length - 1) : this.index--;
   }
 }

@@ -20,14 +20,14 @@ export class AddProductComponent implements OnInit, OnDestroy {
   productForm: FormGroup;
 
   tags: string[] = [];
-  image: string;
+  images: string[] = [];
 
   products = [];
   categories: string[];
   category;
 
   ngOnInit(): void {
-    if(this.sharedData.productEdit){
+    if (this.sharedData.productEdit) {
       this.productForm = this.fb.group({
         title: [this.sharedData.product.title, Validators.required],
         category: [this.sharedData.product.category, Validators.required],
@@ -36,9 +36,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
         description: [this.sharedData.product.description, Validators.required],
         tags: [this.sharedData.product.tags],
         quantity: [this.sharedData.product.quantity, Validators.required],
-      })
-    }else{
-
+      });
+    } else {
       this.productForm = this.fb.group({
         title: ['', Validators.required],
         category: ['', Validators.required],
@@ -53,9 +52,9 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.image != undefined) {
+    if (this.images != undefined) {
       this.productForm.patchValue({
-        img: this.image,
+        img: this.images,
         tags: this.tags,
       });
       if (this.sharedData.productEdit) {
@@ -87,7 +86,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     const randomId = Math.random().toString(36).substring(2);
 
     const imagePath = await this.db.upload(event, randomId);
-    this.image = imagePath;
+    this.images.push(imagePath);
   }
 
   addTag(tag) {

@@ -69,7 +69,6 @@
         type="file"
         class="form-control-file"
         id="imgInput"
-        multiple
         accept=".png,.jpg,.jpeg"
         (change)="upload($event)"
       />
@@ -120,16 +119,21 @@
             <div class="quantityInput">
               <!--To do: implement number check-->
               <label for="quantityInput"><b>Quantity</b></label>
-              <input formControlName="quantity" id="quantityInput" class="form-control" placeholder="Set quantity">
+              <input
+                formControlName="quantity"
+                id="quantityInput"
+                class="form-control"
+                placeholder="Set quantity"
+              />
               <span
-              class="help-blok"
-              *ngIf="
-                !productForm.get('quantity').valid &&
-                productForm.get('quantity').touched
-              "
-              style="color: red"
-              >Please insert the quantity!</span
-            >
+                class="help-blok"
+                *ngIf="
+                  !productForm.get('quantity').valid &&
+                  productForm.get('quantity').touched
+                "
+                style="color: red"
+                >Please insert the quantity!</span
+              >
             </div>
           </div>
         </div>

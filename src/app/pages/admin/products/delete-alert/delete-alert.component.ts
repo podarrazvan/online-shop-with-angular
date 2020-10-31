@@ -22,7 +22,9 @@ export class DeleteAlertComponent {
     this.db
       .deleteProduct(this.productToDelete.category, this.productToDelete.key)
       .subscribe(() => {
-        this.db.deletePhoto(this.productToDelete.img);
+        for (let img of this.productToDelete.img) {
+          this.db.deletePhoto(img);
+        }
       });
     this.db.fetchFromCarousel().subscribe((data) => {
       for (let product of data) {
