@@ -1,17 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, DoCheck } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.scss']
+  styleUrls: ['./admin.component.scss'],
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent implements DoCheck {
+  constructor(private activeRouter: ActivatedRoute) {}
 
-  constructor(private router: Router) { }
+  nothingSelected = true;
 
-  ngOnInit(): void {
-    // this.router.navigate(['../admin']);
+  ngDoCheck(): void {
+    this.checkUrl();
   }
 
+  checkUrl() {
+    var _activeChild = this.activeRouter.children.length;
+    if (_activeChild != 0) {
+      this.nothingSelected = false;
+    }
+  }
 }
