@@ -26,6 +26,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
   categories: string[];
   category;
 
+  notComplete = true;
+
   ngOnInit(): void {
     if (this.sharedData.productEdit) {
       this.productForm = this.fb.group({
@@ -76,6 +78,9 @@ export class AddProductComponent implements OnInit, OnDestroy {
           this.productForm.value.quantity
         );
       }
+      this.notComplete = false;
+      this.tags = [];
+      this.images = [];
       this.productForm.reset();
     } else {
       alert('Please add at last one photo!');
@@ -111,5 +116,10 @@ export class AddProductComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sharedData.product = null;
     this.sharedData.productEdit = false;
+    if(this.notComplete) {
+      for(let img of this.images) {
+        this.db.deletePhoto(img);
+      }
+    }
   }
 }

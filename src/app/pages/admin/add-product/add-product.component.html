@@ -74,6 +74,11 @@
       />
     </div>
   </div>
+  <div class="prev-images">
+    <div class="image" *ngFor="let img of images">
+      <img [src]="img">
+    </div>
+  </div>
   <hr />
   <div class="row">
     <div class="col">
@@ -117,9 +122,10 @@
           </div>
           <div class="col">
             <div class="quantityInput">
-              <!--To do: implement number check-->
               <label for="quantityInput"><b>Quantity</b></label>
               <input
+                type="number"
+                min="1"
                 formControlName="quantity"
                 id="quantityInput"
                 class="form-control"

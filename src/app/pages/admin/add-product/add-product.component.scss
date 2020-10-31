@@ -3,6 +3,24 @@
     display: flex;
 }
 
+img,
+.image {
+    height: 108px;
+    width: 192px;
+}
+
+.prev-images  {
+    display: block;
+    max-width: 600px;
+    position: relative;
+  }
+
+.image {
+    display: inline-block;
+    position: relative;
+    margin: 3px;
+}
+
 .tags,
 .tags-area {
     margin-top: 20px;
