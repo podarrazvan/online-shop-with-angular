@@ -5,10 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Category } from './category.interface';
 import { HomepageArea } from './homepage-area.interface';
-import { ProductComponent } from '../pages/product/product.component';
 import * as firebase from 'firebase';
 import { Message } from './message.interface';
-import { error } from 'protractor';
 
 @Injectable()
 export class DBService {
