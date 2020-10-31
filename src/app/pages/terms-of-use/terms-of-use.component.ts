@@ -14,7 +14,7 @@ export class TermsOfUseComponent implements OnInit {
 
   ngOnInit(): void {
     this.db.fetchTermsOfUse().subscribe(terms => {
-      this.termsOfUse = terms[0].termsOfUse;
+      this.termsOfUse = terms.termsOfUse;
     })
   }
 

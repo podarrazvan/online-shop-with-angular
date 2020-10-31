@@ -222,7 +222,23 @@ export class DBService {
   editTermsOfUse(termsOfUse: string) {
     const terms = { termsOfUse: termsOfUse };
     this.http
-      .post(`https://shop-436e8.firebaseio.com/terms-of-use/.json`, terms, {
+      .put(`https://shop-436e8.firebaseio.com/terms-of-use/.json`, terms, {
+        observe: 'response',
+      })
+      .subscribe(
+        (responseData) => {
+          console.log(responseData);
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
+  }
+
+  editAboutUs(aboutUs: string) {
+    const about = { aboutUs: aboutUs };
+    this.http
+      .put(`https://shop-436e8.firebaseio.com/about-us/.json`, about, {
         observe: 'response',
       })
       .subscribe(
@@ -332,19 +348,14 @@ export class DBService {
   }
 
   fetchTermsOfUse() {
-    const termsOfUse = [];
     return this.http
-      .get<{termsOfUse: string}>(`https://shop-436e8.firebaseio.com/terms-of-use/.json`)
-      .pipe(
-        map((responseData) => {
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              termsOfUse.push({ ...responseData[key] });
-            }
-          }
-          return termsOfUse;
-        })
-      );
+      .get<{termsOfUse: string}>(`https://shop-436e8.firebaseio.com/terms-of-use/.json`);
+  }
+
+  fetchAboutUs() {
+    return this.http
+      .get<{aboutUs: string}>(`https://shop-436e8.firebaseio.com/about-us/.json`)
+    
   }
 
   deleteProduct(category: string, key: string) {

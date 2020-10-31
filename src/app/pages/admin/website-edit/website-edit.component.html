@@ -4,7 +4,13 @@
   ></app-terms-of-use-edit>
 </div>
 
-<div *ngIf="!showEditTermsOfUse">
+<div *ngIf="showEditAboutUs">
+  <app-about-us-edit
+    (close)="closeEditAboutUs()"
+  ></app-about-us-edit>
+</div>
+
+<div *ngIf="!showEditTermsOfUse || !showEditAboutUs">
   <h1>Homepage areas</h1>
   <br />
   <button
@@ -131,6 +137,13 @@
   <br />
   <button class="btn btn-secondary" type="button" (click)="editTermsOfUse()">
     Edit Terms Of Use
+  </button>
+  <br />
+  <br>
+  <h1>About Us</h1>
+  <br />
+  <button class="btn btn-secondary" type="button" (click)="editAboutUs()">
+    Edit About Us
   </button>
   <br />
 </div>

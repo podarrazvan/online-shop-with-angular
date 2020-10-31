@@ -13,6 +13,7 @@ import { ProductComponent } from '../pages/product/product.component';
 import { CartComponent } from '../pages/cart/cart.component';
 import { ContactComponent } from '../pages/contact/contact.component';
 import { TermsOfUseComponent } from '../pages/terms-of-use/terms-of-use.component';
+import { AboutUsComponent } from '../pages/about-us/about-us.component';
 
 const routes: Routes = [
     {path:'', component: HomeComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
     {path:'cart',component: CartComponent},
     {path:'contact',component: ContactComponent},
     {path:'terms-of-use',component: TermsOfUseComponent},
+    {path:'about-us',component: AboutUsComponent},
     {path:'**', component: PageNotFoundComponent}
 ];
 

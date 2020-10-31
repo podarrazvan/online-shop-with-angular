@@ -21,6 +21,8 @@ export class WebsiteEditComponent implements OnInit {
 
   showEditTermsOfUse = false;
 
+  showEditAboutUs = false;
+
   ngOnInit(): void {
     this.getAreas();
     this.getCategories();
@@ -83,5 +85,13 @@ export class WebsiteEditComponent implements OnInit {
 
   closeTermsOfUseEdit() {
     this.showEditTermsOfUse = false;
+  }
+
+  editAboutUs() {
+    this.showEditAboutUs = true;
+  }
+
+  closeEditAboutUs() {
+    this.showEditAboutUs = false;
   }
 }
