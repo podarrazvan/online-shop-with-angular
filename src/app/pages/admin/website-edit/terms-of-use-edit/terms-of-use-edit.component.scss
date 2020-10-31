@@ -1,7 +1,14 @@
+.btn {
+  float: right;
+}
+
 .alert-box {
   position: fixed;
-  top: 30vh;
-  width: 20vw;
+  top: 10vh;
+  bottom: 20vh;
+  height: fit-content;
+  max-height: 80vh;
+  width: 60vw;
   padding: 16px;
   z-index: 100;
   border-radius: 10px;
@@ -9,10 +16,6 @@
   box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
 }
 
-.alert-box-actions {
-  text-align: right;
-}
-
-.yes {
-  float: left;
+textarea {
+  margin-top: 50px;
 }

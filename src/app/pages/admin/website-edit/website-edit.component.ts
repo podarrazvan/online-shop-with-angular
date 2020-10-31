@@ -19,6 +19,8 @@ export class WebsiteEditComponent implements OnInit {
   categories: string[];
   category;
 
+  showEditTermsOfUse = false;
+
   ngOnInit(): void {
     this.getAreas();
     this.getCategories();
@@ -73,5 +75,13 @@ export class WebsiteEditComponent implements OnInit {
         }
         return this.homepageAreas;
       });
+  }
+
+  editTermsOfUse() {
+    this.showEditTermsOfUse = true;
+  }
+
+  closeTermsOfUseEdit() {
+    this.showEditTermsOfUse = false;
   }
 }

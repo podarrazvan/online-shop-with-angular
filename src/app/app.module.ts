@@ -35,6 +35,8 @@ import { DeleteAlertComponent } from './pages/admin/products/delete-alert/delete
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { MessageComponent } from './pages/admin/messages/message/message.component';
+import { TermsOfUseComponent } from './pages/terms-of-use/terms-of-use.component';
+import { TermsOfUseEditComponent } from './pages/admin/website-edit/terms-of-use-edit/terms-of-use-edit.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { MessageComponent } from './pages/admin/messages/message/message.compone
     DeleteAlertComponent,
     FooterComponent,
     ContactComponent,
-    MessageComponent
+    MessageComponent,
+    TermsOfUseComponent,
+    TermsOfUseEditComponent
   ],
   imports: [
     BrowserModule,

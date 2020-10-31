@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from '../pages/page-not-found/page-not-found.co
 import { ProductComponent } from '../pages/product/product.component';
 import { CartComponent } from '../pages/cart/cart.component';
 import { ContactComponent } from '../pages/contact/contact.component';
+import { TermsOfUseComponent } from '../pages/terms-of-use/terms-of-use.component';
 
 const routes: Routes = [
     {path:'', component: HomeComponent},
@@ -26,6 +27,7 @@ const routes: Routes = [
     {path:'product/:category/:key', component: ProductComponent},
     {path:'cart',component: CartComponent},
     {path:'contact',component: ContactComponent},
+    {path:'terms-of-use',component: TermsOfUseComponent},
     {path:'**', component: PageNotFoundComponent}
 ];
 

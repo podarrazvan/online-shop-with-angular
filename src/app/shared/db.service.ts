@@ -219,6 +219,22 @@ export class DBService {
       );
   }
 
+  editTermsOfUse(termsOfUse: string) {
+    const terms = { termsOfUse: termsOfUse };
+    this.http
+      .post(`https://shop-436e8.firebaseio.com/terms-of-use/.json`, terms, {
+        observe: 'response',
+      })
+      .subscribe(
+        (responseData) => {
+          console.log(responseData);
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
+  }
+
   fetchProductsByCategory(category) {
     const productsArray = [];
     return this.http
@@ -311,6 +327,22 @@ export class DBService {
             }
           }
           return messagesArray;
+        })
+      );
+  }
+
+  fetchTermsOfUse() {
+    const termsOfUse = [];
+    return this.http
+      .get<{termsOfUse: string}>(`https://shop-436e8.firebaseio.com/terms-of-use/.json`)
+      .pipe(
+        map((responseData) => {
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              termsOfUse.push({ ...responseData[key] });
+            }
+          }
+          return termsOfUse;
         })
       );
   }

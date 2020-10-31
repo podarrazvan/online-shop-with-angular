@@ -1,0 +1,10 @@
+<div class="backdrop"></div>
+<div class="alert">
+  <div class="alert-box">
+    <button (click)="onClose()" class="btn btn-danger">X</button>
+    <h1>Edit terms of use:</h1>
+    <textarea #terms rows="15" class="form-control">{{termsOfUse}}</textarea>
+    <hr />
+    <button (click)="onSave(terms)" class="btn btn-primary">Save</button>
+  </div>
+</div>
