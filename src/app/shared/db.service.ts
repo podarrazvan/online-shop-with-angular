@@ -15,7 +15,7 @@ export class DBService {
   constructor(
     private afStorage: AngularFireStorage,
     private http: HttpClient
-  ) {}
+  ) { }
 
   categories: Category[];
   category;
@@ -27,6 +27,7 @@ export class DBService {
   }
 
   createAndStoreProduct(
+
     title: string,
     category: string,
     price: number,
@@ -35,6 +36,7 @@ export class DBService {
     tags: any,
     quantity: number
   ) {
+    const user = JSON.parse(localStorage.getItem('userData'));
     const productData: Product = {
       title: title,
       category: category,
@@ -46,7 +48,7 @@ export class DBService {
     };
     this.http
       .post<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/products/${category}/.json`,
+        `https://shop-436e8.firebaseio.com/products/${category}/.json${user._token}`,
         productData,
         {
           observe: 'response',
@@ -55,7 +57,6 @@ export class DBService {
       .subscribe(
         (responseData) => {
           console.log(responseData);
-          // this.addLink(responseData.body.name, responseData.url, productData);
         },
         (error) => {
           this.error.next(error.message);
@@ -64,6 +65,7 @@ export class DBService {
   }
 
   updateProduct(product: Product, homepagePosition: string, key: string) {
+    const user = JSON.parse(localStorage.getItem('userData'));
     console.log(product);
     const productData: Product = {
       title: product.title,
@@ -76,7 +78,7 @@ export class DBService {
       homepagePosition: homepagePosition,
     };
     return this.http.put(
-      `https://shop-436e8.firebaseio.com/products/${product.category}/${key}/.json`,
+      `https://shop-436e8.firebaseio.com/products/${product.category}/${key}/.json${user._token}`,
       productData,
       {
         observe: 'response',
@@ -85,6 +87,7 @@ export class DBService {
   }
 
   addHomepageAreaOnProduct(product: Product, homepagePosition: string) {
+    const user = JSON.parse(localStorage.getItem('userData'));
     const newProduct: Product = {
       title: product.title,
       category: product.category,
@@ -96,7 +99,7 @@ export class DBService {
       homepagePosition: homepagePosition,
     };
     return this.http.put(
-      `https://shop-436e8.firebaseio.com/products/${product.category}/${product.key}/.json`,
+      `https://shop-436e8.firebaseio.com/products/${product.category}/${product.key}/.json${user._token}`,
       newProduct,
       {
         observe: 'response',
@@ -105,10 +108,11 @@ export class DBService {
   }
 
   addToCarousel(key: string, category: string) {
+    const user = JSON.parse(localStorage.getItem('userData'));
     const product = { id: key, category: category };
     this.http
       .post(
-        `https://shop-436e8.firebaseio.com/homepage/carousel/.json`,
+        `https://shop-436e8.firebaseio.com/homepage/carousel/.json${user._token}`,
         product,
         {
           observe: 'response',
@@ -126,10 +130,11 @@ export class DBService {
   }
 
   addHomepageArea(name: string) {
+    const user = JSON.parse(localStorage.getItem('userData'));
     const area = { name: name };
     this.http
       .post<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/homepage/areas/.json`,
+        `https://shop-436e8.firebaseio.com/homepage/areas/.json${user._token}`,
         area,
         {
           observe: 'response',
@@ -147,10 +152,11 @@ export class DBService {
   }
 
   addCategory(name: string) {
+    const user = JSON.parse(localStorage.getItem('userData'));
     const category = { name: name };
     this.http
       .post<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/categories/.json`,
+        `https://shop-436e8.firebaseio.com/categories/.json${user._token}`,
         category,
         {
           observe: 'response',
@@ -191,6 +197,7 @@ export class DBService {
   }
 
   updateMessage(message: Message) {
+    const user = JSON.parse(localStorage.getItem('userData'));
     const messageToAdd = {
       firstName: message.firstName,
       lastName: message.lastName,
@@ -201,7 +208,7 @@ export class DBService {
     };
     this.http
       .put(
-        `https://shop-436e8.firebaseio.com/messages/${message.key}/.json`,
+        `https://shop-436e8.firebaseio.com/messages/${message.key}/.json${user._token}`,
         messageToAdd,
         {
           observe: 'response',
@@ -218,9 +225,10 @@ export class DBService {
   }
 
   editTermsOfUse(termsOfUse: string) {
+    const user = JSON.parse(localStorage.getItem('userData'));
     const terms = { termsOfUse: termsOfUse };
     this.http
-      .put(`https://shop-436e8.firebaseio.com/terms-of-use/.json`, terms, {
+      .put(`https://shop-436e8.firebaseio.com/terms-of-use/.json${user._token}`, terms, {
         observe: 'response',
       })
       .subscribe(
@@ -234,9 +242,10 @@ export class DBService {
   }
 
   editAboutUs(aboutUs: string) {
+    const user = JSON.parse(localStorage.getItem('userData'));
     const about = { aboutUs: aboutUs };
     this.http
-      .put(`https://shop-436e8.firebaseio.com/about-us/.json`, about, {
+      .put(`https://shop-436e8.firebaseio.com/about-us/.json?auth=${user._token}`, about, {
         observe: 'response',
       })
       .subscribe(
@@ -347,13 +356,13 @@ export class DBService {
 
   fetchTermsOfUse() {
     return this.http
-      .get<{termsOfUse: string}>(`https://shop-436e8.firebaseio.com/terms-of-use/.json`);
+      .get<{ termsOfUse: string }>(`https://shop-436e8.firebaseio.com/terms-of-use/.json`);
   }
 
   fetchAboutUs() {
     return this.http
-      .get<{aboutUs: string}>(`https://shop-436e8.firebaseio.com/about-us/.json`)
-    
+      .get<{ aboutUs: string }>(`https://shop-436e8.firebaseio.com/about-us/.json`)
+
   }
 
   deleteProduct(category: string, key: string) {

@@ -40,6 +40,7 @@ import { TermsOfUseEditComponent } from './pages/admin/website-edit/terms-of-use
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { AboutUsEditComponent } from './pages/admin/website-edit/about-us-edit/about-us-edit.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { CategoriesComponent } from './pages/categories/categories.component';
     TermsOfUseEditComponent,
     AboutUsComponent,
     AboutUsEditComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

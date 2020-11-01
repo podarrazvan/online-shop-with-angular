@@ -15,10 +15,13 @@ import { ContactComponent } from '../pages/contact/contact.component';
 import { TermsOfUseComponent } from '../pages/terms-of-use/terms-of-use.component';
 import { AboutUsComponent } from '../pages/about-us/about-us.component';
 import { CategoriesComponent } from '../pages/categories/categories.component';
+import { AuthGuard } from '../auth/auth.guard';
+import { AuthComponent } from '../auth/auth.component';
 
 const routes: Routes = [
     {path:'', component: HomeComponent},
-    {path:'admin', component: AdminComponent, children:[
+    {path:'auth', component: AuthComponent},
+    {path:'admin', component: AdminComponent, canActivate: [AuthGuard], children:[
       {path:'add-product',component: AddProductComponent},
       {path:'orders',component: OrdersComponent},
       {path:'messages',component: MessagesComponent},
