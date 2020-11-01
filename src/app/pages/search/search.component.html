@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="product" *ngFor="let product of products">
+        <app-get-products
+        [img]="product.img"
+        [description]="product.description"
+        [price]="product.price"
+        [homepagePosition]="product.homepagePosition"
+        [category]="product.category"
+        [key]="product.key"
+        ></app-get-products>
+      </div>
+</div>

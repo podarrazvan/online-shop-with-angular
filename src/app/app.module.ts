@@ -41,6 +41,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { AboutUsEditComponent } from './pages/admin/website-edit/about-us-edit/about-us-edit.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { AuthComponent } from './auth/auth.component';
+import { SearchComponent } from './pages/search/search.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { AuthComponent } from './auth/auth.component';
     AboutUsComponent,
     AboutUsEditComponent,
     CategoriesComponent,
-    AuthComponent
+    AuthComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

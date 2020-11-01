@@ -17,6 +17,7 @@ import { AboutUsComponent } from '../pages/about-us/about-us.component';
 import { CategoriesComponent } from '../pages/categories/categories.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthComponent } from '../auth/auth.component';
+import { SearchComponent } from '../pages/search/search.component';
 
 const routes: Routes = [
     {path:'', component: HomeComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
       {path:'products',component: ProductsComponent},
       {path:'website-edit',component: WebsiteEditComponent}
     ]},
+    {path:'search/:search', component: SearchComponent},
     {path:'product/:category/:key', component: ProductComponent},
     {path:'category/:category', component: CategoriesComponent},
     {path:'cart',component: CartComponent},

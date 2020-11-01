@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from '../shared/category.interface';
 import { DBService } from '../shared/db.service';
 
@@ -8,7 +9,8 @@ import { DBService } from '../shared/db.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private db: DBService) {}
+  constructor(private db: DBService,
+              private router: Router) {}
 
   name: string;
 
@@ -42,5 +44,9 @@ export class NavbarComponent implements OnInit {
       this.showCategories = false;
     }
     this.wasInside = false;
+  }
+
+  onSearch(search) {
+    this.router.navigate(['../search', search.value.replace(/\s/g, '-')]);
   }
 }
