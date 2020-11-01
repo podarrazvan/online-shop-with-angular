@@ -94,4 +94,8 @@ export class WebsiteEditComponent implements OnInit {
   closeEditAboutUs() {
     this.showEditAboutUs = false;
   }
+
+  setName(name) {
+    this.db.setName(name.value);
+  }
 }

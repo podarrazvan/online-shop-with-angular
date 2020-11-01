@@ -258,6 +258,23 @@ export class DBService {
       );
   }
 
+  setName(name: string) {
+    const user = JSON.parse(localStorage.getItem('userData'));
+    const websiteName = { name: name };
+    this.http
+      .put(`https://shop-436e8.firebaseio.com/website-name/.json?auth=${user._token}`, websiteName, {
+        observe: 'response',
+      })
+      .subscribe(
+        (responseData) => {
+          console.log(responseData);
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
+  }
+
   fetchProductsByCategory(category) {
     const productsArray = [];
     return this.http
@@ -362,6 +379,12 @@ export class DBService {
   fetchAboutUs() {
     return this.http
       .get<{ aboutUs: string }>(`https://shop-436e8.firebaseio.com/about-us/.json`)
+
+  }
+
+  fetchName() {
+    return this.http
+      .get<{ name: string }>(`https://shop-436e8.firebaseio.com/website-name/.json`)
 
   }
 

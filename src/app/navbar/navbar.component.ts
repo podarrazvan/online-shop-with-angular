@@ -10,12 +10,19 @@ import { DBService } from '../shared/db.service';
 export class NavbarComponent implements OnInit {
   constructor(private db: DBService) {}
 
+  name: string;
+
   showCategories = false;
   wasInside: boolean;
 
   categories: Category[];
 
   ngOnInit(): void {
+
+    this.db.fetchName().subscribe(name => {
+      this.name = name.name;
+    })
+    
     this.categories = [];
     this.db.fetchCategories().subscribe((data) => {
       for (let category of data) {
