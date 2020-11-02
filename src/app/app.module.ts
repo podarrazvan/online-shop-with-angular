@@ -42,6 +42,7 @@ import { AboutUsEditComponent } from './pages/admin/website-edit/about-us-edit/a
 import { CategoriesComponent } from './pages/categories/categories.component';
 import { AuthComponent } from './auth/auth.component';
 import { SearchComponent } from './pages/search/search.component';
+import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { SearchComponent } from './pages/search/search.component';
     AboutUsEditComponent,
     CategoriesComponent,
     AuthComponent,
-    SearchComponent
+    SearchComponent,
+    CheckoutPageComponent
   ],
   imports: [
     BrowserModule,

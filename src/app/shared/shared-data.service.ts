@@ -6,4 +6,5 @@ export class SharedDataService {
     productEdit: boolean;
     product: Product;
     unreadMessages: number;
+    totalCart: number;
 }

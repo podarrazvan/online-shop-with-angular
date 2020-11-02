@@ -22,7 +22,6 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.contactForm.value);
     this.db.addMessage(this.contactForm.value);
     this.contactForm.reset();
   }

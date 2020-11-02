@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import { DBService } from 'src/app/shared/db.service';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
 })
-export class CartComponent implements OnInit {
-  constructor(private db: DBService) {}
+export class CartComponent implements OnInit, DoCheck {
+  constructor(private db: DBService,
+              private sharedDataService: SharedDataService) {}
   cart;
   showCart = false;
   total = 0;
@@ -21,6 +23,11 @@ export class CartComponent implements OnInit {
       this.getProduct(category, key, quantity);
     }
     this.showCart = true;
+  }
+
+  ngDoCheck() {
+    this.sharedDataService.totalCart = this.total;
+    console.log(this.sharedDataService.totalCart);
   }
 
   getProduct(category: string, key: string, quantity: string) {

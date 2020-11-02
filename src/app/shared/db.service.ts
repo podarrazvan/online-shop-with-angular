@@ -7,6 +7,7 @@ import { Category } from './category.interface';
 import { HomepageArea } from './homepage-area.interface';
 import * as firebase from 'firebase';
 import { Message } from './message.interface';
+import { Order } from './order.interface';
 
 @Injectable()
 export class DBService {
@@ -184,6 +185,32 @@ export class DBService {
     };
     this.http
       .post(`https://shop-436e8.firebaseio.com/messages/.json`, messageToAdd, {
+        observe: 'response',
+      })
+      .subscribe(
+        (responseData) => {
+          console.log(responseData);
+        },
+        (error) => {
+          console.log(error.message);
+        }
+      );
+  }
+
+  addOrder(order: Order) {
+    const date = new Date();
+    const orderToAdd = {
+      name: order.name,
+      email: order.email,
+      adress: order.adress,
+      adress2: order.adress2,
+      city: order.city,
+      state: order.state,
+      zipCode: order.zipCode,
+      date: date
+    };
+    this.http
+      .post(`https://shop-436e8.firebaseio.com/orders/.json`, orderToAdd, {
         observe: 'response',
       })
       .subscribe(

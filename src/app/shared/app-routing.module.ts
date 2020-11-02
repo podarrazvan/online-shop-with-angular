@@ -18,6 +18,7 @@ import { CategoriesComponent } from '../pages/categories/categories.component';
 import { AuthGuard } from '../auth/auth.guard';
 import { AuthComponent } from '../auth/auth.component';
 import { SearchComponent } from '../pages/search/search.component';
+import { CheckoutPageComponent } from '../pages/checkout-page/checkout-page.component';
 
 const routes: Routes = [
     {path:'', component: HomeComponent},
@@ -34,6 +35,7 @@ const routes: Routes = [
     {path:'product/:category/:key', component: ProductComponent},
     {path:'category/:category', component: CategoriesComponent},
     {path:'cart',component: CartComponent},
+    {path:'checkout',component: CheckoutPageComponent},
     {path:'contact',component: ContactComponent},
     {path:'terms-of-use',component: TermsOfUseComponent},
     {path:'about-us',component: AboutUsComponent},
