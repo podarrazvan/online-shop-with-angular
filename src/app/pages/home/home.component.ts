@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { Category } from 'src/app/shared/category.interface';
-import { DBService } from 'src/app/shared/db.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 import { HomepageArea } from 'src/app/shared/homepage-area.interface';
 import { Product } from 'src/app/shared/product.interface';
 
@@ -12,7 +11,7 @@ import { Product } from 'src/app/shared/product.interface';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private db: DBService) {}
+  constructor(private dbFetchDataService: DbFetchDataService) {}
   
   carousel:[{img: string, category: string, id: string}];
   
@@ -33,7 +32,7 @@ export class HomeComponent implements OnInit {
 
   getAreas() {
     this.homepageAreas = [];
-    this.db
+    this.dbFetchDataService
       .fetchHomepageAreas()
       .subscribe((areas) => {
         for (let area of areas) {
@@ -46,7 +45,7 @@ export class HomeComponent implements OnInit {
   
   getProducts(cat: string) {
     this.products = [{area:{name:'', key:''},product:[]}];
-    this.db
+    this.dbFetchDataService
       .fetchProductsByCategory(cat)
       .subscribe((products) => {
         for(let area of this.homepageAreas){
@@ -66,7 +65,7 @@ export class HomeComponent implements OnInit {
   
   getCategories() {
     this.categories = [];
-    this.db
+    this.dbFetchDataService
       .fetchCategories()
       .subscribe((categories) => {
         this.category = categories;
@@ -78,11 +77,11 @@ export class HomeComponent implements OnInit {
 
   createCarousel() {
     this.carousel = [{img:'',category:'',id:''}]
-    this.db.fetchFromCarousel().subscribe((data) => {
+    this.dbFetchDataService.fetchFromCarousel().subscribe((data) => {
       for(let product of data){
         const category = product.category;
         const key = product.id;
-        this.db.fetchProduct(category, key).subscribe(data => {
+        this.dbFetchDataService.fetchProduct(category, key).subscribe(data => {
           // this.carouselImages.push(data.img)
           this.carousel.push({img: data.img, category: category,id: key});
         })

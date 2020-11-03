@@ -1,5 +1,6 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
-import { DBService } from 'src/app/shared/db.service';
+import { Component, OnInit } from '@angular/core';
+import { DbDeleteService } from 'src/app/shared/db-delete.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 import { Order } from 'src/app/shared/order.interface';
 
 @Component({
@@ -8,7 +9,8 @@ import { Order } from 'src/app/shared/order.interface';
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent implements OnInit {
-  constructor(private db: DBService) { }
+  constructor(private dbFetchDataService: DbFetchDataService,
+              private dbDeleteService : DbDeleteService) { }
 
   loading = true;
 
@@ -27,7 +29,7 @@ export class OrdersComponent implements OnInit {
 
   getOrders() {
     this.orders = []
-    this.db.fetchOrders().subscribe((orders) => {
+    this.dbFetchDataService.fetchOrders().subscribe((orders) => {
       for (let order of orders) {
         this.orders.push(order);
       }
@@ -51,7 +53,7 @@ export class OrdersComponent implements OnInit {
   }
 
   onDelete(index: number) {
-    this.db.deleteOrder(this.orders[index].key).subscribe(() => {
+    this.dbDeleteService.deleteOrder(this.orders[index].key).subscribe(() => {
       this.orders.splice(index, 1);
     })
   }

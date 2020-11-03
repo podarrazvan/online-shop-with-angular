@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Category } from 'src/app/shared/category.interface';
-import { DBService } from 'src/app/shared/db.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 import { Product } from 'src/app/shared/product.interface';
 
 @Component({
@@ -10,7 +10,7 @@ import { Product } from 'src/app/shared/product.interface';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private db: DBService) {}
+  constructor(private route: ActivatedRoute, private dbFetchDataService: DbFetchDataService) {}
 
   urlData: { search: string[] };
 
@@ -30,7 +30,7 @@ export class SearchComponent implements OnInit {
   searchResult(search: string[]) {
     this.categories = [];
     this.products = [];
-    this.db.fetchCategories().subscribe((categories) => {
+    this.dbFetchDataService.fetchCategories().subscribe((categories) => {
       this.category = categories;
       for (let category of categories) {
         this.getProducts(category.name, search);
@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit {
   }
 
   getProducts(cat: string, search: string[]) {
-    this.db.fetchProductsByCategory(cat).subscribe((products) => {
+    this.dbFetchDataService.fetchProductsByCategory(cat).subscribe((products) => {
       for (let product of products) {
         for (let word of search) {
           if(word != '') {

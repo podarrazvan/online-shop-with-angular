@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { map } from 'rxjs/operators';
-import { DBService } from 'src/app/shared/db.service';
-import { Product } from 'src/app/shared/product.interface';
+import { DbDeleteService } from 'src/app/shared/db-delete.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
+import { DbUploadService } from 'src/app/shared/db-upload.service';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 @Component({
@@ -13,7 +13,9 @@ import { SharedDataService } from 'src/app/shared/shared-data.service';
 export class AddProductComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
-    private db: DBService,
+    private dbUploadService: DbUploadService,
+    private dbFetchDataService: DbFetchDataService,
+    private dbDeleteService: DbDeleteService,
     private sharedData: SharedDataService
   ) {}
 
@@ -60,7 +62,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
         tags: this.tags,
       });
       if (this.sharedData.productEdit) {
-        this.db
+        this.dbUploadService
           .updateProduct(
             this.productForm.value,
             this.sharedData.product.homepagePosition,
@@ -68,7 +70,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
           )
           .subscribe((response) => console.log(response));
       } else {
-        this.db.createAndStoreProduct(
+        this.dbUploadService.createAndStoreProduct(
           this.productForm.value.title,
           this.productForm.value.category,
           this.productForm.value.price,
@@ -90,7 +92,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   public async upload(event: any): Promise<void> {
     const randomId = Math.random().toString(36).substring(2);
 
-    const imagePath = await this.db.upload(event, randomId);
+    const imagePath = await this.dbUploadService.upload(event, randomId);
     this.images.push(imagePath);
   }
 
@@ -104,7 +106,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   getCategories() {
     this.categories = [];
-    this.db.fetchCategories().subscribe((categories) => {
+    this.dbFetchDataService.fetchCategories().subscribe((categories) => {
       this.category = categories;
       for (let category of categories) {
         this.categories.push(category);
@@ -118,7 +120,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.sharedData.productEdit = false;
     if(this.notComplete) {
       for(let img of this.images) {
-        this.db.deletePhoto(img);
+        this.dbDeleteService.deletePhoto(img);
       }
     }
   }

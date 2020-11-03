@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { DBService } from 'src/app/shared/db.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
+import { DbWebsiteEditService } from 'src/app/shared/db-website-edit.sevice';
 
 @Component({
   selector: 'app-about-us-edit',
@@ -9,12 +10,13 @@ import { DBService } from 'src/app/shared/db.service';
 export class AboutUsEditComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
 
-  constructor(private db: DBService) {}
+  constructor(private dbFetchDataService: DbFetchDataService,
+              private dbWebsiteEditService: DbWebsiteEditService ) {}
 
   aboutUs;
 
   ngOnInit(): void {
-    this.db.fetchAboutUs().subscribe((about) => {
+    this. dbFetchDataService.fetchAboutUs().subscribe((about) => {
       this.aboutUs = about.aboutUs;
     });
   }
@@ -24,7 +26,7 @@ export class AboutUsEditComponent implements OnInit {
   }
 
   onSave(aboutUs) {
-    this.db.editAboutUs(aboutUs.value);
+    this.dbWebsiteEditService.editAboutUs(aboutUs.value);
     this.close.emit();
   }
 }

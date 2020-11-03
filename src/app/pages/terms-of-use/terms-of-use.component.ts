@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DBService } from 'src/app/shared/db.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 
 @Component({
   selector: 'app-terms-of-use',
@@ -8,12 +8,12 @@ import { DBService } from 'src/app/shared/db.service';
 })
 export class TermsOfUseComponent implements OnInit {
 
-  constructor(private db: DBService) { }
+  constructor(private dbFetchDataService: DbFetchDataService) { }
 
   termsOfUse;
 
   ngOnInit(): void {
-    this.db.fetchTermsOfUse().subscribe(terms => {
+    this.dbFetchDataService.fetchTermsOfUse().subscribe(terms => {
       this.termsOfUse = terms.termsOfUse;
     })
   }

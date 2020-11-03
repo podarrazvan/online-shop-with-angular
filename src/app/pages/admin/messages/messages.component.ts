@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DBService } from 'src/app/shared/db.service';
+import { DbDeleteService } from 'src/app/shared/db-delete.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
+import { DbUploadService } from 'src/app/shared/db-upload.service';
 import { Message } from 'src/app/shared/message.interface';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 
@@ -10,8 +12,10 @@ import { SharedDataService } from 'src/app/shared/shared-data.service';
 })
 export class MessagesComponent implements OnInit {
   constructor(
-    private db: DBService,
-    private sharedDataService: SharedDataService
+    private dbFetchDataService: DbFetchDataService,
+    private sharedDataService: SharedDataService,
+    private dbUploadService: DbUploadService,
+    private dbDeleteService: DbDeleteService
   ) {}
 
   fbEmails: Message[];
@@ -22,7 +26,7 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.fbEmails = [];
-    this.db.fetchMessages().subscribe((emails) => {
+    this.dbFetchDataService.fetchMessages().subscribe((emails) => {
       for (let email of emails) {
         this.fbEmails.push(email);
       }
@@ -33,14 +37,14 @@ export class MessagesComponent implements OnInit {
     this.messageToShow = this.fbEmails[index];
     this.showMessage = true;
     if (!this.fbEmails[index].seen) {
-      this.db.updateMessage(this.fbEmails[index]);
+      this.dbUploadService.updateMessage(this.fbEmails[index]);
       this.fbEmails[index].seen = true;
       this.sharedDataService.unreadMessages--;
     }
   }
 
   onDelete(index) {
-    this.db.deleteMessage(this.fbEmails[index].key).subscribe();
+    this.dbDeleteService.deleteMessage(this.fbEmails[index].key).subscribe();
     this.fbEmails.splice(index, 1);
   }
 

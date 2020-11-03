@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { map } from 'rxjs/operators';
-import { DBService } from 'src/app/shared/db.service';
+import { DbDeleteService } from 'src/app/shared/db-delete.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
+import { DbUploadService } from 'src/app/shared/db-upload.service';
+import { DbWebsiteEditService } from 'src/app/shared/db-website-edit.sevice';
 import { HomepageArea } from 'src/app/shared/homepage-area.interface';
 import { Product } from 'src/app/shared/product.interface';
 
@@ -10,7 +12,10 @@ import { Product } from 'src/app/shared/product.interface';
   styleUrls: ['./homepage-edit-alert.component.scss'],
 })
 export class HomepageEditAlertComponent implements OnInit {
-  constructor(private db: DBService) {}
+  constructor(private dbFetchDataService: DbFetchDataService,
+              private dbWebsiteEditService: DbWebsiteEditService,
+              private dbDeleteService : DbDeleteService,
+              private dbUploadService : DbUploadService) {}
 
   @Input() product: Product;
   @Output() close = new EventEmitter<void>();
@@ -29,7 +34,7 @@ export class HomepageEditAlertComponent implements OnInit {
 
   getAreas() {
     this.homepageAreas = [];
-    this.db.fetchHomepageAreas().subscribe((areas) => {
+    this.dbFetchDataService.fetchHomepageAreas().subscribe((areas) => {
       for (let area of areas) {
         this.homepageAreas.push(area);
       }
@@ -38,18 +43,18 @@ export class HomepageEditAlertComponent implements OnInit {
   }
   onAdd(selectedArea) {
     if (selectedArea.value === 'Carousel') {
-      this.db.addToCarousel(this.product.key, this.product.category);
+      this.dbWebsiteEditService.addToCarousel(this.product.key, this.product.category);
     } else if (selectedArea.value === '') {
-      this.db.fetchFromCarousel().subscribe((data) => {
+      this.dbFetchDataService.fetchFromCarousel().subscribe((data) => {
         for (let product of data) {
           if (product.id === product.key) {
-            this.db.deleteFromCarousel(product.key).subscribe();
+            this.dbDeleteService.deleteFromCarousel(product.key).subscribe();
           }
         }
       });
     }
-    this.db
-      .addHomepageAreaOnProduct(this.product, selectedArea.value)
+    this.dbUploadService
+      .updateProduct(this.product, selectedArea.value)
       .subscribe(
         (responseData) => {
           console.log(responseData);

@@ -1,5 +1,5 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
-import { DBService } from 'src/app/shared/db.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { SharedDataService } from 'src/app/shared/shared-data.service';
 })
 export class CartComponent implements OnInit, DoCheck {
   constructor(
-    private db: DBService,
+    private dbFetchDataService: DbFetchDataService,
     private sharedDataService: SharedDataService
   ) {}
   cart;
@@ -34,7 +34,7 @@ export class CartComponent implements OnInit, DoCheck {
   }
 
   getProduct(category: string, key: string, quantity: string) {
-    this.db.fetchProduct(category, key).subscribe((response) => {
+    this.dbFetchDataService.fetchProduct(category, key).subscribe((response) => {
       this.cart.push({ product: response, quantity: quantity, key: key });
       this.total += +response.price * +quantity;
     });

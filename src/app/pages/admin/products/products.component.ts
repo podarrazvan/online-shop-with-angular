@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
 import { Category } from 'src/app/shared/category.interface';
-import { DBService } from 'src/app/shared/db.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 import { Product } from 'src/app/shared/product.interface';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
-import { HomepageEditAlertComponent } from './homepage-edit-alert/homepage-edit-alert.component';
 
 @Component({
   selector: 'app-products',
@@ -20,7 +18,7 @@ export class ProductsComponent implements OnInit {
   idOfProductToAddOnHomepage: string;
 
   constructor(
-    private db: DBService,
+    private dbFetchDataService: DbFetchDataService,
     private sharedDataService: SharedDataService,
     private router: Router
   ) {}
@@ -44,7 +42,7 @@ export class ProductsComponent implements OnInit {
 
   getCategories() {
     this.categories = [];
-    this.db.fetchCategories().subscribe((categories) => {
+    this.dbFetchDataService.fetchCategories().subscribe((categories) => {
       this.category = categories;
       for (let category of categories) {
         this.getProducts(category.name);
@@ -54,7 +52,7 @@ export class ProductsComponent implements OnInit {
 
   getProducts(cat: string) {
     this.products = [];
-    this.db.fetchProductsByCategory(cat).subscribe((products) => {
+    this.dbFetchDataService.fetchProductsByCategory(cat).subscribe((products) => {
       this.productsData = products;
       for (let productsData of products) {
         this.products.push(productsData);

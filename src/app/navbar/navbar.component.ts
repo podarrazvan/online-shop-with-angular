@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '../shared/category.interface';
-import { DBService } from '../shared/db.service';
+import { DbFetchDataService } from '../shared/db-fetch-data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +9,7 @@ import { DBService } from '../shared/db.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private db: DBService,
+  constructor(private dbFetchDataService: DbFetchDataService,
               private router: Router) {}
 
   name: string;
@@ -21,12 +21,12 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.db.fetchName().subscribe(name => {
+    this.dbFetchDataService.fetchName().subscribe(name => {
       this.name = name.name;
     })
     
     this.categories = [];
-    this.db.fetchCategories().subscribe((data) => {
+    this.dbFetchDataService.fetchCategories().subscribe((data) => {
       for (let category of data) {
         this.categories.push(category);
       }

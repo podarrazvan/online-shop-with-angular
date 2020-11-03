@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DBService } from 'src/app/shared/db.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 
 @Component({
   selector: 'app-about-us',
@@ -8,12 +8,12 @@ import { DBService } from 'src/app/shared/db.service';
 })
 export class AboutUsComponent implements OnInit {
 
-  constructor(private db: DBService) { }
+  constructor(private dbFetchDataService: DbFetchDataService) { }
 
   aboutUs;
 
   ngOnInit(): void {
-    this.db.fetchAboutUs().subscribe(about => {
+    this.dbFetchDataService.fetchAboutUs().subscribe(about => {
       this.aboutUs = about.aboutUs;
     })
   }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DBService } from 'src/app/shared/db.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 import { Product } from 'src/app/shared/product.interface';
 
 @Component({
@@ -9,7 +9,7 @@ import { Product } from 'src/app/shared/product.interface';
   styleUrls: ['./categories.component.scss'],
 })
 export class CategoriesComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private db: DBService) {}
+  constructor(private route: ActivatedRoute, private dbFetchDataService: DbFetchDataService) {}
 
   urlData: { category: string };
 
@@ -26,7 +26,7 @@ export class CategoriesComponent implements OnInit {
 
   getProducts(category: string) {
     this.products = [];
-    this.db.fetchProductsByCategory(category).subscribe((response) => {
+    this.dbFetchDataService.fetchProductsByCategory(category).subscribe((response) => {
       for (let product of response) {
         this.products.push(product);
       }

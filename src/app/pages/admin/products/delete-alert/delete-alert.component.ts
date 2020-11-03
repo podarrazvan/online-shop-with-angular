@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DBService } from 'src/app/shared/db.service';
+import { DbDeleteService } from 'src/app/shared/db-delete.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 
 @Component({
   selector: 'app-delete-alert',
@@ -7,7 +8,8 @@ import { DBService } from 'src/app/shared/db.service';
   styleUrls: ['./delete-alert.component.scss'],
 })
 export class DeleteAlertComponent {
-  constructor(private db: DBService) {}
+  constructor(private dbDeleteService: DbDeleteService,
+              private dbFetchDataServide: DbFetchDataService) {}
 
   @Input() productToDelete: {
     category: string;
@@ -19,17 +21,17 @@ export class DeleteAlertComponent {
   @Output() no = new EventEmitter<void>();
 
   yesBtn() {
-    this.db
+    this.dbDeleteService
       .deleteProduct(this.productToDelete.category, this.productToDelete.key)
       .subscribe(() => {
         for (let img of this.productToDelete.img) {
-          this.db.deletePhoto(img);
+          this.dbDeleteService.deletePhoto(img);
         }
       });
-    this.db.fetchFromCarousel().subscribe((data) => {
+    this.dbFetchDataServide.fetchFromCarousel().subscribe((data) => {
       for (let product of data) {
         if (product.id === this.productToDelete.key) {
-          this.db.deleteFromCarousel(product.key).subscribe();
+          this.dbDeleteService.deleteFromCarousel(product.key).subscribe();
         }
       }
     });

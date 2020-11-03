@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DBService } from 'src/app/shared/db.service';
-import { map } from 'rxjs/operators';
+import { DbDeleteService } from 'src/app/shared/db-delete.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
+import { DbWebsiteEditService } from 'src/app/shared/db-website-edit.sevice';
 import { HomepageArea } from 'src/app/shared/homepage-area.interface';
 
 @Component({
@@ -9,7 +10,9 @@ import { HomepageArea } from 'src/app/shared/homepage-area.interface';
   styleUrls: ['./website-edit.component.scss'],
 })
 export class WebsiteEditComponent implements OnInit {
-  constructor(private db: DBService) {}
+  constructor(private dbWebsiteEditService: DbWebsiteEditService, 
+              private dbDeleteService: DbDeleteService,
+              private dbFetchDataService: DbFetchDataService) {}
 
   homepageAreasHide = true;
   categoriesHide = true;
@@ -30,23 +33,23 @@ export class WebsiteEditComponent implements OnInit {
 
   addNewValue(value, type) {
     if (value.value != '' && type === 'area') {
-      this.db.addHomepageArea(value.value);
+      this.dbWebsiteEditService.addHomepageArea(value.value);
       this.getAreas();
     }
     if (value.value != '' && type === 'category') {
-      this.db.addCategory(value.value);
+      this.dbWebsiteEditService.addCategory(value.value);
       this.getCategories();
     }
   }
 
   delete(index, id, type) {
     if (type === 'area') {
-      this.db.deleteHomepageArea(id).subscribe(() => {
+      this.dbDeleteService.deleteHomepageArea(id).subscribe(() => {
         this.homepageAreas.splice(index, 1);
         this.getAreas();
       });
     } else {
-      this.db.deleteCategory(id).subscribe(() => {
+      this.dbDeleteService.deleteCategory(id).subscribe(() => {
         this.categories.splice(index, 1);
         this.getAreas();
       });
@@ -55,7 +58,7 @@ export class WebsiteEditComponent implements OnInit {
 
   getCategories() {
     this.categories = [];
-    this.db
+    this.dbFetchDataService
       .fetchCategories()
       .subscribe((categories) => {
         this.category = categories;
@@ -68,7 +71,7 @@ export class WebsiteEditComponent implements OnInit {
 
   getAreas() {
     this.homepageAreas = [];
-    this.db
+    this.dbFetchDataService
       .fetchHomepageAreas()
       .subscribe((areas) => {
         this.area = areas;
@@ -96,6 +99,6 @@ export class WebsiteEditComponent implements OnInit {
   }
 
   setName(name) {
-    this.db.setName(name.value);
+    this.dbWebsiteEditService.setName(name.value);
   }
 }

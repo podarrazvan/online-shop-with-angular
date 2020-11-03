@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CarouselComponent } from './shared/carousel/carousel.component';
-import { DBService } from './shared/db.service';
 import { GetProductsComponent } from './shared/get-products/get-products.component';
 import { ShortenPipe } from './shared/shorten.pipe';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
@@ -44,6 +43,10 @@ import { AuthComponent } from './auth/auth.component';
 import { SearchComponent } from './pages/search/search.component';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
 import { OrderComponent } from './pages/admin/orders/order/order.component';
+import { DbUploadService } from './shared/db-upload.service';
+import { DbFetchDataService } from './shared/db-fetch-data.service';
+import { DbWebsiteEditService } from './shared/db-website-edit.sevice';
+import { DbDeleteService } from './shared/db-delete.service';
 
 @NgModule({
   declarations: [
@@ -91,7 +94,7 @@ import { OrderComponent } from './pages/admin/orders/order/order.component';
     AngularFireStorageModule,
     HttpClientModule
   ],
-  providers: [DBService,SharedDataService],
+  providers: [DbUploadService,DbFetchDataService,DbWebsiteEditService,DbDeleteService,SharedDataService],
   bootstrap: [AppComponent,AngularFirestore]
 })
 export class AppModule { }

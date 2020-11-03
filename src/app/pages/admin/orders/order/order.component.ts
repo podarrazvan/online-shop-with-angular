@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { DBService } from 'src/app/shared/db.service';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
+import { DbUploadService } from 'src/app/shared/db-upload.service';
 import { Order } from 'src/app/shared/order.interface';
-import { Product } from 'src/app/shared/product.interface';
 
 @Component({
   selector: 'app-order',
@@ -16,7 +16,8 @@ export class OrderComponent implements OnInit {
   @Output() close = new EventEmitter<void>();
   @Output() updated = new EventEmitter<void>();
 
-  constructor(private db: DBService,
+  constructor(private dbFetchDataService: DbFetchDataService,
+              private dbUploadService: DbUploadService,
               private router: Router) { }
 
   loading = true;
@@ -26,7 +27,7 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.products.splice(0,1);
     for(let product of this.order.cart) {
-      this.db.fetchProduct(product.category, product.product).subscribe(data => {
+      this.dbFetchDataService.fetchProduct(product.category, product.product).subscribe(data => {
         const total = data.price * product.quantity;
         this.products.push({
           quantity: product.quantity,
@@ -38,7 +39,6 @@ export class OrderComponent implements OnInit {
       });
     }
     this.loading = false;
-    console.log(this.products);
   }
 
   openProduct(category, id) {
@@ -51,7 +51,7 @@ export class OrderComponent implements OnInit {
 
   updateOrder(status: string) {
     if(status != ''){
-      this.db.updateOrder(this.order, status, this.order.key).subscribe(()=> this.updated.emit());
+      this.dbUploadService.updateOrder(this.order, status, this.order.key).subscribe(()=> this.updated.emit());
      
     } else {
       this.close.emit();

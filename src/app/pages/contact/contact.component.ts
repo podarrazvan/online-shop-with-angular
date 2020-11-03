@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DBService } from 'src/app/shared/db.service';
+import { DbUploadService } from 'src/app/shared/db-upload.service';
 
 @Component({
   selector: 'app-contact',
@@ -8,7 +8,7 @@ import { DBService } from 'src/app/shared/db.service';
   styleUrls: ['./contact.component.scss'],
 })
 export class ContactComponent implements OnInit {
-  constructor(private fb: FormBuilder, private db: DBService) {}
+  constructor(private fb: FormBuilder, private dbUploadService: DbUploadService) {}
 
   contactForm: FormGroup;
 
@@ -22,7 +22,7 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
-    this.db.addMessage(this.contactForm.value);
+    this.dbUploadService.addMessage(this.contactForm.value);
     this.contactForm.reset();
   }
 }

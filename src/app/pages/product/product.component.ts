@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DBService } from 'src/app/shared/db.service';
-import { Product } from 'src/app/shared/product.interface';
+import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 
 @Component({
   selector: 'app-product',
@@ -11,7 +10,7 @@ import { Product } from 'src/app/shared/product.interface';
 export class ProductComponent implements OnInit {
   @ViewChild('quantity') quantity: ElementRef;
 
-  constructor(private route: ActivatedRoute, private db: DBService) {}
+  constructor(private route: ActivatedRoute, private dbFetchDataService: DbFetchDataService) {}
 
   urlData: { category: string; key: string };
   product;
@@ -29,7 +28,7 @@ export class ProductComponent implements OnInit {
 
   getProduct(category: string, key: string) {
     this.images = [];
-    this.db.fetchProduct(category, key).subscribe((response) => {
+    this.dbFetchDataService.fetchProduct(category, key).subscribe((response) => {
       this.product = response;
       for (let img of response.img) {
         this.images.push(img);

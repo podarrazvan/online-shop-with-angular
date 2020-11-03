@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DBService } from 'src/app/shared/db.service';
+import { DbUploadService } from 'src/app/shared/db-upload.service';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 declare var paypal;
@@ -16,7 +16,7 @@ export class CheckoutPageComponent implements OnInit {
   constructor(
     private sharedDataService: SharedDataService,
     private fb: FormBuilder,
-    private db: DBService,
+    private dbUploadService: DbUploadService,
     private router: Router
   ) {}
 
@@ -71,7 +71,7 @@ export class CheckoutPageComponent implements OnInit {
       total: this.sharedDataService.totalCart.toString(),
     };
     console.log(order);
-    this.db.addOrder(order);
+    this.dbUploadService.addOrder(order);
     localStorage.removeItem("cart");
     this.checkoutForm.reset();
     alert('Order sent!');
