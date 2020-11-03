@@ -8,18 +8,21 @@ import { SharedDataService } from 'src/app/shared/shared-data.service';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit, DoCheck {
-  constructor(private db: DBService,
-              private sharedDataService: SharedDataService) {}
+  constructor(
+    private db: DBService,
+    private sharedDataService: SharedDataService
+  ) {}
   cart;
   showCart = false;
   total = 0;
 
   ngOnInit(): void {
     this.cart = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      const category = JSON.parse(localStorage.getItem(i.toString())).category;
-      const key = JSON.parse(localStorage.getItem(i.toString())).product;
-      const quantity = JSON.parse(localStorage.getItem(i.toString())).quantity;
+    const products = JSON.parse(localStorage.getItem('cart'));
+    for (let product of products) {
+      const category = product.category;
+      const key = product.product;
+      const quantity = product.quantity;
       this.getProduct(category, key, quantity);
     }
     this.showCart = true;
@@ -47,6 +50,7 @@ export class CartComponent implements OnInit, DoCheck {
     if (this.cart[index].quantity <= +this.cart[index].product.quantity) {
       this.cart[index].quantity++;
       this.total += +this.cart[index].product.price;
+      this.updateLocalstorage();
     }
   }
 
@@ -54,20 +58,20 @@ export class CartComponent implements OnInit, DoCheck {
     if (this.cart[index].quantity != 0) {
       this.cart[index].quantity--;
       this.total -= +this.cart[index].product.price;
+      this.updateLocalstorage();
     }
   }
 
   updateLocalstorage() {
-    localStorage.clear();
-    for (let i = 0; i < this.cart.length; i++) {
-      localStorage.setItem(
-        i.toString(),
-        JSON.stringify({
-          product: this.cart[i].key,
-          category: this.cart[i].product.category,
-          quantity: this.cart[i].quantity,
-        })
-      );
+    let cartUpdated = [];
+    for (let product of this.cart) {
+      console.log(product);
+      cartUpdated.push({
+        category: product.product.category,
+        product: product.key,
+        quantity: product.quantity,
+      });
     }
+    localStorage.setItem('cart', JSON.stringify(cartUpdated));
   }
 }

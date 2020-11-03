@@ -1,0 +1,76 @@
+<div class="backdrop"></div>
+<div class="alert">
+  <div class="alert-box">
+    <div *ngIf="loading">
+      <h1>Loading...</h1>
+    </div>
+    <div *ngIf="!loading">
+      <button (click)="updateOrder('')" class="btn btn-danger">X</button>
+      <div class="customer">
+        <div class="customer-left">
+          <h3>
+            <b>Customer:</b>
+            <h4>{{ order.adress.name }}</h4>
+          </h3>
+          <br />
+          <h3>
+            <b>Email:</b>
+            <h4>{{ order.adress.email }}</h4>
+          </h3>
+        </div>
+        <div class="vl"></div>
+        <div class="adress">
+          <h3>
+            <b>Adress:</b>
+            <h4>{{ order.adress.adress }}</h4>
+          </h3>
+          <h3 *ngIf="order.adress.adress2">
+            <b>Adress 2:</b>
+            <h4>{{ order.adress.adress }}</h4>
+          </h3>
+          <h3>
+            <b>City:</b>
+            <h4>{{ order.adress.city }}</h4>
+          </h3>
+          <h3>
+            <b>State:</b>
+            <h4>{{ order.adress.state }}</h4>
+          </h3>
+          <h3>
+            <b>Zip code:</b>
+            <h4>{{ order.adress.zipCode }}</h4>
+          </h3>
+        </div>
+      </div>
+      <h1>Products</h1>
+      <hr />
+      <div class="products">
+        <div class="product" *ngFor="let product of products">
+          <button
+            class="mat-btn"
+            (click)="openProduct(product.category, product.id)"
+          >
+            <h3>
+              <b
+                >{{ product.quantity }} x {{ product.name }} =
+                {{ product.total }}$</b
+              >
+            </h3></button
+          ><br />
+        </div>
+      </div>
+        <hr />
+        <h1><b>Total</b></h1>
+        <h2 style="color: green">{{ order.total }}</h2>
+      <hr />
+      <div class="actions">
+        <button (click)="updateOrder('processed')" class="btn btn-success">
+          Process the order
+        </button>
+        <button (click)="updateOrder('canceled')" class="btn btn-danger">
+          Cancel the order
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

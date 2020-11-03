@@ -49,7 +49,7 @@ export class DBService {
     };
     this.http
       .post<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/products/${category}/.json${user._token}`,
+        `https://shop-436e8.firebaseio.com/products/${category}/.json?auth=${user._token}`,
         productData,
         {
           observe: 'response',
@@ -79,7 +79,7 @@ export class DBService {
       homepagePosition: homepagePosition,
     };
     return this.http.put(
-      `https://shop-436e8.firebaseio.com/products/${product.category}/${key}/.json${user._token}`,
+      `https://shop-436e8.firebaseio.com/products/${product.category}/${key}/.json?auth=${user._token}`,
       productData,
       {
         observe: 'response',
@@ -100,7 +100,7 @@ export class DBService {
       homepagePosition: homepagePosition,
     };
     return this.http.put(
-      `https://shop-436e8.firebaseio.com/products/${product.category}/${product.key}/.json${user._token}`,
+      `https://shop-436e8.firebaseio.com/products/${product.category}/${product.key}/.json?auth=${user._token}`,
       newProduct,
       {
         observe: 'response',
@@ -113,7 +113,7 @@ export class DBService {
     const product = { id: key, category: category };
     this.http
       .post(
-        `https://shop-436e8.firebaseio.com/homepage/carousel/.json${user._token}`,
+        `https://shop-436e8.firebaseio.com/homepage/carousel/.json?auth=${user._token}`,
         product,
         {
           observe: 'response',
@@ -135,7 +135,7 @@ export class DBService {
     const area = { name: name };
     this.http
       .post<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/homepage/areas/.json${user._token}`,
+        `https://shop-436e8.firebaseio.com/homepage/areas/.json?auth=${user._token}`,
         area,
         {
           observe: 'response',
@@ -157,7 +157,7 @@ export class DBService {
     const category = { name: name };
     this.http
       .post<{ name: string }>(
-        `https://shop-436e8.firebaseio.com/categories/.json${user._token}`,
+        `https://shop-436e8.firebaseio.com/categories/.json?auth=${user._token}`,
         category,
         {
           observe: 'response',
@@ -200,13 +200,10 @@ export class DBService {
   addOrder(order: Order) {
     const date = new Date();
     const orderToAdd = {
-      name: order.name,
-      email: order.email,
+      cart: order.cart,
       adress: order.adress,
-      adress2: order.adress2,
-      city: order.city,
-      state: order.state,
-      zipCode: order.zipCode,
+      total: order.total,
+      status: 'new',
       date: date
     };
     this.http
@@ -223,6 +220,21 @@ export class DBService {
       );
   }
 
+  updateOrder(order: Order, status: string, id: string) {
+    const user = JSON.parse(localStorage.getItem('userData'));
+    const orderToUpdate = {
+      cart: order.cart,
+      adress: order.adress,
+      total: order.total,
+      status: status,
+      date: order.date
+    };
+    return this.http
+      .put(`https://shop-436e8.firebaseio.com/orders/${id}.json?auth=${user._token}`, orderToUpdate, {
+        observe: 'response',
+      })
+  }
+
   updateMessage(message: Message) {
     const user = JSON.parse(localStorage.getItem('userData'));
     const messageToAdd = {
@@ -235,7 +247,7 @@ export class DBService {
     };
     this.http
       .put(
-        `https://shop-436e8.firebaseio.com/messages/${message.key}/.json${user._token}`,
+        `https://shop-436e8.firebaseio.com/messages/${message.key}/.json?auth=${user._token}`,
         messageToAdd,
         {
           observe: 'response',
@@ -255,7 +267,7 @@ export class DBService {
     const user = JSON.parse(localStorage.getItem('userData'));
     const terms = { termsOfUse: termsOfUse };
     this.http
-      .put(`https://shop-436e8.firebaseio.com/terms-of-use/.json${user._token}`, terms, {
+      .put(`https://shop-436e8.firebaseio.com/terms-of-use/.json?auth=${user._token}`, terms, {
         observe: 'response',
       })
       .subscribe(
@@ -405,13 +417,31 @@ export class DBService {
 
   fetchAboutUs() {
     return this.http
-      .get<{ aboutUs: string }>(`https://shop-436e8.firebaseio.com/about-us/.json`)
+      .get<{ aboutUs: string }>(`https://shop-436e8.firebaseio.com/about-us/.json`);
 
   }
 
   fetchName() {
     return this.http
-      .get<{ name: string }>(`https://shop-436e8.firebaseio.com/website-name/.json`)
+      .get<{ name: string }>(`https://shop-436e8.firebaseio.com/website-name/.json`);
+
+  }
+
+  fetchOrders() {
+    const user = JSON.parse(localStorage.getItem('userData'));
+    const ordersArray = [];
+    return this.http
+      .get<{order: Order}>(`https://shop-436e8.firebaseio.com/orders/.json?auth=${user._token}`)    
+      .pipe(
+        map((responseData) => {
+          for (const key in responseData) {
+            if (responseData.hasOwnProperty(key)) {
+              ordersArray.push({ ...responseData[key], key });
+            }
+          }
+          return ordersArray;
+        })
+      );;
 
   }
 
@@ -442,6 +472,12 @@ export class DBService {
   deleteMessage(key: string) {
     return this.http.delete(
       `https://shop-436e8.firebaseio.com/messages/${key}/.json`
+    );
+  }
+
+  deleteOrder(key: string) {
+    return this.http.delete(
+      `https://shop-436e8.firebaseio.com/orders/${key}/.json`
     );
   }
 

@@ -4,7 +4,7 @@
 
 .alert-box {
   position: fixed;
-  top: 20vh;
+  top: 10vh;
   bottom: 20vh;
   width: 50vw;
   padding: 16px;
@@ -14,13 +14,33 @@
   box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
 }
 
-.sender {
+.customer {
   margin-top: 20px;
-  margin-bottom: 30px;
+  display: flex;
 }
 
-div.message {
-  max-height: 400px;
+.customer-left {
+  width: 40%;
+}
+
+.adress {
+  float: right;
+}
+
+.vl {
+  border-left: 1px solid rgb(200, 200, 200);
+  height: 200px;
+  padding: 50px;
+}
+
+div.products {
+  max-height: 80px;
   overflow: auto;
   padding-bottom: 50px;
 }
+
+div.alert-box {
+  max-height: 800px;
+  overflow: auto;
+}
+

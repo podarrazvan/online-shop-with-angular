@@ -43,6 +43,7 @@ import { CategoriesComponent } from './pages/categories/categories.component';
 import { AuthComponent } from './auth/auth.component';
 import { SearchComponent } from './pages/search/search.component';
 import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.component';
+import { OrderComponent } from './pages/admin/orders/order/order.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { CheckoutPageComponent } from './pages/checkout-page/checkout-page.compo
     CategoriesComponent,
     AuthComponent,
     SearchComponent,
-    CheckoutPageComponent
+    CheckoutPageComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

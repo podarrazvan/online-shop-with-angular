@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DBService } from 'src/app/shared/db.service';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 
@@ -15,13 +16,17 @@ export class CheckoutPageComponent implements OnInit {
   constructor(
     private sharedDataService: SharedDataService,
     private fb: FormBuilder,
-    private db: DBService
+    private db: DBService,
+    private router: Router
   ) {}
 
   paidFor = false;
   checkoutForm: FormGroup;
 
   ngOnInit(): void {
+    if (this.sharedDataService.totalCart == null) {
+      this.router.navigate(['../cart']);
+    }
     this.checkoutForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -60,7 +65,14 @@ export class CheckoutPageComponent implements OnInit {
   }
 
   onSubmit() {
-    this.db.addOrder(this.checkoutForm.value);
+    const order = {
+      adress: this.checkoutForm.value,
+      cart: JSON.parse(localStorage.getItem('cart')),
+      total: this.sharedDataService.totalCart.toString(),
+    };
+    console.log(order);
+    this.db.addOrder(order);
+    localStorage.removeItem("cart");
     this.checkoutForm.reset();
     alert('Order sent!');
   }
