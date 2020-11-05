@@ -17,6 +17,12 @@
           <a class="nav-link" routerLink="../cart"><b>Cart</b></a> 
         </li>
       </ul>
+      <div class="admin-btn" *ngIf="admin">
+        <button (click)="openAdmin()" class="btn btn-primarry">Admin</button>
+      </div>
+      <div class="dark-mode-btn" *ngIf="!adminPage">
+        <button (click)="darkMode()" class="mat-btn"><mat-icon>bedtime</mat-icon></button>
+      </div>
       <form class="form-inline my-2 my-lg-0">
         <input #search class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
         <button (click)="onSearch(search)" class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>

@@ -4,7 +4,7 @@ hr {
 
 .top {
     display: flex;
-    margin-top: 50px;
+    padding-top: 50px;
     margin-left: -10%;
     width: 78vw;
 }
@@ -25,6 +25,6 @@ app-carousel {
 }
 
 .description {
-    margin-top: 50px;
+    padding: 50px;
     text-align: justify;
 }

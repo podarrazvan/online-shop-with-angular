@@ -1,49 +1,51 @@
 <div *ngIf="!showCart"><h1>Loading...</h1></div>
 <div class="container">
-  <table class="table" *ngIf="showCart">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Image</th>
-        <th scope="col">Name</th>
-        <th scope="col">Price</th>
-        <th scope="col">Quantity</th>
-        <th scpe="col">Delete</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let product of cart; let i = index">
-      <tr>
-        <th scope="row">{{ i + 1 }}</th>
-        <td>
-          <img
-            class="product-img"
-            [src]="product.product.img"
-            [alt]="product.name"
-          />
-        </td>
-        <td>
-          <b>{{ product.product.title | shorten: 20 }}</b>
-        </td>
-        <td>
-          <b>{{ product.product.price }}</b>
-        </td>
-        <td>
-          <b>{{ product.quantity }} </b>
-          <button (click)="increaseQuantity(i)" class="mat-btn">
-            <mat-icon>add</mat-icon>
-          </button>
-          <button (click)="decreaseQuantity(i)" class="mat-btn">
-            <mat-icon>remove</mat-icon>
-          </button>
-        </td>
-        <td>
-          <button class="mat-btn" (click)="onDelete(i)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table">
+    <table *ngIf="showCart">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Image</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Quantity</th>
+          <th scpe="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let product of cart; let i = index">
+        <tr>
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            <img
+              class="product-img"
+              [src]="product.product.img"
+              [alt]="product.name"
+            />
+          </td>
+          <td>
+            <b>{{ product.product.title | shorten: 20 }}</b>
+          </td>
+          <td>
+            <b>{{ product.product.price }}</b>
+          </td>
+          <td>
+            <b>{{ product.quantity }} </b>
+            <button (click)="increaseQuantity(i)" class="mat-btn">
+              <mat-icon>add</mat-icon>
+            </button>
+            <button (click)="decreaseQuantity(i)" class="mat-btn">
+              <mat-icon>remove</mat-icon>
+            </button>
+          </td>
+          <td>
+            <button class="mat-btn" (click)="onDelete(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <hr />
   <div class="purchase">
     <div class="total">

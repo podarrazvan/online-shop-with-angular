@@ -22,6 +22,8 @@ export class AddProductComponent implements OnInit, OnDestroy {
   productForm: FormGroup;
 
   tags: string[] = [];
+  tag: string;
+
   images: string[] = [];
 
   products = [];
@@ -30,17 +32,22 @@ export class AddProductComponent implements OnInit, OnDestroy {
 
   notComplete = true;
 
+  onEditMode: boolean;
+
   ngOnInit(): void {
-    if (this.sharedData.productEdit) {
+    this.onEditMode = this.sharedData.productEdit;
+    if (this.onEditMode) {
       this.productForm = this.fb.group({
         title: [this.sharedData.product.title, Validators.required],
         category: [this.sharedData.product.category, Validators.required],
         price: [this.sharedData.product.price, Validators.required],
         img: '',
         description: [this.sharedData.product.description, Validators.required],
-        tags: [this.sharedData.product.tags],
+        tags: [''],
         quantity: [this.sharedData.product.quantity, Validators.required],
       });
+      this.tags = this.sharedData.product.tags;
+      this.images = this.sharedData.product.img;
     } else {
       this.productForm = this.fb.group({
         title: ['', Validators.required],
@@ -97,7 +104,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   addTag(tag) {
-    this.tags.push(tag.value);
+    this.tags.push(tag);
   }
 
   deleteTag(index) {

@@ -47,6 +47,7 @@ import { DbUploadService } from './shared/db-upload.service';
 import { DbFetchDataService } from './shared/db-fetch-data.service';
 import { DbWebsiteEditService } from './shared/db-website-edit.sevice';
 import { DbDeleteService } from './shared/db-delete.service';
+import { DarkModeDirective } from './shared/dark-mode.directive';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { DbDeleteService } from './shared/db-delete.service';
     AuthComponent,
     SearchComponent,
     CheckoutPageComponent,
-    OrderComponent
+    OrderComponent,
+    DarkModeDirective
   ],
   imports: [
     BrowserModule,

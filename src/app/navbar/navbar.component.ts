@@ -12,6 +12,10 @@ export class NavbarComponent implements OnInit {
   constructor(private dbFetchDataService: DbFetchDataService,
               private router: Router) {}
 
+  adminPage = false;
+
+  admin: boolean;
+
   name: string;
 
   showCategories = false;
@@ -19,8 +23,7 @@ export class NavbarComponent implements OnInit {
 
   categories: Category[];
 
-  ngOnInit(): void {
-
+  ngOnInit(): void {    
     this.dbFetchDataService.fetchName().subscribe(name => {
       this.name = name.name;
     })
@@ -46,7 +49,40 @@ export class NavbarComponent implements OnInit {
     this.wasInside = false;
   }
 
+  darkMode() {
+    let mode = JSON.parse(localStorage.getItem('darkMode'));
+    localStorage.setItem('darkMode', JSON.stringify(!mode));
+    location.reload();
+  }
+
   onSearch(search) {
     this.router.navigate(['../search', search.value.replace(/\s/g, '-')]);
+  }
+
+  openAdmin() {
+      const darkMode  = JSON.parse(localStorage.getItem('darkMode'));
+      localStorage.setItem('darkModeAdmin', JSON.stringify(darkMode));
+      if(darkMode){
+        localStorage.setItem('darkMode', JSON.stringify(false));
+        localStorage.setItem('reloaded', JSON.stringify(true));
+        window.location.replace(window.location.href + 'admin');
+      } else {
+        this.router.navigate(['../admin'])
+      }
+  }
+
+  ngDoCheck(): void {
+    const account = JSON.parse(localStorage.getItem('userData'));
+     if(account != null){
+      this.admin = true;
+    } else {
+      this.admin = false;
+    }
+    console.log(this.admin);
+    if(window.location.href.includes('/admin')){
+      this.adminPage = true;
+    }else {
+      this.adminPage = false;
+    }
   }
 }

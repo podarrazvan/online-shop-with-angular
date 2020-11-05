@@ -76,7 +76,7 @@
   </div>
   <div class="prev-images">
     <div class="image" *ngFor="let img of images">
-      <img [src]="img">
+      <img [src]="img" />
     </div>
   </div>
   <hr />
@@ -159,6 +159,6 @@
   </div>
   <hr />
   <button [disabled]="!productForm.valid" class="btn btn-danger" type="submit">
-    Add product
+    {{ onEditMode  ? "Edit" : "Add product" }}
   </button>
 </form>
