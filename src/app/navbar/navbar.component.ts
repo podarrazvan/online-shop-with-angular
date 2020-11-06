@@ -78,7 +78,6 @@ export class NavbarComponent implements OnInit {
     } else {
       this.admin = false;
     }
-    console.log(this.admin);
     if(window.location.href.includes('/admin')){
       this.adminPage = true;
     }else {

@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   
   carousel:[{img: string, category: string, id: string}];
   
+  productsInCarousel: boolean;
 
   loading = true;
 
@@ -77,17 +78,16 @@ export class HomeComponent implements OnInit {
 
   createCarousel() {
     this.carousel = [{img:'',category:'',id:''}]
+    this.carousel.splice(0,1);
     this.dbFetchDataService.fetchFromCarousel().subscribe((data) => {
+      data.length > 0 ? this.productsInCarousel = true : this.productsInCarousel = false;
       for(let product of data){
         const category = product.category;
         const key = product.id;
         this.dbFetchDataService.fetchProduct(category, key).subscribe(data => {
-          // this.carouselImages.push(data.img)
           this.carousel.push({img: data.img, category: category,id: key});
         })
       }
-      console.log(this.carousel);
-      this.carousel.splice(0,1);
     });
   }
 

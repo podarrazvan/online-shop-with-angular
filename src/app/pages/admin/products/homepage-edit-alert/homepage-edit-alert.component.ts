@@ -46,9 +46,9 @@ export class HomepageEditAlertComponent implements OnInit {
       this.dbWebsiteEditService.addToCarousel(this.product.key, this.product.category);
     } else if (selectedArea.value === '') {
       this.dbFetchDataService.fetchFromCarousel().subscribe((data) => {
-        for (let product of data) {
-          if (product.id === product.key) {
-            this.dbDeleteService.deleteFromCarousel(product.key).subscribe();
+        for (let carouselProduct of data) {
+          if (carouselProduct.id === this.product.key) {
+            this.dbDeleteService.deleteFromCarousel(carouselProduct.key).subscribe();
           }
         }
       });

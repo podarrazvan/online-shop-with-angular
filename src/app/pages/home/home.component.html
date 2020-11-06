@@ -1,6 +1,7 @@
 <div *ngIf="loading"><h1>Loading...</h1></div>
 <div *ngIf="!loading">
   <app-carousel
+    *ngIf="productsInCarousel"
     [products]="carousel"
     [homepage]="true"
   ></app-carousel>
