@@ -1,4 +1,5 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
 
@@ -10,8 +11,12 @@ import { SharedDataService } from 'src/app/shared/shared-data.service';
 export class CartComponent implements OnInit, DoCheck {
   constructor(
     private dbFetchDataService: DbFetchDataService,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    private router: Router
   ) {}
+
+  emptyCart: boolean;
+
   cart;
   showCart = false;
   total = 0;
@@ -19,6 +24,7 @@ export class CartComponent implements OnInit, DoCheck {
   ngOnInit(): void {
     this.cart = [];
     const products = JSON.parse(localStorage.getItem('cart'));
+    products.length > 0 ? this.emptyCart  = false : this.emptyCart = true;
     for (let product of products) {
       const category = product.category;
       const key = product.product;
@@ -27,7 +33,7 @@ export class CartComponent implements OnInit, DoCheck {
     }
     this.showCart = true;
   }
-
+  // Use observable 
   ngDoCheck() {
     this.sharedDataService.totalCart = this.total;
     console.log(this.sharedDataService.totalCart);
@@ -43,7 +49,13 @@ export class CartComponent implements OnInit, DoCheck {
   onDelete(index: number) {
     this.total -= this.cart[index].product.price * this.cart[index].quantity;
     this.cart.splice(index, 1);
-    this.updateLocalstorage();
+    if(this.cart.length === 0){
+      this.sharedDataService.updateCart(true);
+      localStorage.removeItem("cart");
+      this.router.navigate(['../'])
+    }else{
+      this.updateLocalstorage();
+    }
   }
 
   increaseQuantity(index: number) {

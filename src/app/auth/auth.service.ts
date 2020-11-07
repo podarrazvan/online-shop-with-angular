@@ -4,6 +4,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 
 import { User } from './user.model';
+import { SharedDataService } from '../shared/shared-data.service';
 
 export interface Id {
   uid: string;
@@ -25,7 +26,10 @@ export class AuthService {
 
   user = new BehaviorSubject<User>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private sharedDataService: SharedDataService
+  ) {}
 
   signup(email: string, password: string) {
     return this.http
@@ -75,6 +79,7 @@ export class AuthService {
   }
 
   autoLogin() {
+    this.sharedDataService.updateAuth(true);
     const userData: {
       email: string;
       id: string;
@@ -112,6 +117,7 @@ export class AuthService {
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
+    this.sharedDataService.updateAuth(true);
   }
 
   logout() {
@@ -122,6 +128,7 @@ export class AuthService {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
+    this.sharedDataService.updateAuth(false);
   }
 
   autoLogout(expirationDuration: number) {

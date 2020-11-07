@@ -19,7 +19,6 @@ export class CarouselComponent implements OnInit {
   length: number;
 
   ngOnInit(): void {
-    console.log('carusel', this.images);
     this.homepage
       ? (this.length = this.products.length)
       : (this.length = this.images.length);

@@ -55,7 +55,6 @@ export class CheckoutPageComponent implements OnInit {
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
           this.paidFor = true;
-          console.log(order);
         },
         onError: (err) => {
           console.log(err);
@@ -70,10 +69,11 @@ export class CheckoutPageComponent implements OnInit {
       cart: JSON.parse(localStorage.getItem('cart')),
       total: this.sharedDataService.totalCart.toString(),
     };
-    console.log(order);
     this.dbUploadService.addOrder(order);
     localStorage.removeItem("cart");
     this.checkoutForm.reset();
+    this.sharedDataService.updateCart(true);
     alert('Order sent!');
+    this.router.navigate(['../../'])
   }
 }

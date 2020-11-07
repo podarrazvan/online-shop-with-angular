@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 @Component({
   selector: 'app-product',
@@ -10,7 +11,11 @@ import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 export class ProductComponent implements OnInit {
   @ViewChild('quantity') quantity: ElementRef;
 
-  constructor(private route: ActivatedRoute, private dbFetchDataService: DbFetchDataService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private dbFetchDataService: DbFetchDataService,
+    private sharedDataService: SharedDataService
+  ) {}
 
   urlData: { category: string; key: string };
   product;
@@ -28,17 +33,20 @@ export class ProductComponent implements OnInit {
 
   getProduct(category: string, key: string) {
     this.images = [];
-    this.dbFetchDataService.fetchProduct(category, key).subscribe((response) => {
-      this.product = response;
-      for (let img of response.img) {
-        this.images.push(img);
-      }
-      console.log(this.images);
-      this.isLoading = false;
-    });
+    this.dbFetchDataService
+      .fetchProduct(category, key)
+      .subscribe((response) => {
+        this.product = response;
+        for (let img of response.img) {
+          this.images.push(img);
+        }
+        console.log(this.images);
+        this.isLoading = false;
+      });
   }
 
   addToCart() {
+    this.sharedDataService.updateCart(false);
     let alreadyIn = false;
     if (JSON.parse(localStorage.getItem('cart')) != null) {
       this.newCart = JSON.parse(localStorage.getItem('cart'));

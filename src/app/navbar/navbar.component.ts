@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Category } from '../shared/category.interface';
 import { DbFetchDataService } from '../shared/db-fetch-data.service';
+import { SharedDataService } from '../shared/shared-data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,8 +10,11 @@ import { DbFetchDataService } from '../shared/db-fetch-data.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private dbFetchDataService: DbFetchDataService,
-              private router: Router) {}
+  constructor(
+    private dbFetchDataService: DbFetchDataService,
+    private router: Router,
+    private sharedDataService: SharedDataService
+  ) {}
 
   adminPage = false;
 
@@ -23,16 +27,24 @@ export class NavbarComponent implements OnInit {
 
   categories: Category[];
 
-  ngOnInit(): void {    
-    this.dbFetchDataService.fetchName().subscribe(name => {
+  emptyCart: boolean;
+
+  ngOnInit(): void {
+    this.dbFetchDataService.fetchName().subscribe((name) => {
       this.name = name.name;
-    })
-    
+    });
+
     this.categories = [];
     this.dbFetchDataService.fetchCategories().subscribe((data) => {
       for (let category of data) {
         this.categories.push(category);
       }
+    });
+    this.sharedDataService.emptyCart.subscribe((status) => {
+      this.emptyCart = status;
+    });
+    this.sharedDataService.isAuthenticated.subscribe((authStatus) => {
+      this.admin = authStatus;
     });
   }
 
@@ -60,27 +72,22 @@ export class NavbarComponent implements OnInit {
   }
 
   openAdmin() {
-      const darkMode  = JSON.parse(localStorage.getItem('darkMode'));
-      localStorage.setItem('darkModeAdmin', JSON.stringify(darkMode));
-      if(darkMode){
-        localStorage.setItem('darkMode', JSON.stringify(false));
-        localStorage.setItem('reloaded', JSON.stringify(true));
-        window.location.replace(window.location.href + 'admin');
-      } else {
-        this.router.navigate(['../admin'])
-      }
+    const darkMode = JSON.parse(localStorage.getItem('darkMode'));
+    localStorage.setItem('darkModeAdmin', JSON.stringify(darkMode));
+    if (darkMode) {
+      localStorage.setItem('darkMode', JSON.stringify(false));
+      localStorage.setItem('reloaded', JSON.stringify(true));
+      window.location.replace(window.location.href + 'admin');
+    } else {
+      this.router.navigate(['../admin']);
+    }
   }
 
+  // Use observable
   ngDoCheck(): void {
-    const account = JSON.parse(localStorage.getItem('userData'));
-     if(account != null){
-      this.admin = true;
-    } else {
-      this.admin = false;
-    }
-    if(window.location.href.includes('/admin')){
+    if (window.location.href.includes('/admin')) {
       this.adminPage = true;
-    }else {
+    } else {
       this.adminPage = false;
     }
   }
