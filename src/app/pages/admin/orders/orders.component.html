@@ -7,41 +7,50 @@
   (close)="closeOrder()"
   (updated)="orderUpdated()"
 ></app-order>
+<div *ngIf="deleteAlert">
+  <app-delete-alert itemToDelete="message"></app-delete-alert>
+</div>
 <div class="container" *ngIf="!loading">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Status</th>
-            <th scope="col">Name</th>
-            <th scope="col">Adress</th>
-            <th scope="col">Price</th>
-            <th scope="col">Date</th>
-            <th scpe="col">Open</th>
-            <th scpe="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody *ngFor="let order of orders; let i = index">
-          <tr>
-            <th scope="row">{{ i + 1 }}</th>
-            <th scope="row" *ngIf="order.status == canceled" style="color: gray;"><b>CANCELED</b></th>
-            <th scope="row" *ngIf="order.status == New" style="color: red;"><b>NEW</b></th>
-            <th scope="row" *ngIf="order.status == processed" style="color:green;"><b>PROCESSED</b></th>
-            <td>{{ order.adress.name }}</td>
-            <td>{{ order.adress.adress | shorten: 30 }}</td>
-            <td>{{ order.total }}</td>
-            <td>{{ order.date | date }}</td>
-            <td>
-              <button (click)="openOrder(order)" class="mat-btn">
-                <mat-icon>launch</mat-icon>
-              </button>
-            </td>
-            <td>
-              <button class="mat-btn" (click)="onDelete(i)">
-                <mat-icon>delete</mat-icon>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Status</th>
+        <th scope="col">Name</th>
+        <th scope="col">Adress</th>
+        <th scope="col">Price</th>
+        <th scope="col">Date</th>
+        <th scpe="col">Open</th>
+        <th scpe="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let order of orders; let i = index">
+      <tr>
+        <th scope="row">{{ i + 1 }}</th>
+        <th scope="row" *ngIf="order.status == canceled" style="color: gray">
+          <b>CANCELED</b>
+        </th>
+        <th scope="row" *ngIf="order.status == New" style="color: red">
+          <b>NEW</b>
+        </th>
+        <th scope="row" *ngIf="order.status == processed" style="color: green">
+          <b>PROCESSED</b>
+        </th>
+        <td>{{ order.adress.name }}</td>
+        <td>{{ order.adress.adress | shorten: 30 }}</td>
+        <td>{{ order.total }}</td>
+        <td>{{ order.date | date }}</td>
+        <td>
+          <button (click)="openOrder(order)" class="mat-btn">
+            <mat-icon>launch</mat-icon>
+          </button>
+        </td>
+        <td>
+          <button class="mat-btn" (click)="onDelete(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

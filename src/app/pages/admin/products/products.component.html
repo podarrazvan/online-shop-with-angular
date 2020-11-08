@@ -8,9 +8,7 @@
   </div>
   <div *ngIf='deleteAlert'>
     <app-delete-alert
-    [productToDelete]="productToDelete"
-    (yes)="onProductDeleted()"
-    (no)="onCancelDelete()"
+    itemToDelete="product"
     ></app-delete-alert>
   </div>
     <table class="table">

@@ -30,7 +30,6 @@ import { HomepageEditAlertComponent } from './pages/admin/products/homepage-edit
 import { ProductComponent } from './pages/product/product.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { SharedDataService } from './shared/shared-data.service';
-import { DeleteAlertComponent } from './pages/admin/products/delete-alert/delete-alert.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContactComponent } from './pages/contact/contact.component';
 import { MessageComponent } from './pages/admin/messages/message/message.component';
@@ -48,6 +47,8 @@ import { DbFetchDataService } from './shared/db-fetch-data.service';
 import { DbWebsiteEditService } from './shared/db-website-edit.sevice';
 import { DbDeleteService } from './shared/db-delete.service';
 import { DarkModeDirective } from './shared/dark-mode.directive';
+import { DeleteAlertService } from './shared/delete-alert/delete-alert.service';
+import { DeleteAlertComponent } from './shared/delete-alert/delete-alert.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,7 @@ import { DarkModeDirective } from './shared/dark-mode.directive';
     AngularFireStorageModule,
     HttpClientModule
   ],
-  providers: [DbUploadService,DbFetchDataService,DbWebsiteEditService,DbDeleteService,SharedDataService],
+  providers: [DbUploadService,DbFetchDataService,DbWebsiteEditService,DbDeleteService,SharedDataService, DeleteAlertService],
   bootstrap: [AppComponent,AngularFirestore]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DbDeleteService } from 'src/app/shared/db-delete.service';
 import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
+import { DeleteAlertService } from 'src/app/shared/delete-alert/delete-alert.service';
 import { Order } from 'src/app/shared/order.interface';
 
 @Component({
@@ -9,8 +10,11 @@ import { Order } from 'src/app/shared/order.interface';
   styleUrls: ['./orders.component.scss'],
 })
 export class OrdersComponent implements OnInit {
-  constructor(private dbFetchDataService: DbFetchDataService,
-              private dbDeleteService : DbDeleteService) { }
+  constructor(
+    private dbFetchDataService: DbFetchDataService,
+    private dbDeleteService: DbDeleteService,
+    private deleteAlertService: DeleteAlertService
+  ) {}
 
   loading = true;
 
@@ -23,12 +27,14 @@ export class OrdersComponent implements OnInit {
 
   orders: Order[];
 
+  deleteAlert: boolean;
+
   ngOnInit(): void {
     this.getOrders();
   }
 
   getOrders() {
-    this.orders = []
+    this.orders = [];
     this.dbFetchDataService.fetchOrders().subscribe((orders) => {
       for (let order of orders) {
         this.orders.push(order);
@@ -53,8 +59,21 @@ export class OrdersComponent implements OnInit {
   }
 
   onDelete(index: number) {
-    this.dbDeleteService.deleteOrder(this.orders[index].key).subscribe(() => {
-      this.orders.splice(index, 1);
-    })
+    this.deleteAlert = true;
+    this.deleteAlertService.deleteMessage.subscribe((data) => {
+      switch (data) {
+        case true:
+          this.dbDeleteService
+            .deleteOrder(this.orders[index].key)
+            .subscribe(() => {
+              this.orders.splice(index, 1);
+            });
+          this.deleteAlert = false;
+          break;
+        case false:
+          this.deleteAlert = false;
+          break;
+      }
+    });
   }
 }

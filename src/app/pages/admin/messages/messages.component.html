@@ -2,6 +2,9 @@
   <div *ngIf="showMessage">
     <app-message [message]="messageToShow" (close)="close()"></app-message>
   </div>
+  <div *ngIf="deleteAlert">
+    <app-delete-alert itemToDelete="message"></app-delete-alert>
+  </div>
   <table class="table">
     <thead>
       <tr>

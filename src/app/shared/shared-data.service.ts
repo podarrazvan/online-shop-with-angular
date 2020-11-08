@@ -6,7 +6,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 export class SharedDataService implements OnDestroy {
   emptyCart = new BehaviorSubject<boolean>(true);
   isAuthenticated = new BehaviorSubject<boolean>(false);
+
   cast = this.emptyCart.asObservable();
+  // cast = this.isAuthenticated.asObservable();
 
   productEdit: boolean;
   product: Product;
