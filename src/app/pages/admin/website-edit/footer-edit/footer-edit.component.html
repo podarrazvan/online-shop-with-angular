@@ -1,0 +1,86 @@
+<div class="backdrop"></div>
+<div class="alert">
+  <div class="alert-box">
+    <div *ngIf="loading">
+      <h1>Loading...</h1>
+    </div>
+    <div *ngIf="!loading">
+      <button (click)="onClose()" class="btn btn-danger">X</button>
+      <form [formGroup]="footerEditForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col">
+            <input
+              formControlName="adress"
+              type="text"
+              class="form-control"
+              placeholder="Adress"
+            />
+          </div>
+          <div class="col">
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              placeholder="Email"
+            />
+          </div>
+          <div class="col">
+            <input
+              formControlName="phone"
+              type="text"
+              class="form-control"
+              placeholder="Phone"
+            />
+          </div>
+        </div>
+        <hr />
+        <h1>Social media</h1>
+        <div class="row">
+          <div class="col">
+            <input
+              formControlName="facebookLink"
+              type="text"
+              class="form-control"
+              placeholder="Facebook link"
+            />
+            <input
+              class="custom-input-file"
+              type="file"
+              accept=".png,.jpg,.jpeg,.svg"
+              (change)="facebookLogo($event)"
+            />
+          </div>
+          <div class="col">
+            <input
+              formControlName="instagramLink"
+              type="text"
+              class="form-control"
+              placeholder="Instagram link"
+            />
+            <input
+              class="custom-input-file"
+              type="file"
+              accept=".png,.jpg,.jpeg,.svg"
+              (change)="instagramLogo($event)"
+            />
+          </div>
+          <div class="col">
+            <input
+              formControlName="twitterLink"
+              type="text"
+              class="form-control"
+              placeholder="Twitter link"
+            />
+            <input
+              class="custom-input-file"
+              type="file"
+              accept=".png,.jpg,.jpeg,.svg"
+              (change)="twitterLogo($event)"
+            />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

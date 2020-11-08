@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DbFetchDataService } from '../shared/db-fetch-data.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dbFetchDataService: DbFetchDataService) { }
+
+  aboutUs;
+  footer;
 
   ngOnInit(): void {
+    this.dbFetchDataService.fetchAboutUs().subscribe((about) => {
+      this.aboutUs = about.aboutUs;
+    });
+    this.dbFetchDataService.fetchFooter().subscribe((footerData) => {
+      this.footer = footerData;
+    })
   }
 
 }

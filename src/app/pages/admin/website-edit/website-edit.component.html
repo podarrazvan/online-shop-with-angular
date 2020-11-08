@@ -10,6 +10,12 @@
   ></app-about-us-edit>
 </div>
 
+<div *ngIf="showEditFooter">
+  <app-footer-edit
+    (close)="showEditFooter = false"
+  ></app-footer-edit>
+</div>
+
 <div *ngIf="!showEditTermsOfUse || !showEditAboutUs">
   <h1>Homepage areas</h1>
   <br />
@@ -144,6 +150,13 @@
   <br />
   <button class="btn btn-danger" type="button" (click)="editAboutUs()">
     Edit About Us
+  </button>
+  <br />
+  <br>
+  <h1>Footer</h1>
+  <br />
+  <button class="btn btn-danger" type="button" (click)="showEditFooter = true">
+    Edit Footer
   </button>
   <br />
   <hr>

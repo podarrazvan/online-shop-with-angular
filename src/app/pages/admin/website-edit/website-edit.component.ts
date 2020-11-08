@@ -26,6 +26,8 @@ export class WebsiteEditComponent implements OnInit {
 
   showEditAboutUs = false;
 
+  showEditFooter = false;
+
   ngOnInit(): void {
     this.getAreas();
     this.getCategories();

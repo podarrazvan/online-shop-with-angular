@@ -76,4 +76,17 @@ body {
   }
 }
 
+.custom-input-file::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.custom-input-file {
+  border-radius: 10px;
+  padding: 5px 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 10pt;
+  background-color: #ff0000;
+  color: white;
+}
 

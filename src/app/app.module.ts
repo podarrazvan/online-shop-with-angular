@@ -49,6 +49,7 @@ import { DbDeleteService } from './shared/db-delete.service';
 import { DarkModeDirective } from './shared/dark-mode.directive';
 import { DeleteAlertService } from './shared/delete-alert/delete-alert.service';
 import { DeleteAlertComponent } from './shared/delete-alert/delete-alert.component';
+import { FooterEditComponent } from './pages/admin/website-edit/footer-edit/footer-edit.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { DeleteAlertComponent } from './shared/delete-alert/delete-alert.compone
     SearchComponent,
     CheckoutPageComponent,
     OrderComponent,
-    DarkModeDirective
+    DarkModeDirective,
+    FooterEditComponent
   ],
   imports: [
     BrowserModule,

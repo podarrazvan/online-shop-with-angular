@@ -1,5 +1,44 @@
 <div class="footer">
-  <a routerLink="../contact" class="footer-link"> Contact </a>
-  <a routerLink="../terms-of-use" class="footer-link"> Terms of use </a>
-  <a routerLink="../about-us" class="footer-link"> About us </a>
+  <div class="top">
+    <div class="left">
+      <div class="adress">
+        <h1>
+          <mat-icon> location_on</mat-icon><b> {{ footer.adress }}</b>
+        </h1>
+      </div>
+      <div class="phone">
+        <h1>
+          <mat-icon> call</mat-icon><b> {{ footer.phone }}</b>
+        </h1>
+      </div>
+      <div class="email">
+        <h1>
+          <span><mat-icon>alternate_email</mat-icon></span
+          ><b> {{ footer.email }}</b>
+        </h1>
+      </div>
+    </div>
+    <div class="right">
+      <h1>About us</h1>
+      <h4>{{ aboutUs | shorten: 500 }}</h4>
+      <div class="social-media">
+        <a *ngIf="footer.facebookLogo" [href]="footer.facebookLink"
+          ><img [src]="footer.facebookLogo" alt="facebook icon"
+        /></a>
+        <a *ngIf="footer.instagramLogo" [href]="footer.instagramLink"
+          ><img [src]="footer.instagramLogo" alt="instagram icon"
+        /></a>
+        <a *ngIf="footer.twitterLogo" [href]="footer.twitterLink"
+          ><img [src]="footer.twitterLogo" alt="twitter icon"
+        /></a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="links">
+      <a routerLink="../contact" class="footer-link"> Contact </a>
+      <a routerLink="../terms-of-use" class="footer-link"> Terms of use </a>
+      <a routerLink="../about-us" class="footer-link"> About us </a>
+    </div>
+  </div>
 </div>
