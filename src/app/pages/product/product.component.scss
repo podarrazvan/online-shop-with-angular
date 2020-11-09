@@ -1,30 +1,48 @@
 hr {
-    border-color: rgb(222, 222, 222) !important;
+  border-color: rgb(222, 222, 222) !important;
 }
 
 .top {
-    display: flex;
-    padding-top: 50px;
-    margin-left: -10%;
-    width: 78vw;
+  display: flex;
+  padding-top: 50px;
+  margin-left: -10%;
+  width: 78vw;
 }
 app-carousel {
-    height: 720px!important;
-    width: 1000px;
+  height: 720px !important;
+  width: 1000px;
 }
 .buy-area {
-    flex-direction: column;
-    margin-top: 100px;
-    margin-left:10%;
-    text-align: center;
-    min-width: 300px;
+  flex-direction: column;
+  margin-top: 100px;
+  margin-left: 10%;
+  text-align: center;
+  min-width: 300px;
 }
 .quantity {
-  padding-left:35%;
-  padding-right:35% ;
+  padding-left: 35%;
+  padding-right: 35%;
 }
 
 .description {
-    padding: 50px;
-    text-align: justify;
+  padding: 50px;
+  text-align: justify;
+}
+
+@media screen and (max-width: 1370px) {
+  app-carousel {
+    width: 100%;
+  }
+  .top {
+    flex-direction: column;
+    width: 100%;
+    margin-left: 0px;
+  }
+}
+
+@media screen and (max-width: 1114px) {
+  app-carousel {
+    width: 100%;
+    height: fit-content !important;
+  }
 }

@@ -1,26 +1,36 @@
 table {
-    width: 100%;
+  width: 100%;
 }
 
 img {
-    height: 108px;
-    width: 192x;
+  height: 108px;
+  width: 192x;
 }
 
 .purchase {
-    float: right;
-    display: flex;
-    margin-top: 50px;
+  float: right;
+  display: flex;
+  margin-top: 50px;
 }
 
 .total {
-    margin-right: 50px;
+  margin-right: 50px;
 }
 
 .btn-continue {
-    padding: 18px;
+  padding: 18px;
 }
 
 .emptyText {
-    text-align: center;
+  text-align: center;
+}
+
+.product-quantity {
+  padding-left: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .product-quantity {
+    padding-left: 10px;
+  }
 }

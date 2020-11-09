@@ -1,9 +1,15 @@
 .container {
-    display: flex;
+  display: flex;
 }
 
 .paypal {
-    width: 30%;
-    margin-top: 100px;
-    margin-left: 50px;
+  width: 30%;
+  margin-top: 100px;
+  margin-left: 50px;
+}
+
+@media screen and (max-width: 870px) {
+  .container {
+    flex-direction: column;
+  }
 }

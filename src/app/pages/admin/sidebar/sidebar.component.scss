@@ -7,14 +7,45 @@
   margin-top: -55px;
   height: 110vh;
   width: 14vw;
-  padding:100px 60px 50px 0px;
+  padding: 80px 60px 50px 0px;
   background-color: rgb(30, 30, 30);
 }
 
 a {
-    color: white !important;
+  color: white !important;
 }
 
 hr {
-    border-color: white;
+  border-color: white;
+}
+
+.mat-btn {
+  float: right;
+  margin-right: -35px;
+}
+
+@media screen and (max-width: 1088px) {
+  .side-bar {
+    width: 20vw;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .side-bar {
+    width: 30vw;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .side-bar {
+    width: 40vw;
+  }
+}
+
+.hideSidebar {
+  width: 80px !important;
+  margin-right: 90px;
+  ul {
+    display: none;
+  }
 }

@@ -1,31 +1,85 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" routerLink="" ><b>{{name}}</b></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+  <a class="navbar-brand" routerLink=""
+    ><b>{{ name }}</b></a
+  >
+  <form class="form-inline my-2 my-lg-0">
+    <input
+      #search
+      class="form-control mr-sm-2 search"
+      placeholder="Search"
+      aria-label="Search"
+    />
+    <button
+      (click)="onSearch(search)"
+      class="btn btn-outline-dark my-2 my-sm-0"
+      type="submit"
+    >
+      Search
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" (click)="showCategories = !showCategories" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <b>Categories</b>
-          </a>
-          <div class="dropdown-menu "[class.show]="showCategories" aria-labelledby="navbarDropdown" *ngFor="let category of categories">
-            <a class="dropdown-item" [routerLink]="['category',category.name]">{{category.name}}</a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link"[class.disabled]="emptyCart" routerLink="../cart"><b>Cart</b></a> 
-        </li>
-      </ul>
-      <div class="admin-btn" *ngIf="admin">
-        <button (click)="openAdmin()" style="color: #0095f6;" class="btn btn-primarry">Admin</button>
-      </div>
-      <div class="dark-mode-btn" *ngIf="!adminPage">
-        <button (click)="darkMode()" class="mat-btn"><mat-icon>bedtime</mat-icon></button>
-      </div>
-      <form class="form-inline my-2 my-lg-0">
-        <input #search class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
-        <button (click)="onSearch(search)" class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
+  </form>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    (click)="mobileShow = !mobileShow"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div
+    class="collapse navbar-collapse"
+    id="navbarSupportedContent"
+    [class.show]="mobileShow"
+  >
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          (click)="showCategories = !showCategories"
+          role="button"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <b>Categories</b>
+        </a>
+        <div
+          class="dropdown-menu"
+          [class.show]="showCategories"
+          aria-labelledby="navbarDropdown"
+          *ngFor="let category of categories"
+        >
+          <a class="dropdown-item" [routerLink]="['category', category.name]">{{
+            category.name
+          }}</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.disabled]="emptyCart" routerLink="../cart"
+          ><b>Cart</b></a
+        >
+      </li>
+      <li *ngIf="admin">
+        <div class="admin-btn">
+          <button
+            (click)="openAdmin()"
+            style="color: #0095f6"
+            class="btn btn-primarry"
+          >
+            Admin
+          </button>
+        </div>
+      </li>
+      <li *ngIf="!adminPage">
+        <div class="dark-mode-btn">
+          <button (click)="darkMode()" class="mat-btn">
+            <mat-icon>bedtime</mat-icon>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

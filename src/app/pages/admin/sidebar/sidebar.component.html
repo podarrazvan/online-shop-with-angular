@@ -1,4 +1,9 @@
-<div class="side-bar">
+<div class="side-bar" [class.hideSidebar]="hide">
+  <button (click)="hide = !hide" class="mat-btn">
+    <mat-icon style="color: white">list</mat-icon>
+  </button>
+  <br />
+  <br />
   <ul>
     <a routerLink="add-product">
       <li>Add a product</li>

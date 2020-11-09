@@ -14,6 +14,8 @@ export class SidebarComponent implements OnInit, DoCheck {
   ) {}
 
   unread: number;
+  
+  hide = false;
 
   ngOnInit(): void {
     this.dbFetchDataService.fetchMessages().subscribe((emails) => {

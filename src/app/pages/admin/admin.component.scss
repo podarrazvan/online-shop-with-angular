@@ -14,3 +14,22 @@
   width: 70vw;
   padding: 50px;
 }
+
+@media screen and (max-width: 1060px) {
+  img {
+    margin-left: 150px;
+  }
+}
+
+@media screen and (max-width: 842px) {
+  img {
+    width: 90%;
+    margin-left: 50px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  img {
+    display: none;
+  }
+}

@@ -1,7 +1,57 @@
 nav {
-    z-index: 2;
+  z-index: 2;
+}
+
+form {
+  margin-left: 50px;
+}
+
+.navbar-nav {
+  float: right;
+  margin-left: 80%;
+  margin-right: 0px;
 }
 
 .dark-mode-btn {
-    margin-right: 40px;
+  margin-right: 40px;
+}
+
+@media screen and (max-width: 1832px) {
+  .navbar-nav {
+    margin-left: 75%;
+  }
+}
+
+@media screen and (max-width: 1564px) {
+  .navbar-nav {
+    margin-left: 70%;
+  }
+}
+
+@media screen and (max-width: 1370px) {
+  .navbar-nav {
+    margin-left: 65%;
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  .navbar-nav {
+    margin-left: 50%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  form {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  .search {
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .navbar-brand {
+    display: none;
+  }
 }

@@ -15,6 +15,8 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private sharedDataService: SharedDataService
   ) {}
+  
+  mobileShow = false;
 
   adminPage = false;
 
