@@ -1,22 +1,29 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" routerLink=""
-    ><b>{{ name }}</b></a
-  >
-  <form class="form-inline my-2 my-lg-0">
-    <input
-      #search
-      class="form-control mr-sm-2 search"
-      placeholder="Search"
-      aria-label="Search"
-    />
-    <button
-      (click)="onSearch(search)"
-      class="btn btn-outline-dark my-2 my-sm-0"
-      type="submit"
+  <div class="left-nav">
+    <a class="navbar-brand" routerLink=""
+      ><b>{{ name }}</b></a
     >
-      Search
-    </button>
-  </form>
+    <form
+      [formGroup]="searchBar"
+      (ngSubmit)="onSearch()"
+      class="form-inline my-2 my-lg-0"
+    >
+      <input
+        formControlName="search"
+        class="form-control mr-sm-2 search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <button class="empty-btn" (click)="emptySearchBar()">X</button>
+      <button
+        [disabled]="!searchBar.valid"
+        class="btn btn-outline-dark my-2 my-sm-0"
+        type="submit"
+      >
+        Search
+      </button>
+    </form>
+  </div>
   <button
     class="navbar-toggler"
     type="button"
@@ -52,15 +59,16 @@
           aria-labelledby="navbarDropdown"
           *ngFor="let category of categories"
         >
-          <a class="dropdown-item" [routerLink]="['category', category.name]">{{
-            category.name
-          }}</a>
+          <a
+            (click)="showCategories = false"
+            class="dropdown-item"
+            [routerLink]="['category', category.name]"
+            >{{ category.name }}</a
+          >
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" [class.disabled]="emptyCart" routerLink="../cart"
-          ><b>Cart</b></a
-        >
+      <li class="nav-item" *ngIf="!emptyCart">
+        <a class="nav-link" routerLink="../cart"><b>Cart</b></a>
       </li>
       <li *ngIf="admin">
         <div class="admin-btn">
@@ -73,8 +81,8 @@
           </button>
         </div>
       </li>
-      <li *ngIf="!adminPage">
-        <div class="dark-mode-btn">
+      <li class="dark-mode-btn" *ngIf="!adminPage">
+        <div>
           <button (click)="darkMode()" class="mat-btn">
             <mat-icon>bedtime</mat-icon>
           </button>

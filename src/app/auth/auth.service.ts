@@ -4,7 +4,6 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
 
 import { User } from './user.model';
-import { SharedDataService } from '../shared/shared-data.service';
 
 export interface Id {
   uid: string;
@@ -27,33 +26,8 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
 
   constructor(
-    private http: HttpClient,
-    private sharedDataService: SharedDataService
+    private http: HttpClient
   ) {}
-
-  signup(email: string, password: string) {
-    return this.http
-      .post<AuthResponseData>(
-        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyB2LCy0vDlPneQn5OW6ft-h5rOXY-vooQE',
-        {
-          email: email,
-          password: password,
-          returnSecureToken: true,
-        }
-      )
-      .pipe(
-        catchError(this.handleError),
-        tap((resData) => {
-          this.handleAuthentication(
-            resData.email,
-            resData.localId,
-            resData.idToken,
-            +resData.expiresIn
-          );
-          this.saveUser(resData.localId);
-        })
-      );
-  }
 
   login(email: string, password: string) {
     return this.http
@@ -79,7 +53,6 @@ export class AuthService {
   }
 
   autoLogin() {
-    this.sharedDataService.updateAuth(true);
     const userData: {
       email: string;
       id: string;
@@ -117,7 +90,6 @@ export class AuthService {
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));
-    this.sharedDataService.updateAuth(true);
   }
 
   logout() {
@@ -128,7 +100,6 @@ export class AuthService {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
-    this.sharedDataService.updateAuth(false);
   }
 
   autoLogout(expirationDuration: number) {

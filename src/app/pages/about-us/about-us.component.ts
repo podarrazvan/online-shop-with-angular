@@ -13,6 +13,7 @@ export class AboutUsComponent implements OnInit {
   aboutUs;
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.dbFetchDataService.fetchAboutUs().subscribe(about => {
       this.aboutUs = about.aboutUs;
     })

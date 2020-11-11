@@ -104,7 +104,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   }
 
   addTag(tag) {
-    this.tags.push(tag);
+    this.tags.push(tag.value);
   }
 
   deleteTag(index) {

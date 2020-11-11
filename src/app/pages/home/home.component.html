@@ -1,4 +1,4 @@
-<div *ngIf="loading"><h1>Loading...</h1></div>
+<div class="container" *ngIf="loading"><app-loading></app-loading></div>
 <div *ngIf="!loading">
   <app-carousel
     *ngIf="productsInCarousel"

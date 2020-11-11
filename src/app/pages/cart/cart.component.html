@@ -1,4 +1,4 @@
-<div *ngIf="!showCart"><h1>Loading...</h1></div>
+<div class="container" *ngIf="!showCart"><app-loading></app-loading></div>
 <div class="container emptyText" *ngIf="emptyCart"><h1>Empty...</h1></div>
 <div class="container" *ngIf="showCart && !emptyCart">
   <div class="table">

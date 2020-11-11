@@ -50,6 +50,7 @@ import { DarkModeDirective } from './shared/dark-mode.directive';
 import { DeleteAlertService } from './shared/delete-alert/delete-alert.service';
 import { DeleteAlertComponent } from './shared/delete-alert/delete-alert.component';
 import { FooterEditComponent } from './pages/admin/website-edit/footer-edit/footer-edit.component';
+import { LoadingComponent } from './shared/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { FooterEditComponent } from './pages/admin/website-edit/footer-edit/foot
     CheckoutPageComponent,
     OrderComponent,
     DarkModeDirective,
-    FooterEditComponent
+    FooterEditComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

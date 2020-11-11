@@ -15,7 +15,7 @@
     <hr />
     <a routerLink="messages">
       <li>
-        Messages <span class="badge badge-danger">{{ unread }}</span>
+        Messages <span *ngIf="unread > 0" class="badge badge-danger">{{ unread }}</span>
       </li>
     </a>
     <hr />

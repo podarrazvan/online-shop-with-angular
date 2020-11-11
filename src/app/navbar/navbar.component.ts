@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Category } from '../shared/category.interface';
 import { DbFetchDataService } from '../shared/db-fetch-data.service';
@@ -11,10 +12,13 @@ import { SharedDataService } from '../shared/shared-data.service';
 })
 export class NavbarComponent implements OnInit {
   constructor(
+    private fb: FormBuilder,
     private dbFetchDataService: DbFetchDataService,
     private router: Router,
     private sharedDataService: SharedDataService
   ) {}
+
+  searchBar: FormGroup;
   
   mobileShow = false;
 
@@ -32,6 +36,11 @@ export class NavbarComponent implements OnInit {
   emptyCart: boolean;
 
   ngOnInit(): void {
+
+    this.searchBar = this.fb.group({
+      search: ['',Validators.required]
+    });
+
     this.dbFetchDataService.fetchName().subscribe((name) => {
       this.name = name.name;
     });
@@ -69,8 +78,13 @@ export class NavbarComponent implements OnInit {
     location.reload();
   }
 
-  onSearch(search) {
-    this.router.navigate(['../search', search.value.replace(/\s/g, '-')]);
+  onSearch() {
+    const search = this.searchBar.value.search;
+    this.router.navigate(['../search', search.replace(/\s/g, '-')]);
+  }
+
+  emptySearchBar() {
+    this.searchBar.reset()
   }
 
   openAdmin() {

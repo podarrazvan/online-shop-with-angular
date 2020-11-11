@@ -13,6 +13,7 @@ export class TermsOfUseComponent implements OnInit {
   termsOfUse;
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.dbFetchDataService.fetchTermsOfUse().subscribe(terms => {
       this.termsOfUse = terms.termsOfUse;
     })

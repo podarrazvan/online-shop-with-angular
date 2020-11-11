@@ -13,6 +13,7 @@ export class ContactComponent implements OnInit {
   contactForm: FormGroup;
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.contactForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],

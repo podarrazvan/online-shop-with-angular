@@ -11,15 +11,10 @@ import { AuthService, AuthResponseData } from './auth.service';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent {
-  isLoginMode = true;
   isLoading = false;
   error: string = null;
 
   constructor(private authService: AuthService, private router: Router) {}
-
-  onSwitchMode() {
-    this.isLoginMode = !this.isLoginMode;
-  }
 
   onSubmit(form: NgForm) {
     if (!form.valid) {
@@ -32,12 +27,8 @@ export class AuthComponent {
 
     this.isLoading = true;
 
-    if (this.isLoginMode) {
-      authObs = this.authService.login(email, password);
-    } else {
-      authObs = this.authService.signup(email, password);
-    }
-
+    authObs = this.authService.login(email, password);
+  
     authObs.subscribe(
       (resData) => {
         this.isLoading = false;

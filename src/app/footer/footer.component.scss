@@ -16,6 +16,8 @@ a {
   height: fit-content;
   background-color: rgb(0, 4, 17);
   h1 {
+    display: flex;
+    align-items: center;
     color: rgba(245, 245, 245, 0.9);
   }
   h4 {

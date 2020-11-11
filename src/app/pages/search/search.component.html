@@ -1,4 +1,7 @@
 <div class="container">
+  <div *ngIf="products.length == 0">
+    <h1>Nothing to show...</h1>
+  </div>
     <div class="product" *ngFor="let product of products">
         <app-get-products
         [img]="product.img"
