@@ -29,6 +29,25 @@ img {
   padding-left: 30px;
 }
 
+.card-mobile {
+  display: flex;
+  h3,
+  h4,
+  p {
+    color: black;
+  }
+}
+
+.product-img-mobile {
+  padding-top: 50px;
+  padding-left: 10px;
+}
+
+.product-info {
+  text-align: center;
+  padding: 15px;
+}
+
 @media screen and (max-width: 768px) {
   .product-quantity {
     padding-left: 10px;

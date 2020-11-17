@@ -16,6 +16,9 @@ export class AppComponent implements OnInit {
   title = 'shop';
 
   ngOnInit(): void {
+
+    window.innerWidth > 542 ? this.sharedDataService.mobile = false : this.sharedDataService.mobile = true;
+
     this.authService.autoLogin();
 
     if (localStorage.getItem('userData')) {

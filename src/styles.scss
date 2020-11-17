@@ -60,10 +60,11 @@ body {
   h5,
   p,
   label {
-  color: white;
-  } 
+    color: white;
+  }
 }
-.dark-mode table {
+.dark-mode table,
+.card-mobile {
   background-color: rgba(255, 255, 255, 0.945);
   border-radius: 10px;
 }
@@ -71,7 +72,7 @@ body {
 .dark-mode .card {
   background-color: rgba(255, 255, 255, 0.795);
   h3,
-  p{
+  p {
     color: black;
   }
 }
@@ -90,3 +91,50 @@ body {
   color: white;
 }
 
+.products-grid {
+  padding: 20px 100px;
+  display: grid;
+  grid-template-columns: repeat(6, auto);
+  grid-column-gap: 10px;
+}
+
+@media (max-width: 1880px) {
+  .products-grid {
+    grid-template-columns: repeat(5, auto);
+  }
+}
+
+@media (max-width: 1696px) {
+  .products-grid {
+    grid-template-columns: repeat(4, auto);
+  }
+}
+
+@media (max-width: 1328px) {
+  .products-grid {
+    grid-template-columns: repeat(3, auto);
+  }
+}
+
+@media (max-width: 1084px) {
+  .products-grid {
+    grid-template-columns: repeat(2, auto);
+  }
+}
+@media (max-width: 828px) {
+  .card {
+    width: 10em;
+  }
+}
+
+@media (max-width: 750px) {
+  .products-grid {
+    padding: 20px 50px;
+  }
+}
+
+@media (max-width: 500px) {
+  .products-grid {
+    padding: 20px 10px;
+  }
+}

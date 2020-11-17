@@ -1,10 +1,10 @@
 <div class="card" style="width: 18rem">
   <img class="card-img-top" [src]="img[0]" alt="Card image cap" />
   <div class="card-body">
-    <p class="card-text">{{ description | shorten: 100 }}</p>
+    <p class="card-text">{{ description | shorten: characters }}</p>
     <h3>
       <b>{{ price }} $</b>
     </h3>
-    <button (click)="openProduct(category,key)" class="btn btn-primary">Open product</button>
+    <button (click)="openProduct(category,key)" class="btn btn-primary">{{btnText}}</button>
   </div>
 </div>

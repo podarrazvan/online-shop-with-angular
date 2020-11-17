@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../product.interface';
 
@@ -18,15 +18,20 @@ export class GetProductsComponent implements OnInit {
   @Input() key: string;
 
   constructor(private router: Router) { }
-  
-  
+
+  characters = 100;
+  btnText = "Open product";
 
   ngOnInit(): void {
-    
+    if (window.innerWidth < 420) {
+      this.characters = 20
+      this.btnText = "Open";
+    }
+
   }
-  
+
   openProduct(c: string, k: string) {
-    this.router.navigate(['/product',c, k]);
+    this.router.navigate(['/product', c, k]);
   }
 
 }

@@ -10,16 +10,18 @@ export class FooterComponent implements OnInit {
 
   constructor(private dbFetchDataService: DbFetchDataService) { }
 
+  isLoading = true;
   aboutUs;
   footer;
 
   ngOnInit(): void {
     this.dbFetchDataService.fetchAboutUs().subscribe((about) => {
       this.aboutUs = about.aboutUs;
+      this.dbFetchDataService.fetchFooter().subscribe((footerData) => {
+        this.footer = footerData;
+        this.isLoading = false;
+      });
     });
-    this.dbFetchDataService.fetchFooter().subscribe((footerData) => {
-      this.footer = footerData;
-    })
   }
 
 }

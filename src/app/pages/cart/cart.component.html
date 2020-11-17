@@ -1,7 +1,8 @@
 <div class="container" *ngIf="!showCart"><app-loading></app-loading></div>
 <div class="container emptyText" *ngIf="emptyCart"><h1>Empty...</h1></div>
 <div class="container" *ngIf="showCart && !emptyCart">
-  <div class="table">
+  <!--Desktop version-->
+  <div class="table" *ngIf="!mobile">
     <table>
       <thead>
         <tr>
@@ -51,6 +52,32 @@
       </tbody>
     </table>
   </div>
+  <!--Mobile version-->
+  <div *ngFor="let product of cart; let i = index">
+    <div class="card-mobile" *ngIf="mobile">
+      <div class="product-img-mobile">
+        <img [src]="product.product.img" [alt]="product.name" />
+      </div>
+      <div class="product-info">
+        <h3>{{ product.product.title }}</h3>
+        <div class="product-quantity">
+          <h4>Quantity <br> {{ product.quantity }}</h4>
+          <button (click)="increaseQuantity(i)" class="mat-btn">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button (click)="decreaseQuantity(i)" class="mat-btn">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <p>{{ product.product.price }}</p>
+      </div>
+      <button class="mat-btn" (click)="onDelete(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  <!---->
+
   <hr />
   <div class="purchase">
     <div class="total">

@@ -14,6 +14,7 @@ export class SharedDataService implements OnDestroy {
   product: Product;
   unreadMessages: number;
   totalCart: number;
+  mobile: boolean;
 
   ngOnDestroy() {
     this.productEdit = null;

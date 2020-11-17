@@ -34,6 +34,11 @@ a {
   padding-top: 50px;
   width: 55vw;
   margin-right: 20vw;
+
+}
+
+.left div {
+  word-break: break-all;
 }
 
 .right {
@@ -82,18 +87,32 @@ a {
 }
 
 @media screen and (max-width: 420px) {
+  a {
+    display: inline-block;
+    width: fit-content;
+  }
+  .footer {
+    padding-left: 150px;
+  }
   .social-media {
-    flex-direction: column;
+    display: block;
+  }
+  .bottom {
+    margin-left: -150px;
   }
 }
 
 @media screen and (max-width: 400px) {
+  .footer h1, h4 {
+    font-size: 0.6em!important;
+  }
+
   .footer-link:hover {
     padding: 1px;
   }
-}
-@media screen and (max-width: 400px) {
+
   .top {
     margin-left: -100px;
   }
 }
+

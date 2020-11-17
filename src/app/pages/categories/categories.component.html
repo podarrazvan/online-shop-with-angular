@@ -2,7 +2,7 @@
   <h1>Loading...</h1>
 </div>
 
-<div class="container" *ngIf="!isLoading">
+<div class="products-grid" *ngIf="!isLoading">
   <div class="product" *ngFor="let product of products">
     <app-get-products
       [img]="product.img"

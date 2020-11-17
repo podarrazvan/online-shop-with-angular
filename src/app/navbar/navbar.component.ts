@@ -95,7 +95,7 @@ export class NavbarComponent implements OnInit {
       localStorage.setItem('reloaded', JSON.stringify(true));
       window.location.replace(window.location.href + 'admin');
     } else {
-      this.router.navigate(['../admin']);
+      this.router.navigate(['../../admin']);
     }
   }
 

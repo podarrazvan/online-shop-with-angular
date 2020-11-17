@@ -21,7 +21,10 @@ export class CartComponent implements OnInit, DoCheck {
   showCart = false;
   total = 0;
 
+  mobile: boolean;
+
   ngOnInit(): void {
+    this.mobile = this.sharedDataService.mobile;
     this.cart = [];
     const products = JSON.parse(localStorage.getItem('cart'));
     products.length > 0 ? this.emptyCart  = false : this.emptyCart = true;
