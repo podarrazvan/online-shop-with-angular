@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    window.innerWidth > 542 ? this.sharedDataService.mobile = false : this.sharedDataService.mobile = true;
+    window.innerWidth > 850 ? this.sharedDataService.mobile = false : this.sharedDataService.mobile = true;
 
     this.authService.autoLogin();
 

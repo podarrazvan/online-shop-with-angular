@@ -18,9 +18,13 @@ export class NavbarComponent implements OnInit {
     private sharedDataService: SharedDataService
   ) {}
 
+  mobile: boolean;
+
+  darkNavbar: boolean;
+
   searchBar: FormGroup;
   
-  mobileShow = false;
+  showSearchBar = false;
 
   adminPage = false;
 
@@ -36,7 +40,8 @@ export class NavbarComponent implements OnInit {
   emptyCart: boolean;
 
   ngOnInit(): void {
-
+    this.darkNavbar = JSON.parse(localStorage.getItem('darkMode'));
+    this.mobile = this.sharedDataService.mobile;
     this.searchBar = this.fb.group({
       search: ['',Validators.required]
     });

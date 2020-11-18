@@ -1,7 +1,11 @@
 nav {
   display: flex;
-  justify-content: space-between;
-  z-index: 2;
+  height: 54px;
+  padding: 25px 30px 50px;
+}
+
+.darkNav {
+  background-color: rgba(1, 4, 44, 0.10);
 }
 
 ul {
@@ -10,13 +14,38 @@ ul {
   width: 100%;
 }
 
-.left-nav {
-  display: flex;
-  align-items: center;
+li {
+  margin: 0px 20px;
+}
+
+mat-icon,
+.nav-link {
+  color: rgba(1, 4, 44, 0.801);
+}
+
+.right {
+  width: 100%;
+}
+
+.right button {
+  float: right;
+}
+
+.categories {
+  position: absolute;
+  z-index: 3;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  background-color: white;
 }
 
 form {
   margin-left: 50px;
+}
+
+.search-bar {
+  float: right;
 }
 
 .search {
@@ -27,12 +56,11 @@ form {
 }
 
 .empty-btn {
-  margin-right: 8px;
-  margin-left: -2px;
   border: 1px solid #ced4da;
   border-radius: 0, 0.25rem, 0.25rem, 0;
   border-left: 0px;
   height: 38px;
+  margin: 1px 8px 1px -2px;
   background-color: white;
 }
 
@@ -41,22 +69,66 @@ form {
 }
 
 .dark-mode-btn {
+  float: right;
   width: 30px;
   margin-top: 5px;
 }
 
-@media screen and (max-width: 576px) {
-  form {
-    margin-left: 10px;
-    margin-right: 10px;
+.mobileSearchBar {
+  position: fixed;
+  left: calc(50% - 250px);
+  margin-top: 200px;
+  z-index: 51;
+
+  background-color: seagreen;
+}
+
+.mobileSearchBar .search {
+  width: 500px;
+}
+
+.mobileSearchBar form {
+  margin: auto;
+}
+
+.mobileSearchBar .form-inline {
+  flex-flow: unset;
+  width: 500px;
+}
+
+@media (max-width: 1015px) {
+  li {
+    margin: 0px 5px;
   }
-  .search {
-    width: 120px;
+
+  .empty-btn {
+    margin-top: 1px;
   }
 }
 
-@media screen and (max-width: 390px) {
-  .navbar-brand {
-    display: none;
+@media (max-width: 870px) {
+  ul {
+    padding: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .mobileSearchBar {
+    left: calc(50% - 150px);
+  }
+
+  .mobileSearchBar .form-inline {
+    width: 300px;
+  }
+}
+
+@media (max-width: 429px) {
+  a,
+  button {
+    padding: 8px 2px;
+  }
+
+  nav {
+    padding: 15px 10px 50px;
   }
 }

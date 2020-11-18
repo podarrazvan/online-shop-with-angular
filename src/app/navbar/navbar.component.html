@@ -1,75 +1,16 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="left-nav">
-    <a class="navbar-brand" routerLink=""
-      ><b>{{ name }}</b></a
+<nav [class.darkNav]="darkNavbar">
+  <div class="home">
+    <button routerLink="" *ngIf="mobile" class="mat-btn">
+      <mat-icon>home</mat-icon>
+    </button>
+    <a *ngIf="!mobile" class="brand" routerLink=""
+      ><h1>
+        <b>{{ name }}</b>
+      </h1></a
     >
-    <form
-      [formGroup]="searchBar"
-      (ngSubmit)="onSearch()"
-      class="form-inline my-2 my-lg-0"
-    >
-      <input
-        formControlName="search"
-        class="form-control mr-sm-2 search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="empty-btn" (click)="emptySearchBar()">X</button>
-      <button
-        [disabled]="!searchBar.valid"
-        class="btn btn-outline-dark my-2 my-sm-0"
-        type="submit"
-      >
-        Search
-      </button>
-    </form>
   </div>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-    (click)="mobileShow = !mobileShow"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div
-    class="collapse navbar-collapse"
-    id="navbarSupportedContent"
-    [class.show]="mobileShow"
-  >
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown">
-        <a
-          class="nav-link dropdown-toggle"
-          (click)="showCategories = !showCategories"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-        >
-          <b>Categories</b>
-        </a>
-        <div
-          class="dropdown-menu"
-          [class.show]="showCategories"
-          aria-labelledby="navbarDropdown"
-          *ngFor="let category of categories"
-        >
-          <a
-            (click)="showCategories = false"
-            class="dropdown-item"
-            [routerLink]="['category', category.name]"
-            >{{ category.name }}</a
-          >
-        </div>
-      </li>
-      <li class="nav-item" *ngIf="!emptyCart">
-        <a class="nav-link" routerLink="../cart"><b>Cart</b></a>
-      </li>
+  <div class="buttons">
+    <ul>
       <li *ngIf="admin">
         <div class="admin-btn">
           <button
@@ -81,13 +22,75 @@
           </button>
         </div>
       </li>
-      <li class="dark-mode-btn" *ngIf="!adminPage">
-        <div>
-          <button (click)="darkMode()" class="mat-btn">
-            <mat-icon>bedtime</mat-icon>
-          </button>
+      <li class="nav-item" *ngIf="!emptyCart">
+        <a class="nav-link" routerLink="../cart"><b>Cart</b></a>
+      </li>
+      <li>
+        <a (click)="showCategories = !showCategories" class="nav-link">
+          <b> Categories </b>
+        </a>
+        <div class="categories" *ngIf="showCategories">
+          <div *ngFor="let category of categories">
+            <a
+              (click)="showCategories = false"
+              class="category"
+              [routerLink]="['category', category.name]"
+              >{{ category.name }}</a
+            >
+            <hr />
+          </div>
         </div>
       </li>
     </ul>
+  </div>
+  <div class="right">
+    <button
+      class="dark-mode-btn"
+      *ngIf="!adminPage"
+      (click)="darkMode()"
+      class="mat-btn"
+    >
+      <mat-icon>bedtime</mat-icon>
+    </button>
+    <button
+      *ngIf="mobile"
+      (click)="showSearchBar = !showSearchBar"
+      class="mat-btn"
+    >
+      <mat-icon>search</mat-icon>
+    </button>
+    <div
+      (click)="showSearchBar = false"
+      class="backdrop"
+      *ngIf="showSearchBar"
+    ></div>
+    <div
+      class="search-bar"
+      [class.mobileSearchBar]="mobile"
+      *ngIf="!mobile || showSearchBar"
+    >
+      <form
+        [formGroup]="searchBar"
+        (ngSubmit)="onSearch()"
+        class="form-inline my-2 my-lg-0"
+      >
+        <input
+          formControlName="search"
+          class="form-control mr-sm-2 search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="empty-btn" type="button" (click)="emptySearchBar()">
+          X
+        </button>
+        <button
+          [disabled]="!searchBar.valid"
+          class="btn btn-primary"
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
+    </div>
   </div>
 </nav>
