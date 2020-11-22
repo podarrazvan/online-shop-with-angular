@@ -31,7 +31,6 @@ export class CheckoutPageComponent implements OnInit {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       adress: ['', Validators.required],
-      adress2: [''],
       city: ['', Validators.required],
       state: ['', Validators.required],
       zipCode: ['', Validators.required],

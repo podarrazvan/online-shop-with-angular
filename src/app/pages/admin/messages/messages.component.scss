@@ -1,0 +1,53 @@
+.emails {
+  margin-bottom: 100px;
+}
+
+.email-card {
+  margin-top: 10px;
+  width: 700px !important;
+  border: 1px solid rgb(190, 190, 190);
+  border-radius: 5px;
+  padding: 10px 30px 10px 10px;
+}
+
+.card-top {
+  display: inline-block;
+  width: 100%;
+}
+
+.card-top h5 {
+  display: inline-block;
+}
+
+.email-status {
+  float: right;
+}
+
+.delete-btn {
+  float: right;
+  margin-top: -20px;
+}
+
+@media (max-width: 750px) {
+  .email-card {
+    width: 500px !important;
+  }
+}
+
+@media (max-width: 550px) {
+  .email-card {
+    width: 300px !important;
+  }
+}
+
+@media (max-width: 323px) {
+  .email-card {
+    width: 250px !important;
+  }
+}
+
+@media (max-width: 260px) {
+  .email-card {
+    width: 200px !important;
+  }
+}

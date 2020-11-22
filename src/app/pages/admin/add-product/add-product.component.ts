@@ -103,6 +103,11 @@ export class AddProductComponent implements OnInit, OnDestroy {
     this.images.push(imagePath);
   }
 
+  deletePhoto(img, i) {
+    this.dbDeleteService.deletePhoto(img);
+    this.images.splice(i, 1);
+  }
+
   addTag(tag) {
     this.tags.push(tag.value);
   }
@@ -125,7 +130,7 @@ export class AddProductComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sharedData.product = null;
     this.sharedData.productEdit = false;
-    if(this.notComplete) {
+    if(this.notComplete && !this.onEditMode) {
       for(let img of this.images) {
         this.dbDeleteService.deletePhoto(img);
       }

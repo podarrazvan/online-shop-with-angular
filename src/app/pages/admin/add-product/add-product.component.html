@@ -75,10 +75,14 @@
     </div>
   </div>
   <div class="prev-images">
-    <div class="image" *ngFor="let img of images">
-      <img [src]="img" />
+    <div class="image" *ngFor="let img of images; let i = index">
+      <div>
+        <button (click)="deletePhoto(img, i)" class="delete-btn">X</button>
+        <img [src]="img" />
+      </div>
     </div>
   </div>
+  <br>
   <hr />
   <div class="row">
     <div class="col">

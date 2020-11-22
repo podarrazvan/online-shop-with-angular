@@ -61,7 +61,10 @@
       <div class="product-info">
         <h3>{{ product.product.title }}</h3>
         <div class="product-quantity">
-          <h4>Quantity <br> {{ product.quantity }}</h4>
+          <h4>
+            Quantity <br />
+            {{ product.quantity }}
+          </h4>
           <button (click)="increaseQuantity(i)" class="mat-btn">
             <mat-icon>add</mat-icon>
           </button>

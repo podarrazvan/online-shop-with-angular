@@ -15,10 +15,21 @@ img,
     position: relative;
   }
 
+.delete-btn {
+    position: relative;
+    top: 25px;
+    right: 5px;
+    float: right;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: red;
+}
+
 .image {
     display: inline-block;
     position: relative;
-    margin: 3px;
+    margin: 5px;
 }
 
 .tags,

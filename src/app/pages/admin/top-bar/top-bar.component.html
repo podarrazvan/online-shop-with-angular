@@ -1,0 +1,22 @@
+<ul>
+    <a routerLink="add-product">
+      <li><b>Add a product</b></li>
+    </a>
+    <a routerLink="orders">
+      <li><b>Orders</b></li>
+    </a>
+    <a routerLink="messages">
+      <li>
+        <b>Messages </b><span *ngIf="unread > 0" class="badge badge-danger">{{ unread }}</span>
+      </li>
+    </a>
+    <a routerLink="statistics">
+      <li><b>Statistics</b></li>
+    </a>
+    <a routerLink="products">
+      <li><b>Products</b></li>
+    </a>
+    <a routerLink="website-edit">
+      <li><b>Website edit</b></li>
+    </a>
+  </ul>

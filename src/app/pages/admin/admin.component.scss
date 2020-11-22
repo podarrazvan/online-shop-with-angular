@@ -7,12 +7,20 @@
   position: relative;
   flex-direction: column;
   display: flex;
-  left: 16vw;
+  left: 18vw;
   // place-content: center;
   align-items: center;
   float: right;
   width: 70vw;
   padding: 50px;
+}
+
+.mobile {
+  top: 75px;
+  left: 0;
+  padding-bottom: 100px;
+  width: 95vw;
+  margin: auto;
 }
 
 @media screen and (max-width: 1060px) {
@@ -31,5 +39,11 @@
 @media screen and (max-width: 550px) {
   img {
     display: none;
+  }
+}
+
+@media (max-width: 353px) {
+  .mobile {
+    top: 150px;
   }
 }

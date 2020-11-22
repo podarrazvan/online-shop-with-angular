@@ -121,6 +121,14 @@ body {
     grid-template-columns: repeat(2, auto);
   }
 }
+
+@media (max-width: 850px) {
+  .alert-box {
+    max-height: 95vh!important;
+    width: 98vw!important;
+  }
+}
+
 @media (max-width: 828px) {
   .card {
     width: 10em;

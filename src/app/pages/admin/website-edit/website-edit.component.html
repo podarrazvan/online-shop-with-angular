@@ -5,20 +5,15 @@
 </div>
 
 <div *ngIf="showEditAboutUs">
-  <app-about-us-edit
-    (close)="closeEditAboutUs()"
-  ></app-about-us-edit>
+  <app-about-us-edit (close)="closeEditAboutUs()"></app-about-us-edit>
 </div>
 
 <div *ngIf="showEditFooter">
-  <app-footer-edit
-    (close)="showEditFooter = false"
-  ></app-footer-edit>
+  <app-footer-edit (close)="showEditFooter = false"></app-footer-edit>
 </div>
 
 <div *ngIf="!showEditTermsOfUse || !showEditAboutUs">
   <h1>Homepage areas</h1>
-  <br />
   <button
     class="btn btn-danger dropdown-toggle"
     type="button"
@@ -26,23 +21,22 @@
   >
     Show
   </button>
-  <br />
+  <hr>
   <div *ngIf="!homepageAreasHide">
     <form #newArea="ngForm">
       <div class="form-row align-items-center">
         <div class="col-auto">
-          <label for="tagInput"><b>Add a new area</b></label>
+          <label for="areaInput"><b>Add a new area</b></label>
           <input
             type="text"
             class="form-control"
-            id="tagInput"
+            id="areaInput"
             placeholder="Area"
             #area
             required
           />
         </div>
         <div class="col-auto">
-          <br />
           <!--To do: fix newArea.valid-->
           <button
             [disabled]="!newArea.valid"
@@ -59,27 +53,42 @@
       <div *ngFor="let area of homepageAreas; let i = index">
         <!--To do: implement active-->
         <li class="list-group-item">
-          <h1>{{ area.name }}</h1>
+          <h1 *ngIf="editAreaMode != i">{{ area.name }}</h1>
+
+          <input
+            [hidden]="editAreaMode != i"
+            type="text"
+            class="form-control"
+            [value]="area.name"
+            #editedArea
+          />
           <hr />
           <div class="buttons">
-            <button
-              (click)="delete(i, area.key, 'area')"
-              style="background-color: transparent; border: none"
-            >
+            <button (click)="delete(i, area.key, 'area')" class="mat-btn">
               <mat-icon>delete</mat-icon>
             </button>
 
-            <button style="background-color: transparent; border: none">
+            <button
+              *ngIf="editAreaMode != i"
+              (click)="editAreaMode = i"
+              class="mat-btn"
+            >
               <mat-icon>create</mat-icon>
+            </button>
+
+            <button
+              *ngIf="editAreaMode == i"
+              (click)="edit(editedArea, area.key, 'area')"
+              class="btn btn-primary"
+            >
+              Done
             </button>
           </div>
         </li>
       </div>
     </ul>
   </div>
-  <br />
   <h1>Products categories</h1>
-  <br />
   <button
     class="btn btn-danger dropdown-toggle"
     type="button"
@@ -87,7 +96,6 @@
   >
     Show
   </button>
-  <br />
   <div *ngIf="!categoriesHide">
     <form #newCategory="ngForm">
       <div class="form-row align-items-center">
@@ -103,7 +111,6 @@
           />
         </div>
         <div class="col-auto">
-          <br />
           <!--To do: fix newCategory.valid-->
           <button
             [disabled]="!newCategory.valid"
@@ -120,52 +127,71 @@
       <div *ngFor="let category of categories; let i = index">
         <!--To do: implement active-->
         <li class="list-group-item">
-          <h1>{{ category.name }}</h1>
+          <h1 *ngIf="editCategoryMode != i">{{ category.name }}</h1>
+
+          <input
+            [hidden]="editCategoryMode != i"
+            type="text"
+            class="form-control"
+            [value]="category.name"
+            #editedCategory
+          />
           <hr />
           <div class="buttons">
             <button
               (click)="delete(i, category.key, 'category')"
-              style="background-color: transparent; border: none"
+              class="mat-btn"
             >
               <mat-icon>delete</mat-icon>
             </button>
 
-            <button style="background-color: transparent; border: none">
+            <button *ngIf="editCategoryMode != i" (click)="editCategoryMode=i" class="mat-btn">
               <mat-icon>create</mat-icon>
+            </button>
+            <button
+              *ngIf="editCategoryMode == i"
+              (click)="edit(editedCategory, category.key, 'category')"
+              class="btn btn-primary"
+            >
+              Done
             </button>
           </div>
         </li>
       </div>
     </ul>
   </div>
-
+<hr>
   <h1>Terms of use</h1>
-  <br />
   <button class="btn btn-danger" type="button" (click)="editTermsOfUse()">
     Edit Terms Of Use
   </button>
-  <br />
-  <br>
+<hr>
   <h1>About Us</h1>
-  <br />
   <button class="btn btn-danger" type="button" (click)="editAboutUs()">
     Edit About Us
   </button>
-  <br />
-  <br>
+  <hr>
   <h1>Footer</h1>
-  <br />
   <button class="btn btn-danger" type="button" (click)="showEditFooter = true">
     Edit Footer
   </button>
-  <br />
   <hr>
-  <br>
   <h1>Website's name</h1>
   <div class="form-inline">
     <div class="form-group mx-sm-3 mb-2">
-      <input #websiteName type="text" class="form-control inputName" placeholder="Website's name">
-      <button (click)="setName(websiteName)" type="button" class="btn btn-primary mb-2">Set name</button>
+      <input
+        #websiteName
+        type="text"
+        class="form-control inputName"
+        placeholder="Website's name"
+      />
+      <button
+        (click)="setName(websiteName)"
+        type="button"
+        class="btn btn-primary mb-2"
+      >
+        Set name
+      </button>
     </div>
   </div>
 </div>

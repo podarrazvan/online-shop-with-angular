@@ -1,5 +1,6 @@
 import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SharedDataService } from 'src/app/shared/shared-data.service';
 
 @Component({
   selector: 'app-admin',
@@ -7,11 +8,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminComponent implements DoCheck, OnInit, OnDestroy {
-  constructor(private activeRouter: ActivatedRoute) {}
+  constructor(private activeRouter: ActivatedRoute,
+              private sharedDataService: SharedDataService) {}
 
+  mobile: boolean;
+  
   nothingSelected = true;
 
   ngOnInit(){
+    this.mobile = this.sharedDataService.mobile;
     const reloaded = JSON.parse(localStorage.getItem('reloaded'))
     if(!reloaded) {
       const darkMode  = JSON.parse(localStorage.getItem('darkMode'));

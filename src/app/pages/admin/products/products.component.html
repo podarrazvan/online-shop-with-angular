@@ -1,45 +1,120 @@
 <div class="container">
-  <div *ngIf='showEditHomepage'>
+  <div *ngIf="showEditHomepage">
     <app-homepage-edit-alert
-    (close)="close('homepage')"
-    (changed)='getCategories()'
-    [product]="productToAddOnHomepage"
+      (close)="close('homepage')"
+      (changed)="getCategories()"
+      [product]="productToAddOnHomepage"
     ></app-homepage-edit-alert>
   </div>
-  <div *ngIf='deleteAlert'>
-    <app-delete-alert
-    itemToDelete="product"
-    ></app-delete-alert>
+  <div *ngIf="deleteAlert">
+    <app-delete-alert itemToDelete="product"></app-delete-alert>
   </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Image</th>
-          <th scope="col">Name</th>
-          <th scope="col">Price</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">On home page</th>
-          <th scpe="col">Edit</th>
-          <th scpe="col">Delete</th>
-        </tr>
-      </thead>
-      <tbody *ngFor="let product of products; let i = index">
-        <tr>
-          <th scope="row">{{ i + 1 }}</th>
-          <td><img class="product-img" [src]="product.img[0]" [alt]="product.name"></td>
-          <td><b>{{ product.title |shorten : 20 }}</b></td>
-          <td><b>{{product.price}}</b></td>
-          <td><b>{{product.quantity}}</b></td>
-          <td *ngIf="product.homepagePosition"><button (click)="openEdit('homepage', product)" class="btn btn-primary">{{product.homepagePosition}}</button></td>
-          <td *ngIf="!product.homepagePosition"><button (click)="openEdit('homepage', product)" class="mat-btn"><mat-icon>add</mat-icon></button></td>
-          <td><button class="mat-btn" (click)="openEditProduct(product)"><mat-icon>edit</mat-icon></button></td>
-          <td>
-            <button class="mat-btn" (click)="onDelete(product.category, product.key, i, product.img)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <!--Desktop version-->
+  <table *ngIf="!mobile" class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">On home page</th>
+        <th scpe="col">Edit</th>
+        <th scpe="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let product of products; let i = index">
+      <tr>
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          <img
+            class="product-img"
+            [src]="product.img[0]"
+            [alt]="product.name"
+          />
+        </td>
+        <td>
+          <b>{{ product.title | shorten: 20 }}</b>
+        </td>
+        <td>
+          <b>{{ product.price }}</b>
+        </td>
+        <td>
+          <b>{{ product.quantity }}</b>
+        </td>
+        <td *ngIf="product.homepagePosition">
+          <button
+            (click)="openEdit('homepage', product)"
+            class="btn btn-primary"
+          >
+            {{ product.homepagePosition }}
+          </button>
+        </td>
+        <td *ngIf="!product.homepagePosition">
+          <button (click)="openEdit('homepage', product)" class="mat-btn">
+            <mat-icon>add</mat-icon>
+          </button>
+        </td>
+        <td>
+          <button class="mat-btn" (click)="openEditProduct(product)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+        <td>
+          <button
+            class="mat-btn"
+            (click)="onDelete(product.category, product.key, i, product.img)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!--Mobile version-->
+<div class="products" *ngIf="mobile">
+  <div *ngFor="let product of products; let i = index">
+    <div class="card" style="width: 11rem">
+      <img class="card-img-top" [src]="product.img" [alt]="product.title" />
+      <div class="card-body">
+        <h3 class="card-title">{{ product.title }}</h3>
+        <div class="card-text">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"> 
+              <b>Price: {{ product.price }}$</b>
+            </li>
+            <li class="list-group-item">
+              <b>Quantity: {{ product.quantity }}</b>
+            </li>
+          </ul>
+        </div>
+        <hr>
+        <button
+        class="mat-btn"
+        (click)="onDelete(product.category, product.key, i, product.img)"
+        >
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button class="mat-btn" (click)="openEditProduct(product)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <hr>
+      <button
+        *ngIf="product.homepagePosition"
+        (click)="openEdit('homepage', product)"
+        class="btn btn-primary"
+      >
+        {{ product.homepagePosition }}
+      </button>
+      <button
+        *ngIf="!product.homepagePosition"
+        (click)="openEdit('homepage', product)"
+        class="mat-btn"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      </div>
+    </div>
   </div>
+</div>

@@ -51,6 +51,7 @@ import { DeleteAlertService } from './shared/delete-alert/delete-alert.service';
 import { DeleteAlertComponent } from './shared/delete-alert/delete-alert.component';
 import { FooterEditComponent } from './pages/admin/website-edit/footer-edit/footer-edit.component';
 import { LoadingComponent } from './shared/loading/loading.component';
+import { TopBarComponent } from './pages/admin/top-bar/top-bar.component';
 
 @NgModule({
   declarations: [
@@ -87,7 +88,8 @@ import { LoadingComponent } from './shared/loading/loading.component';
     OrderComponent,
     DarkModeDirective,
     FooterEditComponent,
-    LoadingComponent
+    LoadingComponent,
+    TopBarComponent
   ],
   imports: [
     BrowserModule,

@@ -24,6 +24,7 @@ a {
     color: rgba(245, 245, 245, 0.808);
   }
 }
+
 .top {
   display: flex;
   flex-direction: row;
@@ -104,7 +105,7 @@ a {
 
 @media screen and (max-width: 400px) {
   .footer h1, h4 {
-    font-size: 0.6em!important;
+    font-size: 0.9em!important;
   }
 
   .footer-link:hover {
@@ -113,6 +114,12 @@ a {
 
   .top {
     margin-left: -100px;
+  }
+
+  .social-media img {
+    margin: 10px;
+    height: 25px;
+    width: 25px;
   }
 }
 

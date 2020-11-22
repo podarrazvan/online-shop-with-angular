@@ -53,6 +53,20 @@ export class DbWebsiteEditService {
       );
   }
 
+  updateHomepageArea(name: string, id: string) {
+    console.log(name, id);
+    const user = JSON.parse(localStorage.getItem('userData'));
+    const area = { name: name };
+    return this.http
+      .put<{ name: string }>(
+        `https://shop-436e8.firebaseio.com/homepage/areas/${id}/.json?auth=${user._token}`,
+        area,
+        {
+          observe: 'response',
+        }
+      )
+  }
+
   addCategory(name: string) {
     const user = JSON.parse(localStorage.getItem('userData'));
     const category = { name: name };
@@ -73,6 +87,21 @@ export class DbWebsiteEditService {
         }
       );
   }
+
+  updateCategory(name: string, id: string) {
+    console.log(name, id);
+    const user = JSON.parse(localStorage.getItem('userData'));
+    const category = { name: name };
+    return this.http
+      .put<{ name: string }>(
+        `https://shop-436e8.firebaseio.com/categories/${id}/.json?auth=${user._token}`,
+        category,
+        {
+          observe: 'response',
+        }
+      )
+  }
+
   editTermsOfUse(termsOfUse: string) {
     const user = JSON.parse(localStorage.getItem('userData'));
     const terms = { termsOfUse: termsOfUse };

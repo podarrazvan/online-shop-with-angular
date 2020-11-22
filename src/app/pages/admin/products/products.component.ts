@@ -27,6 +27,8 @@ export class ProductsComponent implements OnInit {
     private dbDeleteService: DbDeleteService
   ) {}
 
+  mobile: boolean;
+
   products: Product[];
   productsData;
 
@@ -41,6 +43,7 @@ export class ProductsComponent implements OnInit {
   productToDeleteIndex;
 
   ngOnInit(): void {
+    this.mobile = this.sharedDataService.mobile;
     this.getCategories();
   }
 

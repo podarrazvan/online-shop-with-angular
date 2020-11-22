@@ -1,7 +1,10 @@
 nav {
+  position: relative;
   display: flex;
   height: 54px;
   padding: 25px 30px 50px;
+  z-index: 3;
+  background-color: whitesmoke;
 }
 
 .darkNav {
@@ -72,6 +75,7 @@ form {
   float: right;
   width: 30px;
   margin-top: 5px;
+  margin-left: 10px;
 }
 
 .mobileSearchBar {
@@ -79,8 +83,6 @@ form {
   left: calc(50% - 250px);
   margin-top: 200px;
   z-index: 51;
-
-  background-color: seagreen;
 }
 
 .mobileSearchBar .search {
@@ -106,9 +108,18 @@ form {
   }
 }
 
+@media (max-width: 992px) {
+  .search-bar {
+    margin-top: -10px;
+  }
+}
+
 @media (max-width: 870px) {
   ul {
     padding: 0;
+  }
+  .search-bar {
+    margin-top: 100px;
   }
 }
 

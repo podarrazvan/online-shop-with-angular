@@ -1,5 +1,5 @@
 .list-group {
-    min-width: 400px;
+    margin-top: 10px;
     text-align: center;
 }
 
@@ -8,12 +8,9 @@
     place-content: center space-between;
 }
 
-.dropdown-toggle {
-    margin-bottom: 30px;
-}
-
 .inputName {
     max-width: 50%;
     margin-right: 10px;
     margin-left: -10px;
+    margin-bottom: 10px;
 }

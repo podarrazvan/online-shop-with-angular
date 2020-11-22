@@ -5,7 +5,8 @@
   <div *ngIf="deleteAlert">
     <app-delete-alert itemToDelete="message"></app-delete-alert>
   </div>
-  <table class="table">
+  <!--Desktop version-->
+  <table class="table" *ngIf="!mobile">
     <thead>
       <tr>
         <th scope="col">#</th>
@@ -45,3 +46,31 @@
     </tbody>
   </table>
 </div>
+<!--Mobile version-->
+<div class="emails" *ngFor="let email of fbEmails; let i = index">
+  <div *ngIf="mobile">
+    <div class="email-card">
+      <div (click)="openEmail(i)">
+        <div class="card-top">
+          <h5>{{ email.date | date }}</h5>
+          <div class="email-status" *ngIf="!email.seen" style="color: red">
+            <mat-icon> email</mat-icon>
+          </div>
+          <div class="email-status" *ngIf="email.seen">
+            <mat-icon> mail_outline</mat-icon>
+          </div>
+        </div>
+        <h5>{{ email.firstName }} {{ email.lastName }}</h5>
+        <p class="card-text">
+          {{ email.message | shorten: 200 }}
+        </p>
+      </div>
+      <hr>
+      <br>
+      <button  class="mat-btn delete-btn" (click)="onDelete(i)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+<!---->

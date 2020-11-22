@@ -1,5 +1,6 @@
-<app-sidebar></app-sidebar>
-<div class="content">
+<app-sidebar *ngIf="!mobile"></app-sidebar>
+<app-top-bar *ngIf="mobile"></app-top-bar>
+<div class="content" [class.mobile]="mobile">
     <div *ngIf="nothingSelected">
         <img src="https://image.freepik.com/free-vector/settings-concept-illustration_114360-3056.jpg">
     </div>

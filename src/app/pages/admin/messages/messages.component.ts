@@ -20,6 +20,8 @@ export class MessagesComponent implements OnInit {
     private deleteAlertService: DeleteAlertService
   ) {}
 
+  mobile: boolean;
+
   fbEmails: Message[];
 
   showMessage: boolean;
@@ -29,6 +31,7 @@ export class MessagesComponent implements OnInit {
   deleteAlert: boolean;
 
   ngOnInit(): void {
+    this.mobile = this.sharedDataService.mobile;
     this.fbEmails = [];
     this.dbFetchDataService.fetchMessages().subscribe((emails) => {
       for (let email of emails) {

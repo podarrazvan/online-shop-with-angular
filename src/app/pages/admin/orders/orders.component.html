@@ -10,9 +10,10 @@
 <div *ngIf="deleteAlert">
   <app-delete-alert itemToDelete="message"></app-delete-alert>
 </div>
-<div class="container"*ngIf="orders.length == 0" >
+<div class="container"*ngIf="orders.length == 0 && mobileOrders.length == 0" >
   <h1>No orders yet...</h1>
 </div>
+<!--Desktop version-->
 <div class="container" *ngIf="!loading && orders.length > 0">
   <table class="table">
     <thead>
@@ -57,3 +58,64 @@
     </tbody>
   </table>
 </div>
+<!--Mobile version-->
+<div *ngIf="mobile">
+ <div class="orders" *ngFor="let order of mobileOrders; let i = index">
+    <div class="order-card">
+        <div class="card-top">
+          <h5>{{ order.date | date }}</h5>
+          <div class="order-status" *ngIf="order.status == canceled" style="color: gray">
+            <b>CANCELED</b>
+          </div>
+          <div class="order-status" *ngIf="order.status == New" style="color: red">
+            <b>NEW</b>
+          </div>
+          <div class="order-status" *ngIf="order.status == processed" style="color: green">
+            <b>PROCESSED</b>
+          </div>
+          <div class="card-text">
+            <div class="shipping">
+              <div class="customer">
+                <h5>Customer</h5><br>
+                <h5>{{order.name}}</h5><br>
+                <h5>Email</h5><br>
+                <h5>{{order.adress.email}}</h5><br>
+              </div> 
+              <div class="vl"></div>
+              <div class="adress">
+                <h5>Street</h5><br>
+                <h5>{{order.adress.adress}}</h5><br>
+                <h5>City</h5><br>
+                <h5>{{order.adress.city}}</h5><br>
+                <h5>Zip code</h5><br>
+                <h5>{{order.adress.zipCode}}</h5><br>
+                <h5>State</h5><br>
+                <h5>{{order.adress.state}}</h5>
+              </div>
+            </div>
+            <hr>
+            <h5>Products:</h5>
+            <div *ngFor="let product of order.products">
+              <p> {{product.quantity}} X {{product.product.title}}</p>
+            </div>
+            <hr>
+            <p><b>Total <span style="color: red">{{ order.total }}</span>$</b></p>
+        </div>
+      </div>
+      <hr>
+      <br>
+      <div class="actions">
+        <button (click)="updateOrder('processed', order)" class="btn btn-success">
+          Process
+        </button>
+        <button (click)="updateOrder('canceled', order)" class="btn btn-danger">
+          Cancel
+        </button>
+        <button  class="mat-btn delete-btn" (click)="onDelete(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+  </div> 
+</div> 
+
+

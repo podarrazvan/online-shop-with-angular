@@ -18,8 +18,10 @@ export class WebsiteEditComponent implements OnInit {
   categoriesHide = true;
 
   homepageAreas: HomepageArea[];
+  editAreaMode: number;
   area;
   categories: string[];
+  editCategoryMode: boolean;
   category;
 
   showEditTermsOfUse = false;
@@ -55,6 +57,36 @@ export class WebsiteEditComponent implements OnInit {
         this.categories.splice(index, 1);
         this.getAreas();
       });
+    }
+  }
+
+
+  edit(newValue, id, type) {
+    if (type === 'area') {
+      this.editAreaMode = null;
+      this.dbWebsiteEditService.updateHomepageArea(newValue.value,id).subscribe(
+        (responseData) => {
+          this.getAreas();
+          console.log(responseData);
+        },
+        (error) => {
+          console.log('error:', error);
+          error.next(error.message);
+        }
+      );
+     
+    } else {
+      this.editCategoryMode = null;
+      this.dbWebsiteEditService.updateCategory(newValue.value,id).subscribe(
+        (responseData) => {
+          this.getAreas();
+          console.log(responseData);
+        },
+        (error) => {
+          console.log('error:', error);
+          error.next(error.message);
+        }
+      );
     }
   }
 
