@@ -52,6 +52,8 @@ import { DeleteAlertComponent } from './shared/delete-alert/delete-alert.compone
 import { FooterEditComponent } from './pages/admin/website-edit/footer-edit/footer-edit.component';
 import { LoadingComponent } from './shared/loading/loading.component';
 import { TopBarComponent } from './pages/admin/top-bar/top-bar.component';
+import { DbStatisticsService } from './shared/db-statistics.service';
+import { StatisticsService } from './shared/statistics.service';
 
 @NgModule({
   declarations: [
@@ -103,7 +105,7 @@ import { TopBarComponent } from './pages/admin/top-bar/top-bar.component';
     AngularFireStorageModule,
     HttpClientModule
   ],
-  providers: [DbUploadService,DbFetchDataService,DbWebsiteEditService,DbDeleteService,SharedDataService, DeleteAlertService],
+  providers: [DbUploadService,DbFetchDataService,DbWebsiteEditService,DbDeleteService,SharedDataService, DeleteAlertService,DbStatisticsService,StatisticsService],
   bootstrap: [AppComponent,AngularFirestore]
 })
 export class AppModule { }

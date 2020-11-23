@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { SharedDataService } from './shared/shared-data.service';
+import { StatisticsService } from './shared/statistics.service';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +11,16 @@ import { SharedDataService } from './shared/shared-data.service';
 export class AppComponent implements OnInit {
   constructor(
     private authService: AuthService,
-    private sharedDataService: SharedDataService
-  ) {}
+    private sharedDataService: SharedDataService,
+    private statisticsService: StatisticsService
+  ) { }
 
   title = 'shop';
 
   ngOnInit(): void {
-
-    window.innerWidth > 850 ? this.sharedDataService.mobile = false : this.sharedDataService.mobile = true;
+    window.innerWidth > 850
+      ? (this.sharedDataService.mobile = false)
+      : (this.sharedDataService.mobile = true);
 
     this.authService.autoLogin();
 
@@ -32,5 +35,7 @@ export class AppComponent implements OnInit {
     } else {
       this.sharedDataService.updateCart(true);
     }
+
+    this.statisticsService.websiteUniqueView();
   }
 }

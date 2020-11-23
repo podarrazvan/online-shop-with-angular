@@ -12,3 +12,9 @@
 .alert-box-actions {
   text-align: right;
 }
+
+@media (max-width: 850px) {
+  .alert-box {
+    max-width: 60vw;
+  }
+}

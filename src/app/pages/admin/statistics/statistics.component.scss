@@ -1,0 +1,31 @@
+.control-buttons {
+  margin-bottom: 20px;
+}
+
+.control-btn {
+  margin: 10px;
+}
+
+.product {
+  display: flex;
+}
+
+.product-info {
+  margin-left: 15px;
+}
+
+.prod-img {
+  width: 160px;
+}
+
+.background-img {
+  width: 80%;
+  margin: auto;
+}
+
+@media (max-width: 400px) {
+  .prod-img {
+    height: 60px;
+    width: 112px;
+  }
+}

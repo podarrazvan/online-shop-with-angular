@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from '../product.interface';
 
 @Component({
   selector: 'app-get-products',

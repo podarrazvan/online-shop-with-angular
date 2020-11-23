@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DbFetchDataService } from 'src/app/shared/db-fetch-data.service';
 import { SharedDataService } from 'src/app/shared/shared-data.service';
+import { StatisticsService } from 'src/app/shared/statistics.service';
 
 @Component({
   selector: 'app-product',
@@ -14,7 +15,8 @@ export class ProductComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dbFetchDataService: DbFetchDataService,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    private statisticsService: StatisticsService
   ) {}
 
   urlData: { category: string; key: string };
@@ -37,10 +39,13 @@ export class ProductComponent implements OnInit {
       .fetchProduct(category, key)
       .subscribe((response) => {
         this.product = response;
+        this.statisticsService.productUniqueView(
+          this.product.category,
+          this.urlData.key
+        );
         for (let img of response.img) {
           this.images.push(img);
         }
-        console.log(this.images);
         this.isLoading = false;
       });
   }
